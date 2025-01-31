@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Bot Builder</title>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@latest/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Минималистичная стилизация */
+        body {
+            background: var(--background-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .bg-card {
+            background: var(--card-background);
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        .card-hover:hover {
+            box-shadow: var(--card-hover-shadow);
+        }
+
+        .btn {
+            background-color: var(--primary-color);
+            color: var(--button-text-color);
+            width: 100%;
+            padding: 10px 0;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s ease;
+            font-size: 24px; /* Установим размер для символов */
+        }
+
+        .btn:hover {
+            background-color: var(--hover-color);
+            transform: scale(1.05);
+        }
+
+        input:focus {
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.7);
+            outline: none;
+        }
+
+        /* Темный режим */
+        .dark-mode {
+            --background-color: #2d3748;
+            --text-color: #edf2f7;
+            --card-background: #4a5568;
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            --card-hover-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+            --primary-color: #2b6cb0;
+            --hover-color: #3182ce;
+            --button-text-color: #edf2f7;
+        }
+
+        /* Светлый режим */
+        .light-mode {
+            --background-color: #ffffff;
+            --text-color: #1a202c;
+            --card-background: #f7fafc;
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --card-hover-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+            --primary-color: #3182ce;
+            --hover-color: #63b3ed;
+            --button-text-color: #ffffff;
+        }
+
+        /* Специфическая стилизация для элементов в темном режиме */
+        .dark-mode .text-gray-600, .dark-mode .text-gray-800 {
+            color: #e2e8f0; /* Светлый текст для темного режима */
+        }
+        .dark-mode #step-2 p {
+            color: #edf2f7; /* Добавлен цвет текста */
+        }
+    </style>
+</head>
+<body class="light-mode">
+    <div class="bg-card p-6 max-w-xl w-full card-hover">
+        <button id="theme-toggle" onclick="toggleTheme()" class="mb-4 bg-gray-700 text-white px-4 py-2 rounded flex justify-center items-center">
+            <span id="theme-icon">🌙</span>
+        </button>
+
+        <div id="step-1" class="mb-6">
+            <h1 class="text-3xl font-semibold text-center">Create Your Telegram Bot</h1>
+            <p class="text-center text-gray-600 mb-4">Start by entering your Telegram Bot API token.</p>
+            <input 
+                id="api-input" 
+                type="text" 
+                class="w-full border rounded px-4 py-3 text-gray-700 focus:ring focus:ring-blue-500 mb-4" 
+                placeholder="Enter your Bot API token here...">
+            <button 
+                onclick="goToStep2()" 
+                class="btn">
+                Next
+            </button>
+        </div>
+
+        <div id="step-2" class="hidden">
+            <h1 class="text-3xl font-semibold text-center">Design Your Bot</h1>
+            <p class="text-center mb-4">Drag and drop elements to design your bot.</p>
+            <div class="flex flex-col sm:flex-row gap-6">
+                <div id="elements" class="bg-gray-50 p-4 rounded shadow w-full sm:w-1/4">
+                    <h2 class="font-semibold text-lg mb-4">Blocks</h2>
+                    <div class="element bg-gray-200 p-3 mb-3 rounded shadow text-center cursor-pointer" draggable="true">Data input</div>
+                    <div class="element bg-gray-200 p-3 mb-3 rounded shadow text-center cursor-pointer" draggable="true">Data selection</div>
+                </div>
+                <div id="canvas" class="bg-gray-50 p-4 rounded shadow w-full sm:w-3/4">
+                    <h2 class="font-semibold text-lg mb-4">Bot Canvas</h2>
+                    <div id="dropzone" class="bg-gray-100 p-6 min-h-[200px] sm:min-h-[300px] border-2 border-dashed border-gray-300 rounded">
+                    </div>
+                </div>
+            </div>
+            <button 
+                onclick="submitBot()" 
+                class="mt-6 btn">
+                Submit Bot
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            document.body.classList.toggle('dark-mode');
+            document.body.classList.toggle('light-mode');
+            
+            const themeIcon = document.getElementById('theme-icon');
+            themeIcon.textContent = isDarkMode ? '🌙' : '☀️';
+        }
+
+        // Автоматическое определение темы в Telegram Web App
+        window.onload = () => {
+            if (Telegram.WebApp.themeParams) {
+                const isDarkMode = Telegram.WebApp.themeParams.bg_color === "#2d3748"; // Сравнение с темной темой
+                if (isDarkMode) {
+                    document.body.classList.add("dark-mode");
+                    document.body.classList.remove("light-mode");
+                } else {
+                    document.body.classList.add("light-mode");
+                    document.body.classList.remove("dark-mode");
+                }
+            }
+        };
+
+        // Show Step 2
+        function goToStep2() {
+            const apiInput = document.getElementById('api-input').value;
+            if (!apiInput.trim()) {
+                alert('Please enter a valid API token!');
+                return;
+            }
+            document.getElementById('step-1').classList.add('hidden');
+            document.getElementById('step-2').classList.remove('hidden');
+        }
+
+        // Drag and drop functionality
+        const elements = document.querySelectorAll('.element');
+        const dropzone = document.getElementById('dropzone');
+
+        elements.forEach(el => {
+            el.addEventListener('dragstart', (e) => {
+                e.dataTransfer.setData('text/plain', e.target.outerHTML);
+            });
+        });
+
+        dropzone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+        });
+
+        dropzone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            const data = e.dataTransfer.getData('text/plain');
+            dropzone.insertAdjacentHTML('beforeend', data);
+        });
+
+        // Submit bot configuration
+        function submitBot() {
+            const botApi = document.getElementById('api-input').value;
+            const botDesign = dropzone.innerHTML;
+
+            if (!botDesign.trim()) {
+                alert('Your bot design is empty! Add elements before submitting.');
+                return;
+            }
+
+            console.log('Submitting bot with API:', botApi);
+            console.log('Bot design:', botDesign);
+
+            alert('Bot design submitted successfully!');
+        }
+    </script>
+    <script src="https://telegram.org/js/telegram-web-app.js?56"></script>
+</body>
+</html>
