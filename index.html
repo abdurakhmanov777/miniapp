@@ -32,7 +32,6 @@
     <script>
         let tg = window.Telegram.WebApp;
         tg.expand(); // Разворачиваем мини-приложение на весь экран
-
         document.getElementById("user-info").innerText = `Привет, ${tg.initDataUnsafe.user?.first_name || 'пользователь'}!`;
 
         function closeApp() {
