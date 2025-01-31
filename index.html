@@ -14,13 +14,13 @@
 
         body {
             font-family: Arial, sans-serif;
-            background-color: #f7f7f7;
+            background-color: var(--tg-theme-bg-color, #f7f7f7);
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            color: #333;
+            color: var(--tg-theme-text-color, #333);
         }
 
         .form-container {
@@ -38,7 +38,7 @@
         h1 {
             font-size: 24px;
             margin-bottom: 20px;
-            color: #333;
+            color: var(--tg-theme-text-color, #333);
         }
 
         input {
@@ -52,44 +52,40 @@
             transition: all 0.3s ease;
         }
 
-        /* Светлый режим */
-        @media (prefers-color-scheme: light) {
-            input:focus {
-                border-color: #7a4fb4; /* Темно-фиолетовая */
-                box-shadow: 0 0 5px rgba(122, 79, 180, 0.6);
-            }
-
-            button {
-                background-color: #7a4fb4; /* Фиолетовая кнопка */
-            }
-
-            button:hover {
-                background-color: #673594;
-            }
-
-            button:active {
-                transform: scale(0.98);
-            }
+        /* Цвета для светлой темы */
+        .light-theme input:focus {
+            border-color: #7a4fb4; /* Темно-фиолетовая */
+            box-shadow: 0 0 5px rgba(122, 79, 180, 0.6);
         }
 
-        /* Темный режим */
-        @media (prefers-color-scheme: dark) {
-            input:focus {
-                border-color: #d1a2f5; /* Светло-фиолетовая */
-                box-shadow: 0 0 5px rgba(209, 162, 245, 0.6);
-            }
+        .light-theme button {
+            background-color: #7a4fb4; /* Фиолетовая кнопка */
+        }
 
-            button {
-                background-color: #d1a2f5; /* Светло-фиолетовая кнопка */
-            }
+        .light-theme button:hover {
+            background-color: #673594;
+        }
 
-            button:hover {
-                background-color: #a678c2;
-            }
+        .light-theme button:active {
+            transform: scale(0.98);
+        }
 
-            button:active {
-                transform: scale(0.98);
-            }
+        /* Цвета для темной темы */
+        .dark-theme input:focus {
+            border-color: #d1a2f5; /* Светло-фиолетовая */
+            box-shadow: 0 0 5px rgba(209, 162, 245, 0.6);
+        }
+
+        .dark-theme button {
+            background-color: #d1a2f5; /* Светло-фиолетовая кнопка */
+        }
+
+        .dark-theme button:hover {
+            background-color: #a678c2;
+        }
+
+        .dark-theme button:active {
+            transform: scale(0.98);
         }
 
         button {
@@ -118,6 +114,12 @@
     </div>
 
     <script>
+        // Определяем текущую тему на основе темы Телеграм
+        if (Telegram.WebApp.themeParams) {
+            const theme = Telegram.WebApp.themeParams.bg_color_dark ? 'dark' : 'light';
+            document.body.classList.add(`${theme}-theme`);
+        }
+
         function goNext() {
             const apiKey = document.getElementById("api-input").value;
             if (apiKey) {
