@@ -88,6 +88,11 @@
             transform: scale(0.98);
         }
 
+        /* Изменение цвета текста в зависимости от темы */
+        .dark-theme h1 {
+            color: #cccccc; /* Серый цвет для темной темы */
+        }
+
         button {
             padding: 12px 20px;
             font-size: 16px;
@@ -125,6 +130,9 @@
             if (apiKey) {
                 localStorage.setItem("api_key", apiKey);
                 window.location.href = "app.html";
+
+                // Закрыть окно Telegram WebApp
+                Telegram.WebApp.close();
             } else {
                 alert("Введите API-ключ");
             }
