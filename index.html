@@ -13,6 +13,14 @@
             background-color: var(--tg-theme-bg-color, #ffffff);
             color: var(--tg-theme-text-color, #000000);
         }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            width: 80%;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
         button {
             padding: 10px 20px;
             font-size: 16px;
@@ -25,17 +33,19 @@
     </style>
 </head>
 <body>
-    <h1>Привет, Telegram Mini App!</h1>
-    <p id="user-info">Загрузка...</p>
-    <button onclick="closeApp()">Закрыть приложение</button>
+    <h1>Введите API</h1>
+    <input type="text" id="api-input" placeholder="Введите API-ключ">
+    <button onclick="goNext()">Далее</button>
 
     <script>
-        let tg = window.Telegram.WebApp;
-        tg.expand(); // Разворачиваем мини-приложение на весь экран
-        document.getElementById("user-info").innerText = `Привет, ${tg.initDataUnsafe.user?.first_name || 'пользователь'}!`;
-
-        function closeApp() {
-            tg.close();
+        function goNext() {
+            const apiKey = document.getElementById("api-input").value;
+            if (apiKey) {
+                localStorage.setItem("api_key", apiKey);
+                window.location.href = "app.html";
+            } else {
+                alert("Введите API-ключ");
+            }
         }
     </script>
 </body>
