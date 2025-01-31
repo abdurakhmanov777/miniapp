@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Telegram Mini App</title>
+    <title>Настройка Telegram Бота</title>
     <script src="https://telegram.org/js/telegram-web-app.js?56"></script>
     <style>
         body {
@@ -13,38 +13,47 @@
             background-color: var(--tg-theme-bg-color, #ffffff);
             color: var(--tg-theme-text-color, #000000);
         }
-        input {
+        input, button {
             padding: 10px;
             font-size: 16px;
-            width: 80%;
             margin-bottom: 10px;
-            border: 1px solid #ccc;
             border-radius: 5px;
         }
+        input {
+            width: 80%;
+            border: 1px solid #ccc;
+        }
         button {
-            padding: 10px 20px;
-            font-size: 16px;
             border: none;
             background-color: var(--tg-theme-button-color, #0088cc);
             color: var(--tg-theme-button-text-color, #ffffff);
             cursor: pointer;
-            border-radius: 5px;
         }
     </style>
 </head>
 <body>
-    <h1>Введите API</h1>
-    <input type="text" id="api-input" placeholder="Введите API-ключ">
-    <button onclick="goNext()">Далее</button>
+    <h1>Добро пожаловать!</h1>
+    <p>API-ключ был успешно сохранен.</p>
+    <p>Настройте бота, чтобы продолжить:</p>
+
+    <input type="text" id="bot-name" placeholder="Введите имя бота">
+    <button onclick="submitBot()">Создать бота</button>
 
     <script>
-        function goNext() {
-            const apiKey = document.getElementById("api-input").value;
-            if (apiKey) {
-                localStorage.setItem("api_key", apiKey);
-                window.location.href = "app.html";
+        // Получаем сохраненный API-ключ
+        const apiKey = localStorage.getItem("api_key");
+        if (!apiKey) {
+            window.location.href = "index.html"; // Если API-ключ не найден, перенаправляем на страницу ввода
+        }
+
+        function submitBot() {
+            const botName = document.getElementById("bot-name").value;
+            if (botName) {
+                // Здесь можно отправить API-ключ и имя бота на сервер или продолжить настройку
+                alert(`Бот с именем "${botName}" создан!`);
+                // Дальше можно продолжить, например, добавить функциональность бота
             } else {
-                alert("Введите API-ключ");
+                alert("Введите имя бота");
             }
         }
     </script>
