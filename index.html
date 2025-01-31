@@ -6,36 +6,116 @@
     <title>Telegram Mini App</title>
     <script src="https://telegram.org/js/telegram-web-app.js?56"></script>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            padding: 40px 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
             text-align: center;
-            padding: 20px;
-            background-color: var(--tg-theme-bg-color, #ffffff);
-            color: var(--tg-theme-text-color, #000000);
+            transform: scale(0);
+            animation: fadeInUp 0.6s ease-in-out forwards;
         }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
         input {
-            padding: 10px;
+            padding: 12px;
             font-size: 16px;
-            width: 80%;
-            margin-bottom: 10px;
+            width: 100%;
+            margin-bottom: 20px;
             border: 1px solid #ccc;
-            border-radius: 5px;
+            border-radius: 8px;
+            outline: none;
+            transition: all 0.3s ease;
         }
+
+        /* Светлый режим */
+        @media (prefers-color-scheme: light) {
+            input:focus {
+                border-color: #7a4fb4; /* Темно-фиолетовая */
+                box-shadow: 0 0 5px rgba(122, 79, 180, 0.6);
+            }
+
+            button {
+                background-color: #7a4fb4; /* Фиолетовая кнопка */
+            }
+
+            button:hover {
+                background-color: #673594;
+            }
+
+            button:active {
+                transform: scale(0.98);
+            }
+        }
+
+        /* Темный режим */
+        @media (prefers-color-scheme: dark) {
+            input:focus {
+                border-color: #d1a2f5; /* Светло-фиолетовая */
+                box-shadow: 0 0 5px rgba(209, 162, 245, 0.6);
+            }
+
+            button {
+                background-color: #d1a2f5; /* Светло-фиолетовая кнопка */
+            }
+
+            button:hover {
+                background-color: #a678c2;
+            }
+
+            button:active {
+                transform: scale(0.98);
+            }
+        }
+
         button {
-            padding: 10px 20px;
+            padding: 12px 20px;
             font-size: 16px;
             border: none;
-            background-color: var(--tg-theme-button-color, #0088cc);
-            color: var(--tg-theme-button-text-color, #ffffff);
+            color: #ffffff;
             cursor: pointer;
-            border-radius: 5px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                transform: scale(1);
+            }
         }
     </style>
 </head>
 <body>
-    <h1>Введите API</h1>
-    <input type="text" id="api-input" placeholder="Введите API-ключ">
-    <button onclick="goNext()">Далее</button>
+    <div class="form-container">
+        <h1>Введите API</h1>
+        <input type="text" id="api-input" placeholder="Введите API-ключ">
+        <button onclick="goNext()">Далее</button>
+    </div>
 
     <script>
         function goNext() {
