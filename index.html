@@ -124,11 +124,10 @@
             const theme = Telegram.WebApp.themeParams.bg_color_dark ? 'dark' : 'light';
             document.body.classList.add(`${theme}-theme`);
         }
-
         function goNext() {
             const botName = document.getElementById("bot-name-input").value;
             if (botName) {
-                fetch("http://localhost:8000/api/submit_api_key", {  // Измени на реальный адрес бэкенда
+                fetch("http://localhost:8000/api/submit_bot_name", {  // Измени на реальный адрес бэкенда
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
