@@ -127,7 +127,7 @@
         function goNext() {
             const apiKey = document.getElementById("api-input").value;
             if (apiKey) {
-                fetch("https://abdurakhmanov777.github.io/miniapp/", {  // Измени на реальный адрес бэкенда
+                fetch("http://localhost:8000/api/submit_api_key", {  // Измени на реальный адрес бэкенда
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
