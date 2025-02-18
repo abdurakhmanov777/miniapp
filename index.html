@@ -124,17 +124,39 @@
             const theme = Telegram.WebApp.themeParams.bg_color_dark ? 'dark' : 'light';
             document.body.classList.add(`${theme}-theme`);
         }
-
         function goNext() {
             const apiKey = document.getElementById("api-input").value;
             if (apiKey) {
-                localStorage.setItem("api_key", apiKey);
-                // Закрытие окна в Telegram
-                Telegram.WebApp.close();
+                fetch("https://abdurakhmanov777.github.io/miniapp/", {  // Измени на реальный адрес бэкенда
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        api_key: apiKey,
+                        user_id: Telegram.WebApp.initDataUnsafe.user.id  // Получаем user_id из Telegram
+                    })
+                }).then(response => response.json())
+                .then(data => {
+                    console.log("Ответ сервера:", data);
+                    Telegram.WebApp.close();
+                })
+                .catch(error => console.error("Ошибка:", error));
             } else {
                 alert("Введите API-ключ");
             }
         }
+
+        // function goNext() {
+        //     const apiKey = document.getElementById("api-input").value;
+        //     if (apiKey) {
+        //         localStorage.setItem("api_key", apiKey);
+        //         // Закрытие окна в Telegram
+        //         Telegram.WebApp.close();
+        //     } else {
+        //         alert("Введите API-ключ");
+        //     }
+        // }
     </script>
 </body>
 </html>
