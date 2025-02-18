@@ -113,8 +113,8 @@
 </head>
 <body>
     <div class="form-container">
-        <h1>Введите API</h1>
-        <input type="text" id="api-input" placeholder="Введите API-ключ">
+        <h1>Введите имя бота</h1>
+        <input type="text" id="bot-name-input" placeholder="Введите имя бота">
         <button onclick="goNext()">Далее</button>
     </div>
 
@@ -124,16 +124,17 @@
             const theme = Telegram.WebApp.themeParams.bg_color_dark ? 'dark' : 'light';
             document.body.classList.add(`${theme}-theme`);
         }
+
         function goNext() {
-            const apiKey = document.getElementById("api-input").value;
-            if (apiKey) {
-                fetch("http://localhost:8000/api/submit_api_key", {  // Измени на реальный адрес бэкенда
+            const botName = document.getElementById("bot-name-input").value;
+            if (botName) {
+                fetch("http://localhost:8000/api/submit_bot_name", {  // Измени на реальный адрес бэкенда
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify({
-                        api_key: apiKey,
+                        bot_name: botName,
                         user_id: Telegram.WebApp.initDataUnsafe.user.id  // Получаем user_id из Telegram
                     })
                 }).then(response => response.json())
@@ -143,20 +144,9 @@
                 })
                 .catch(error => console.error("Ошибка:", error));
             } else {
-                alert("Введите API-ключ");
+                alert("Введите имя бота");
             }
         }
-
-        // function goNext() {
-        //     const apiKey = document.getElementById("api-input").value;
-        //     if (apiKey) {
-        //         localStorage.setItem("api_key", apiKey);
-        //         // Закрытие окна в Telegram
-        //         Telegram.WebApp.close();
-        //     } else {
-        //         alert("Введите API-ключ");
-        //     }
-        // }
     </script>
 </body>
 </html>
