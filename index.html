@@ -127,7 +127,7 @@
         function goNext() {
             const botName = document.getElementById("bot-name-input").value;
             if (botName) {
-                fetch("http://localhost:8000/api/submit_bot_name", {  // Измени на реальный адрес бэкенда
+                fetch("http://localhost:8000/bot/submit_bot_name", {  // Измени на реальный адрес бэкенда
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
