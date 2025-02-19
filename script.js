@@ -2,6 +2,13 @@ let tg = window.Telegram.WebApp;
 let buy = document.getElementById("buy");
 let order = document.getElementById("order");
 
+// Получаем имя пользователя из данных Telegram Web App
+let userName = tg.initDataUnsafe?.user?.first_name || "Гость"; // Используем "Гость", если имя не доступно
+let userNameDisplay = document.getElementById("user_name_display");
+
+// Отображаем имя на странице
+userNameDisplay.innerText = `Здравствуйте, ${userName}!`;
+
 tg.expand();
 
 buy.addEventListener("click", () => {
