@@ -127,9 +127,7 @@
                 email: email,
                 phone: phone
             }
-            // tg.sendData(JSON.stringify(data))
-            tg.sendData(JSON.stringify({ query_id: tg.initDataUnsafe.query_id, ...data }));
-
+            tg.sendData(JSON.stringify(data))
             tg.close()
         })
 
