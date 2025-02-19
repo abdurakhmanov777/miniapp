@@ -92,14 +92,16 @@ input:focus {
 .button-container {
     display: flex;
     justify-content: space-between; /* Размещение кнопок по краям */
+    width: 100%;
     margin-top: 20px;
+    flex-wrap: nowrap; /* Запрещаем перенос кнопок */
 }
 
 button {
     border: none;
     border-radius: 8px;
     height: 50px;
-    width: 48%; /* Задаем ширину кнопок */
+    width: 48%; /* Ширина кнопок, чтобы они располагались рядом */
     font-size: 18px;
     font-weight: 500;
     cursor: pointer;
