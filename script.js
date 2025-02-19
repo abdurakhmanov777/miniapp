@@ -60,7 +60,7 @@ order.addEventListener("click", () => {
         return;
     }
 
-    fetch("http://80.87.192.5:40805/bot/submit_bot_name", {
+    fetch("http://127.0.0.1:8000/bot/submit_bot_name", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
