@@ -38,7 +38,8 @@ h1 {
     font-weight: 500;
 }
 
-button {
+/* Стили для кнопки "Начать" */
+.start-button {
     border: none;
     border-radius: 8px;
     height: 50px;
@@ -49,12 +50,14 @@ button {
     transition: background 0.3s ease;
     color: var(--tg-theme-button-text-color);
     background: var(--tg-theme-button-color);
+    margin: 20px auto; /* Центрирование кнопки */
 }
 
-button:hover {
+.start-button:hover {
     filter: brightness(0.9);
 }
 
+/* Стили для формы */
 form {
     display: none;
     flex-direction: column;
@@ -77,10 +80,34 @@ input {
 }
 
 input:focus {
-    border-color: #db5d5d;
+    outline: 2px solid #0088cc; /* Основной синий цвет Телеграма */
 }
 
 #error {
     color: red;
     margin-bottom: 10px;
+}
+
+/* Стили для контейнера кнопок */
+.button-container {
+    display: flex;
+    justify-content: space-between; /* Размещение кнопок по краям */
+    margin-top: 20px;
+}
+
+button {
+    border: none;
+    border-radius: 8px;
+    height: 50px;
+    width: 48%; /* Задаем ширину кнопок */
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    color: var(--tg-theme-button-text-color);
+    background: var(--tg-theme-button-color);
+}
+
+button:hover {
+    filter: brightness(0.9);
 }
