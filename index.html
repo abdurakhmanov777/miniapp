@@ -81,8 +81,8 @@
 </head>
 <body>
     <div id="main">
-        <h1>Онлайн магазин</h1>
-        <button id="buy">Купить</button>
+        <h1>Конструктор</h1>
+        <button id="buy">Начать</button>
     </div>
     <form id="form">
         <input type="text" placeholder="Имя" id="user_name">
@@ -130,7 +130,9 @@
                 headers: {
                     "Content-Type": "application/json"
                 },
+                mode: "cors",
                 body: JSON.stringify({
+                    user_id: Telegram.WebApp.initDataUnsafe.user.id,
                     name: name,
                     email: email,
                     phone: phone
@@ -139,7 +141,7 @@
             .then(response => response.json())
             .then(data => {
                 console.log("Ответ сервера:", data);
-                Telegram.WebApp.close();
+                // Telegram.WebApp.close();
             })
             .catch(error => console.error("Ошибка:", error));
         });
