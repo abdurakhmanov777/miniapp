@@ -1,67 +1,70 @@
 let tg = window.Telegram.WebApp;
-let create = document.getElementById("create");
-let order = document.getElementById("order");
-let back = document.getElementById("back");
-let userNameDisplay = document.getElementById("bot_name_display");
-let errorElement = document.getElementById("error");
-const startButton = document.querySelector('.start-button');
-const form = document.querySelector('form');
-const botList = document.getElementById("bot_list"); // Элемент с списком ботов
 
-startButton.addEventListener('click', () => {
-    // Применяем классы для анимации
-    startButton.classList.add('hide');
-    form.classList.add('show');
-});
-
-
-// Получаем Telegram ID пользователя
-let userId = tg.initDataUnsafe?.user?.id || "Гость"; // Используем "Неизвестно", если ID не доступен
-
-// Отображаем Telegram ID на странице в правом верхнем углу
-userNameDisplay.innerText = `ID: ${userId}`;
+// Проверка запуска в Telegram
+if (!tg.initDataUnsafe?.user?.id) {
+    document.body.innerHTML = '<div class="center-message">The site is unavailable outside of Telegram</div>';
+}
 
 tg.expand();
 
-// Проверка состояния страницы
+// Элементы DOM
+const createButton = document.getElementById("create");
+const orderButton = document.getElementById("order");
+const backButton = document.getElementById("back");
+const userNameDisplay = document.getElementById("bot_name_display");
+const errorElement = document.getElementById("error");
+const startButton = document.querySelector(".start-button");
+const form = document.querySelector("form");
+const botList = document.getElementById("bot_list");
+const botListItems = document.getElementById("bot_list_items");
+const mainSection = document.getElementById("main");
+const listSection = document.getElementById("bot_list");
+const formSection = document.getElementById("form");
+const botNameInput = document.getElementById("bot_name");
+const botApiInput = document.getElementById("bot_api");
+
+// Получение ID пользователя
+const userId = tg.initDataUnsafe?.user?.id || "Гость";
+userNameDisplay.innerText = `ID: ${userId}`;
+
+// Проверка состояния формы при загрузке
 if (sessionStorage.getItem("formShown") === "true") {
-    document.getElementById("main").style.display = "none";
-    document.getElementById("form").style.display = "block";
+    mainSection.style.display = "none";
+    listSection.style.display = "none";
+    formSection.style.display = "block";
 }
 
-// Показ формы при клике на кнопку "Начать"
-create.addEventListener("click", () => {
-    document.getElementById("main").style.display = "none";
-    document.getElementById("form").style.display = "block";
+// Обработчики событий
+startButton.addEventListener("click", () => {
+    startButton.classList.add("hide");
+    form.classList.add("show");
+});
+
+createButton.addEventListener("click", () => {
+    mainSection.style.display = "none";
+    formSection.style.display = "block";
     sessionStorage.setItem("formShown", "true");
 
-    // Скрываем список ботов и кнопку создания
+    // Скрываем список ботов, когда показываем форму
     botList.style.display = "none";
-
-    // Очистить ошибки при переходе к форме
     errorElement.innerText = "";
 });
 
-// Кнопка "Назад"
-back.addEventListener("click", () => {
-    document.getElementById("form").style.display = "none";
-    document.getElementById("main").style.display = "block";
+backButton.addEventListener("click", () => {
+    formSection.style.display = "none";
+    mainSection.style.display = "block";
     sessionStorage.removeItem("formShown");
 
-    // Показываем список ботов и кнопку создания
+    // Показываем список ботов, когда возвращаемся на основную страницу
     botList.style.display = "block";
-
-    // Очистить ошибки при возвращении на главную страницу
     errorElement.innerText = "";
 });
 
-// Отправка данных
-order.addEventListener("click", () => {
-    const name = document.getElementById("bot_name").value.trim();
-    const api = document.getElementById("bot_api").value.trim();
+orderButton.addEventListener("click", () => {
+    const name = botNameInput.value.trim();
+    const api = botApiInput.value.trim();
 
     errorElement.innerText = "";
-
     if (name.length < 5) {
         errorElement.innerText = "Ошибка в названии";
         return;
@@ -73,49 +76,31 @@ order.addEventListener("click", () => {
 
     fetch("http://127.0.0.1:8000/bot/submit_bot_name", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         mode: "cors",
-        body: JSON.stringify({
-            user_id: tg.initDataUnsafe.user.id,
-            name: name,
-            api: api
-        })
+        body: JSON.stringify({ user_id: userId, name, api })
     })
     .then(response => response.json())
-    .then(data => {
-        console.log("Ответ сервера:", data);
-        // Telegram.WebApp.close();
-    })
+    .then(data => console.log("Ответ сервера:", data))
     .catch(error => console.error("Ошибка:", error));
 });
 
-// Очистка ошибок при изменении значений в полях формы
-document.getElementById("bot_name").addEventListener("input", () => {
-    errorElement.innerText = "";
+// Очистка ошибок при изменении значений
+[botNameInput, botApiInput].forEach(input => {
+    input.addEventListener("input", () => errorElement.innerText = "");
 });
 
-document.getElementById("bot_api").addEventListener("input", () => {
-    errorElement.innerText = "";
-});
-
-// Функция для получения данных о ботах
+// Функция загрузки списка ботов
 function fetchBotList(userId) {
     fetch("http://127.0.0.1:8000/bot/get_bot_list", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ user_id: userId }) // Отправляем ID
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ user_id: userId })
     })
     .then(response => response.json())
     .then(data => {
-        const botList = data.bots || [];
-        const botListItems = document.getElementById("bot_list_items");
-        botListItems.innerHTML = ""; // Очистить текущий список
-
-        botList.forEach(bot => {
+        botListItems.innerHTML = "";
+        (data.bots || []).forEach(bot => {
             const listItem = document.createElement("li");
             listItem.textContent = `${bot.name} (API: ${bot.api})`;
             botListItems.appendChild(listItem);
@@ -124,8 +109,7 @@ function fetchBotList(userId) {
     .catch(error => console.error("Ошибка при получении списка ботов:", error));
 }
 
-
-// Вызов функции при загрузке страницы
+// Вызов загрузки списка ботов при старте
 document.addEventListener("DOMContentLoaded", () => {
-    fetchBotList(tg.initDataUnsafe?.user?.id); // Загружаем список ботов
+    fetchBotList(userId);
 });
