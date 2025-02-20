@@ -39,7 +39,7 @@ body {
     max-width: 220px;
     background: var(--tg-theme-secondary-bg-color);
     border-radius: 8px;
-    margin-top: 20px;
+    margin-top: -20px;
 }
 
 #bot_list_items {

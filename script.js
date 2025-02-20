@@ -78,6 +78,7 @@ orderButton.addEventListener("click", () => {
 toggleBotListButton.addEventListener("click", () => {
     const isListVisible = botListItems.style.display === "block";
     botListItems.style.display = isListVisible ? "none" : "block";
+    document.getElementById("arrow").textContent = isListVisible ? "▼" : "▲";
 });
 
 // Очистка ошибок при изменении значений
