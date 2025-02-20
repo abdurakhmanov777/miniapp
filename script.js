@@ -6,6 +6,7 @@ let userNameDisplay = document.getElementById("bot_name_display");
 let errorElement = document.getElementById("error");
 const startButton = document.querySelector('.start-button');
 const form = document.querySelector('form');
+const botList = document.getElementById("bot_list"); // Элемент с списком ботов
 
 startButton.addEventListener('click', () => {
     // Применяем классы для анимации
@@ -34,6 +35,9 @@ create.addEventListener("click", () => {
     document.getElementById("form").style.display = "block";
     sessionStorage.setItem("formShown", "true");
 
+    // Скрываем список ботов и кнопку создания
+    botList.style.display = "none";
+
     // Очистить ошибки при переходе к форме
     errorElement.innerText = "";
 });
@@ -43,6 +47,9 @@ back.addEventListener("click", () => {
     document.getElementById("form").style.display = "none";
     document.getElementById("main").style.display = "block";
     sessionStorage.removeItem("formShown");
+
+    // Показываем список ботов и кнопку создания
+    botList.style.display = "block";
 
     // Очистить ошибки при возвращении на главную страницу
     errorElement.innerText = "";
@@ -91,4 +98,34 @@ document.getElementById("bot_name").addEventListener("input", () => {
 
 document.getElementById("bot_api").addEventListener("input", () => {
     errorElement.innerText = "";
+});
+
+// Функция для получения данных о ботах
+function fetchBotList(userId) {
+    fetch("http://127.0.0.1:8000/bot/get_bot_list", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ user_id: userId }) // Отправляем ID
+    })
+    .then(response => response.json())
+    .then(data => {
+        const botList = data.bots || [];
+        const botListItems = document.getElementById("bot_list_items");
+        botListItems.innerHTML = ""; // Очистить текущий список
+
+        botList.forEach(bot => {
+            const listItem = document.createElement("li");
+            listItem.textContent = `${bot.name} (API: ${bot.api})`;
+            botListItems.appendChild(listItem);
+        });
+    })
+    .catch(error => console.error("Ошибка при получении списка ботов:", error));
+}
+
+
+// Вызов функции при загрузке страницы
+document.addEventListener("DOMContentLoaded", () => {
+    fetchBotList(tg.initDataUnsafe?.user?.id); // Загружаем список ботов
 });
