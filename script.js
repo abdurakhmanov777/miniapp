@@ -13,15 +13,15 @@ const orderButton = document.getElementById("order");
 const backButton = document.getElementById("back");
 const userNameDisplay = document.getElementById("bot_name_display");
 const errorElement = document.getElementById("error");
-const startButton = document.querySelector(".start-button");
 const form = document.querySelector("form");
 const botList = document.getElementById("bot_list");
-const botListItems = document.getElementById("bot_list_items");
 const mainSection = document.getElementById("main");
 const listSection = document.getElementById("bot_list");
 const formSection = document.getElementById("form");
 const botNameInput = document.getElementById("bot_name");
 const botApiInput = document.getElementById("bot_api");
+const toggleBotListButton = document.getElementById("toggle_bot_list");
+const botListItems = document.getElementById("bot_list_items");
 
 // Получение ID пользователя
 const userId = tg.initDataUnsafe?.user?.id || "Гость";
@@ -35,17 +35,10 @@ if (sessionStorage.getItem("formShown") === "true") {
 }
 
 // Обработчики событий
-startButton.addEventListener("click", () => {
-    startButton.classList.add("hide");
-    form.classList.add("show");
-});
-
 createButton.addEventListener("click", () => {
     mainSection.style.display = "none";
     formSection.style.display = "block";
     sessionStorage.setItem("formShown", "true");
-
-    // Скрываем список ботов, когда показываем форму
     botList.style.display = "none";
     errorElement.innerText = "";
 });
@@ -54,8 +47,6 @@ backButton.addEventListener("click", () => {
     formSection.style.display = "none";
     mainSection.style.display = "block";
     sessionStorage.removeItem("formShown");
-
-    // Показываем список ботов, когда возвращаемся на основную страницу
     botList.style.display = "block";
     errorElement.innerText = "";
 });
@@ -77,12 +68,16 @@ orderButton.addEventListener("click", () => {
     fetch("http://127.0.0.1:8000/bot/submit_bot_name", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        mode: "cors",
         body: JSON.stringify({ user_id: userId, name, api })
     })
     .then(response => response.json())
     .then(data => console.log("Ответ сервера:", data))
     .catch(error => console.error("Ошибка:", error));
+});
+
+toggleBotListButton.addEventListener("click", () => {
+    const isListVisible = botListItems.style.display === "block";
+    botListItems.style.display = isListVisible ? "none" : "block";
 });
 
 // Очистка ошибок при изменении значений
@@ -101,8 +96,9 @@ function fetchBotList(userId) {
     .then(data => {
         botListItems.innerHTML = "";
         (data.bots || []).forEach(bot => {
-            const listItem = document.createElement("li");
-            listItem.textContent = `${bot.name} (API: ${bot.api})`;
+            const listItem = document.createElement("button");
+            listItem.textContent = `${bot.name}`;
+            listItem.classList.add("bot-button");
             botListItems.appendChild(listItem);
         });
     })

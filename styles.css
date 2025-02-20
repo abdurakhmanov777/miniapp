@@ -16,7 +16,6 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
-    position: relative; /* Для позиционирования имени в верхний угол */
 }
 
 #header {
@@ -43,14 +42,10 @@ body {
     margin-top: 20px;
 }
 
-#bot_list h2 {
-    margin-bottom: 15px;
-    font-weight: 500;
-}
-
 #bot_list_items {
     list-style-type: none;
     padding: 0;
+    margin-top: 10px;
 }
 
 #bot_list_items li {
@@ -60,13 +55,56 @@ body {
     color: var(--tg-theme-text-color);
 }
 
+#toggle_bot_list {
+    border: none;
+    border-radius: 8px;
+    height: 50px;
+    width: 100%;
+    max-width: 220px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    color: var(--tg-theme-button-text-color);
+    background: var(--tg-theme-button-color);
+    margin: 20px auto;
+}
+
+#toggle_bot_list:hover {
+    filter: brightness(0.9);
+}
+
+#toggle_bot_list:active {
+    transform: scale(0.95);
+}
+
+.bot-button {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    background: var(--tg-theme-button-color);
+    color: var(--tg-theme-button-text-color);
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.bot-button:hover {
+    filter: brightness(0.9);
+}
+
+.bot-button:active {
+    transform: scale(0.95);
+}
 
 h1 {
     margin-bottom: 15px;
     font-weight: 500;
 }
 
-/* Стили для кнопки "Начать" */
 .start-button {
     border: none;
     border-radius: 8px;
@@ -79,7 +117,7 @@ h1 {
     transition: background 0.3s ease;
     color: var(--tg-theme-button-text-color);
     background: var(--tg-theme-button-color);
-    margin: 20px auto; /* Центрирование кнопки */
+    margin: 20px auto;
 }
 
 .start-button:hover {
@@ -87,7 +125,7 @@ h1 {
 }
 
 .start-button:active {
-    transform: scale(0.95); /* Уменьшаем кнопку при нажатии */
+    transform: scale(0.95);
 }
 
 .center-message {
@@ -100,7 +138,7 @@ h1 {
     color: red;
     text-align: center;
 }
-/* Стили для формы */
+
 form {
     display: none;
     flex-direction: column;
@@ -123,7 +161,7 @@ input {
 }
 
 input:focus {
-    outline: 2px solid #0088cc; /* Основной синий цвет Телеграма */
+    outline: 2px solid #0088cc;
 }
 
 #error {
@@ -131,20 +169,19 @@ input:focus {
     margin-bottom: 10px;
 }
 
-/* Стили для контейнера кнопок */
 .button-container {
     display: flex;
-    justify-content: space-between; /* Размещение кнопок по краям */
+    justify-content: space-between;
     width: 100%;
     margin-top: 20px;
-    flex-wrap: nowrap; /* Запрещаем перенос кнопок */
+    flex-wrap: nowrap;
 }
 
 button {
     border: none;
     border-radius: 8px;
     height: 50px;
-    width: 48%; /* Ширина кнопок, чтобы они располагались рядом */
+    width: 48%;
     font-size: 18px;
     font-weight: 500;
     cursor: pointer;
@@ -158,5 +195,5 @@ button:hover {
 }
 
 button:active {
-    transform: scale(0.95); /* Уменьшаем кнопку при нажатии */
+    transform: scale(0.95);
 }
