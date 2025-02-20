@@ -56,11 +56,11 @@ order.addEventListener("click", () => {
     errorElement.innerText = "";
 
     if (name.length < 5) {
-        errorElement.innerText = "Ошибка в имени";
+        errorElement.innerText = "Ошибка в названии";
         return;
     }
     if (api.length < 5) {
-        errorElement.innerText = "Ошибка в номере телефона";
+        errorElement.innerText = "Ошибка в API";
         return;
     }
 
