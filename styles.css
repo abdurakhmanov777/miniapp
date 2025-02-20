@@ -57,6 +57,10 @@ h1 {
     filter: brightness(0.9);
 }
 
+.start-button:active {
+    transform: scale(0.95); /* Уменьшаем кнопку при нажатии */
+}
+
 /* Стили для формы */
 form {
     display: none;
@@ -112,4 +116,8 @@ button {
 
 button:hover {
     filter: brightness(0.9);
+}
+
+button:active {
+    transform: scale(0.95); /* Уменьшаем кнопку при нажатии */
 }

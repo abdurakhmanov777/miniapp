@@ -1,11 +1,21 @@
 let tg = window.Telegram.WebApp;
-let buy = document.getElementById("buy");
+let create = document.getElementById("create");
 let order = document.getElementById("order");
 let back = document.getElementById("back");
+let userNameDisplay = document.getElementById("bot_name_display");
+let errorElement = document.getElementById("error");
+const startButton = document.querySelector('.start-button');
+const form = document.querySelector('form');
+
+startButton.addEventListener('click', () => {
+    // Применяем классы для анимации
+    startButton.classList.add('hide');
+    form.classList.add('show');
+});
+
 
 // Получаем Telegram ID пользователя
 let userId = tg.initDataUnsafe?.user?.id || "Гость"; // Используем "Неизвестно", если ID не доступен
-let userNameDisplay = document.getElementById("user_name_display");
 
 // Отображаем Telegram ID на странице в правом верхнем углу
 userNameDisplay.innerText = `ID: ${userId}`;
@@ -19,13 +29,13 @@ if (sessionStorage.getItem("formShown") === "true") {
 }
 
 // Показ формы при клике на кнопку "Начать"
-buy.addEventListener("click", () => {
+create.addEventListener("click", () => {
     document.getElementById("main").style.display = "none";
     document.getElementById("form").style.display = "block";
     sessionStorage.setItem("formShown", "true");
 
     // Очистить ошибки при переходе к форме
-    document.getElementById("error").innerText = "";
+    errorElement.innerText = "";
 });
 
 // Кнопка "Назад"
@@ -35,15 +45,13 @@ back.addEventListener("click", () => {
     sessionStorage.removeItem("formShown");
 
     // Очистить ошибки при возвращении на главную страницу
-    document.getElementById("error").innerText = "";
+    errorElement.innerText = "";
 });
 
 // Отправка данных
 order.addEventListener("click", () => {
-    const name = document.getElementById("user_name").value.trim();
-    const email = document.getElementById("user_email").value.trim();
-    const phone = document.getElementById("user_phone").value.trim();
-    const errorElement = document.getElementById("error");
+    const name = document.getElementById("bot_name").value.trim();
+    const api = document.getElementById("bot_api").value.trim();
 
     errorElement.innerText = "";
 
@@ -51,11 +59,7 @@ order.addEventListener("click", () => {
         errorElement.innerText = "Ошибка в имени";
         return;
     }
-    if (email.length < 5) {
-        errorElement.innerText = "Ошибка в email";
-        return;
-    }
-    if (phone.length < 5) {
+    if (api.length < 5) {
         errorElement.innerText = "Ошибка в номере телефона";
         return;
     }
@@ -67,10 +71,9 @@ order.addEventListener("click", () => {
         },
         mode: "cors",
         body: JSON.stringify({
-            user_id: Telegram.WebApp.initDataUnsafe.user.id,
+            user_id: tg.initDataUnsafe.user.id,
             name: name,
-            email: email,
-            phone: phone
+            api: api
         })
     })
     .then(response => response.json())
@@ -82,14 +85,10 @@ order.addEventListener("click", () => {
 });
 
 // Очистка ошибок при изменении значений в полях формы
-document.getElementById("user_name").addEventListener("input", () => {
-    document.getElementById("error").innerText = "";
+document.getElementById("bot_name").addEventListener("input", () => {
+    errorElement.innerText = "";
 });
 
-document.getElementById("user_email").addEventListener("input", () => {
-    document.getElementById("error").innerText = "";
-});
-
-document.getElementById("user_phone").addEventListener("input", () => {
-    document.getElementById("error").innerText = "";
+document.getElementById("bot_api").addEventListener("input", () => {
+    errorElement.innerText = "";
 });
