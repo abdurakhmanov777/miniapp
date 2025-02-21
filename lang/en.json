@@ -1,0 +1,12 @@
+{
+    "constructor": "Constructor",
+    "createBot": "Create Bot",
+    "myBots": "My Bots",
+    "back": "Back",
+    "next": "Next",
+    "botNamePlaceholder": "Bot Name",
+    "botApiPlaceholder": "Bot API",
+    "errorBotName": "Error in bot name",
+    "errorBotApi": "Error in bot API",
+    "noBots": "You have no bots yet"
+}

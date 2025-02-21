@@ -1,0 +1,12 @@
+{
+    "constructor": "Конструктор",
+    "createBot": "Создать бота",
+    "myBots": "Мои боты",
+    "back": "Назад",
+    "next": "Далее",
+    "botNamePlaceholder": "Название",
+    "botApiPlaceholder": "Bot API",
+    "errorBotName": "Ошибка в названии",
+    "errorBotApi": "Ошибка в API",
+    "noBots": "У вас пока нет ботов."
+}

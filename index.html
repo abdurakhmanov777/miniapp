@@ -8,27 +8,30 @@
 </head>
 <body>
     <div id="header">
-        <div id="bot_name_display"></div>
+        <button id="language-toggle" class="language-toggle-button"></button>
+        <button id="bot_name_display" class="bot_name_display-button"></button>
     </div>
     <div id="main">
-        <h1>Конструктор</h1>
-        <button id="create" class="start-button">Создать бота</button>
-        <button id="my_bots" class="start-button">Мои боты</button>
+        <h1></h1>
+        <div id="button-container">
+            <button id="create" class="start-button"></button>
+            <button id="my_bots" class="start-button"></button>
+        </div>
     </div>
     <form id="bot_list">
         <div id="bot_list_container">
-            <ul id="bot_list_items" style="display: none;"></ul> <!-- Скрываем список по умолчанию -->
+            <ul id="bot_list_items" style="display: none;"></ul>
         </div>
-        <button id="back_to_main" class="back-button">Назад</button>
+        <button id="back_to_main" class="back-button"></button>
     </form>
 
     <form id="form">
-        <input type="text" placeholder="Название" id="bot_name">
-        <input type="text" placeholder="Bot API" id="bot_api">
+        <input type="text" placeholder="" id="bot_name">
+        <input type="text" placeholder="" id="bot_api">
         <div id="error"></div>
         <div class="button-container">
-            <button id="back" type="button">Назад</button>
-            <button id="order" type="button">Далее</button>
+            <button id="back" type="button"></button>
+            <button id="order" type="button"></button>
         </div>
     </form>
 

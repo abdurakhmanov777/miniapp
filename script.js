@@ -1,5 +1,5 @@
-// Инициализация Telegram WebApp
 let tg = window.Telegram.WebApp;
+let currentLanguage = 'ru';  // Начальный язык
 
 // Проверка запуска в Telegram
 if (!tg.initDataUnsafe?.user?.id) {
@@ -24,8 +24,92 @@ const botNameInput = document.getElementById("bot_name");
 const botApiInput = document.getElementById("bot_api");
 
 // Получение ID пользователя
-const userId = tg.initDataUnsafe?.user?.id || "Гость";
+const userId = tg.initDataUnsafe?.user?.id || "unknown";
 userNameDisplay.innerText = `ID: ${userId}`;
+
+// Функция для загрузки локализации
+function loadLocalization(language) {
+    fetch(`lang/${language}.json`)
+        .then(response => response.json())
+        .then(data => {
+            document.querySelector("h1").textContent = data.constructor;
+            createButton.textContent = data.createBot;
+            myBotsButton.textContent = data.myBots;
+            backToMainButton.textContent = data.back;
+            orderButton.textContent = data.next;
+            botNameInput.placeholder = data.botNamePlaceholder;
+            botApiInput.placeholder = data.botApiPlaceholder;
+            backButton.textContent = data.back;
+            errorElement.innerText = data.errorBotName; // Пример использования
+            document.getElementById('language-toggle').textContent = language === 'en' ? 'En' : 'Ru';
+        })
+        .catch(error => console.error('Ошибка при загрузке локализации:', error));
+}
+
+// Вызов функции загрузки локализации при загрузке страницы
+loadLocalization(currentLanguage);
+
+// Переключение языка
+document.getElementById('language-toggle').addEventListener('click', () => {
+    currentLanguage = currentLanguage === 'ru' ? 'en' : 'ru';
+    loadLocalization(currentLanguage);
+});
+
+// Использование локализации в коде
+orderButton.addEventListener("click", () => {
+    const name = botNameInput.value.trim();
+    const api = botApiInput.value.trim();
+
+    errorElement.innerText = "";
+    if (name.length < 5) {
+        errorElement.innerText = data.errorBotName; // Локализованное сообщение об ошибке
+        return;
+    }
+    if (api.length < 5) {
+        errorElement.innerText = data.errorBotApi; // Локализованное сообщение об ошибке
+        return;
+    }
+
+    fetch("http://127.0.0.1:8000/bot/submit_bot_name", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ user_id: userId, name, api })
+    })
+    .then(response => response.json())
+    .then(data => console.log("Ответ сервера:", data))
+    .catch(error => console.error("Ошибка:", error));
+});
+
+// Функция загрузки списка ботов
+function fetchBotList(userId) {
+    if (!userId) return;
+
+    fetch("http://127.0.0.1:8000/bot/get_bot_list", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ user_id: userId })
+    })
+    .then(response => response.json())
+    .then(data => {
+        botListItems.innerHTML = "";
+
+        if (data.bots && data.bots.length > 0) {
+            data.bots.forEach(bot => {
+                const listItem = document.createElement("button");
+                listItem.textContent = bot.name;
+                listItem.classList.add("bot-button");
+                botListItems.appendChild(listItem);
+            });
+            botListItems.style.display = "block";
+        } else {
+            botListItems.innerHTML = `<p>${data.noBots}</p>`;
+            botListItems.style.display = "none";
+        }
+    })
+    .catch(error => console.error("Ошибка при получении списка ботов:", error));
+}
+
+
 
 // Восстановление состояния из sessionStorage
 if (sessionStorage.getItem("formShown") === "true") {
@@ -157,6 +241,20 @@ function updatePageState() {
         errorElement.innerText = "";
     }
 }
+
+// Добавьте обработчик клика для bot_name_display
+userNameDisplay.addEventListener("click", () => {
+    const userId = tg.initDataUnsafe?.user?.id || "unknown";  // Получаем userId
+    navigator.clipboard.writeText(userId)
+        // .then(() => {
+        //     // Сообщение об успешном копировании
+        //     alert("User ID скопирован в буфер обмена!");
+        // })
+        // .catch(err => {
+        //     // В случае ошибки
+        //     console.error("Ошибка при копировании:", err);
+        // });
+});
 
 // Вызов функции для правильной инициализации страницы при обновлении
 updatePageState();
