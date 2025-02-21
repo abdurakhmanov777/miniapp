@@ -27,11 +27,24 @@ const userId = tg.initDataUnsafe?.user?.id || "unknown";
 userNameDisplay.innerText = `ID: ${userId}`;
 
 // Функция для загрузки локализации
-function loadLocalization(language) {
-    fetch(`lang/${language}.json`)
-        .then(response => response.json())
-        .then(data => updateLocalization(data))
-        .catch(error => console.error('Ошибка при загрузке локализации:', error));
+async function loadLocalization(language) {
+    const content = document.getElementById('content');
+    const cachedData = sessionStorage.getItem(`lang_${language}`);
+
+    if (cachedData) {
+        updateLocalization(JSON.parse(cachedData));
+        content.style.display = 'block';
+    } else {
+        try {
+            const response = await fetch(`lang/${language}.json`);
+            const data = await response.json();
+            sessionStorage.setItem(`lang_${language}`, JSON.stringify(data)); // Кэшируем
+            updateLocalization(data);
+            content.style.display = 'block';
+        } catch (error) {
+            console.error('Ошибка при загрузке локализации:', error);
+        }
+    }
 }
 
 // Обновление текста с локализацией
@@ -44,19 +57,21 @@ function updateLocalization(data) {
     botNameInput.placeholder = data.botNamePlaceholder;
     botApiInput.placeholder = data.botApiPlaceholder;
     backButton.textContent = data.back;
+    noBotsMessage.textContent = data.noBots;
     document.getElementById('languageToggleButton').textContent = currentLanguage === 'en' ? 'EN' : 'RU';
 }
 
 // Переключение языка
 document.getElementById('languageToggleButton').addEventListener('click', toggleLanguage);
 
-function toggleLanguage() {
+async function toggleLanguage() {
     currentLanguage = currentLanguage === 'ru' ? 'en' : 'ru';
-    loadLocalization(currentLanguage);
+    await loadLocalization(currentLanguage);
 }
+loadLocalization(currentLanguage);
 
 // Валидация и отправка данных формы
-function validateAndSubmitForm() {
+async function validateAndSubmitForm() {
     const name = botNameInput.value.trim();
     const api = botApiInput.value.trim();
 
@@ -78,45 +93,60 @@ function validateAndSubmitForm() {
 
     if (hasError) return;
 
-    fetch("http://127.0.0.1:8000/bot/submit_bot_name", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ user_id: userId, name, api })
-    })
-    .then(response => response.json())
+    try {
+        await fetch("http://127.0.0.1:8000/bot/submit_bot_name", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ user_id: userId, name, api })
+        });
+    } catch (error) {
+        console.error('Ошибка при отправке данных:', error);
+    }
 }
 
 // Функция загрузки списка ботов
-function fetchBotList(userId) {
+async function fetchBotList(userId) {
     if (!userId) return;
 
-    fetch("http://127.0.0.1:8000/bot/get_bot_list", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ user_id: userId })
-    })
-    .then(response => response.json())
-    .then(data => updateBotList(data))
+    try {
+        const response = await fetch("http://127.0.0.1:8000/bot/get_bot_list", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ user_id: userId })
+        });
+        const data = await response.json();
+        updateBotList(data);
+    } catch (error) {
+        console.error('Ошибка при загрузке списка ботов:', error);
+        showNoBotsMessage();
+    }
 }
 
 function updateBotList(data) {
     botListItems.innerHTML = "";
+    const noBotsMessage = document.getElementById("noBotsMessage");
+
     if (data.bots && data.bots.length > 0) {
+        const fragment = document.createDocumentFragment();
         data.bots.forEach(bot => {
             const listItem = document.createElement("button");
             listItem.textContent = bot.name;
             listItem.classList.add("bot-button");
-            // listItem.style.marginTop = "0"; // Remove any margin
-            // listItem.style.marginBottom = "20"; // Remove any margin
-            botListItems.appendChild(listItem);
+            fragment.appendChild(listItem);
         });
+        botListItems.appendChild(fragment);
         botListItems.style.display = "block";
+        noBotsMessage.style.display = "none";  // Скрываем сообщение
     } else {
-        botListItems.innerHTML = `<p>${data.noBots}</p>`;
-        botListItems.style.display = "none";
+        botListItems.style.display = "none";   // Скрываем список
+        noBotsMessage.style.display = "block"; // Показываем сообщение
     }
 }
 
+function showNoBotsMessage() {
+    document.getElementById("noBotsMessage").style.display = "block";
+    botListItems.style.display = "none";
+}
 
 // Восстановление состояния из sessionStorage
 function restorePageState() {
@@ -210,6 +240,5 @@ nextButton.addEventListener("click", validateAndSubmitForm);
 userNameDisplay.addEventListener("click", copyUserIdToClipboard);
 
 // Вызов функций для начальной загрузки страницы
-loadLocalization(currentLanguage);
 restorePageState();
 updatePageState();

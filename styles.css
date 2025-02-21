@@ -124,7 +124,14 @@ body {
     padding-right: 10px;
     box-sizing: border-box;
 }
-
+.no-bots-message {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500; /* Сделать шрифт толще */
+    color: #777;
+    padding: 20px;
+    margin: 0;
+}
 #botListItems {
     display: flex;
     flex-direction: column;
