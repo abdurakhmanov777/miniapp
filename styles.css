@@ -32,29 +32,6 @@ body {
     padding: 20px;
 }
 
-#bot_list {
-    text-align: center;
-    padding: 20px;
-    width: 100%;
-    max-width: 220px;
-    background: var(--tg-theme-secondary-bg-color);
-    border-radius: 8px;
-    margin-top: -20px;
-}
-
-#bot_list_items {
-    list-style-type: none;
-    padding: 0;
-    margin-top: 10px;
-}
-
-#bot_list_items li {
-    font-size: 16px;
-    font-weight: 400;
-    margin: 10px 0;
-    color: var(--tg-theme-text-color);
-}
-
 #toggle_bot_list {
     border: none;
     border-radius: 8px;
@@ -92,6 +69,7 @@ body {
     transition: background 0.3s ease;
 }
 
+
 .bot-button:hover {
     filter: brightness(0.9);
 }
@@ -99,6 +77,43 @@ body {
 .bot-button:active {
     transform: scale(0.95);
 }
+
+#bot_list_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Центрирование по горизонтали */
+    width: 90%; /* Сделать ширину как у формы */
+    max-width: 320px; /* Максимальная ширина как у формы */
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    background: var(--tg-theme-secondary-bg-color);
+}
+
+
+.back-button {
+    width: 100%;
+    max-width: 220px;
+    padding: 12px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 500;
+    background: var(--tg-theme-button-color);
+    color: var(--tg-theme-button-text-color);
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.back-button:hover {
+    filter: brightness(0.9);
+}
+
+.back-button:active {
+    transform: scale(0.95);
+}
+
 
 h1 {
     margin-bottom: 15px;
@@ -153,12 +168,13 @@ form {
 input {
     width: 100%;
     padding: 12px;
-    margin-bottom: 10px;
+    margin-bottom: 15px; /* Немного больше отступов */
     border: 1px solid silver;
     border-radius: 5px;
     font-size: 16px;
     outline: none;
 }
+
 
 input:focus {
     outline: 2px solid #0088cc;

@@ -13,12 +13,13 @@
     <div id="main">
         <h1>Конструктор</h1>
         <button id="create" class="start-button">Создать бота</button>
+        <button id="my_bots" class="start-button">Мои боты</button>
     </div>
     <div id="bot_list">
-        <button id="toggle_bot_list" class="start-button">
-            Мои боты <span id="arrow">▼</span>
-        </button>
-        <ul id="bot_list_items" style="display: none;"></ul> <!-- Скрываем список по умолчанию -->
+        <div id="bot_list_container">
+            <ul id="bot_list_items" style="display: none;"></ul> <!-- Скрываем список по умолчанию -->
+        </div>
+        <button id="back_to_main" class="back-button">Назад</button>
     </div>
 
     <form id="form">
