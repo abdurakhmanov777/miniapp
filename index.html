@@ -8,30 +8,33 @@
 </head>
 <body>
     <div id="header">
-        <button id="language-toggle" class="language-toggle-button"></button>
-        <button id="bot_name_display" class="bot_name_display-button"></button>
+        <button id="languageToggleButton" class="language-toggle-button"></button>
+        <button id="botNameDisplayButton" class="bot-name-display-button"></button>
     </div>
     <div id="main">
         <h1></h1>
-        <div id="button-container">
-            <button id="create" class="start-button"></button>
-            <button id="my_bots" class="start-button"></button>
+        <div id="buttonContainer">
+            <button id="createBotButton" class="start-button"></button>
+            <button id="myBotsButton" class="start-button"></button>
         </div>
     </div>
-    <form id="bot_list">
-        <div id="bot_list_container">
-            <ul id="bot_list_items" style="display: none;"></ul>
+    <div id="botListForm">
+        <div id="botListContainer">
+            <ul id="botListItems" style="display: none;"></ul>
         </div>
-        <button id="back_to_main" class="back-button"></button>
-    </form>
+        <button id="backToMainButton" class="back-button"></button>
+    </div>
 
-    <form id="form">
-        <input type="text" placeholder="" id="bot_name">
-        <input type="text" placeholder="" id="bot_api">
-        <div id="error"></div>
-        <div class="button-container">
-            <button id="back" type="button"></button>
-            <button id="order" type="button"></button>
+    <form id="botForm">
+        <input type="text" placeholder="" id="botNameInput">
+        <div id="botNameError" class="error-message"></div>
+
+        <input type="text" placeholder="" id="botApiInput">
+        <div id="botApiError" class="error-message"></div>
+
+        <div class="buttonContainer">
+            <button id="backButton" type="button"></button>
+            <button id="nextButton" type="button"></button>
         </div>
     </form>
 

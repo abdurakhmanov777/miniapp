@@ -9,19 +9,18 @@ if (!tg.initDataUnsafe?.user?.id) {
 tg.expand();
 
 // Элементы DOM
-const createButton = document.getElementById("create");
-const myBotsButton = document.getElementById("my_bots");
-const orderButton = document.getElementById("order");
-const backButton = document.getElementById("back");
-const backToMainButton = document.getElementById("back_to_main");
-const userNameDisplay = document.getElementById("bot_name_display");
-const errorElement = document.getElementById("error");
-const form = document.getElementById("form");
-const botList = document.getElementById("bot_list");
+const createButton = document.getElementById("createBotButton");
+const myBotsButton = document.getElementById("myBotsButton");
+const nextButton = document.getElementById("nextButton");
+const backButton = document.getElementById("backButton");
+const backToMainButton = document.getElementById("backToMainButton");
+const userNameDisplay = document.getElementById("botNameDisplayButton");
+const botForm = document.getElementById("botForm");
+const botList = document.getElementById("botListForm");
 const mainSection = document.getElementById("main");
-const botListItems = document.getElementById("bot_list_items");
-const botNameInput = document.getElementById("bot_name");
-const botApiInput = document.getElementById("bot_api");
+const botListItems = document.getElementById("botListItems");
+const botNameInput = document.getElementById("botNameInput");
+const botApiInput = document.getElementById("botApiInput");
 
 // Получение ID пользователя
 const userId = tg.initDataUnsafe?.user?.id || "unknown";
@@ -31,44 +30,53 @@ userNameDisplay.innerText = `ID: ${userId}`;
 function loadLocalization(language) {
     fetch(`lang/${language}.json`)
         .then(response => response.json())
-        .then(data => {
-            document.querySelector("h1").textContent = data.constructor;
-            createButton.textContent = data.createBot;
-            myBotsButton.textContent = data.myBots;
-            backToMainButton.textContent = data.back;
-            orderButton.textContent = data.next;
-            botNameInput.placeholder = data.botNamePlaceholder;
-            botApiInput.placeholder = data.botApiPlaceholder;
-            backButton.textContent = data.back;
-            errorElement.innerText = data.errorBotName; // Пример использования
-            document.getElementById('language-toggle').textContent = language === 'en' ? 'En' : 'Ru';
-        })
+        .then(data => updateLocalization(data))
         .catch(error => console.error('Ошибка при загрузке локализации:', error));
 }
 
-// Вызов функции загрузки локализации при загрузке страницы
-loadLocalization(currentLanguage);
+// Обновление текста с локализацией
+function updateLocalization(data) {
+    document.querySelector("h1").textContent = data.constructor;
+    createButton.textContent = data.createBot;
+    myBotsButton.textContent = data.myBots;
+    backToMainButton.textContent = data.back;
+    nextButton.textContent = data.next;
+    botNameInput.placeholder = data.botNamePlaceholder;
+    botApiInput.placeholder = data.botApiPlaceholder;
+    backButton.textContent = data.back;
+    document.getElementById('languageToggleButton').textContent = currentLanguage === 'en' ? 'EN' : 'RU';
+}
 
 // Переключение языка
-document.getElementById('language-toggle').addEventListener('click', () => {
+document.getElementById('languageToggleButton').addEventListener('click', toggleLanguage);
+
+function toggleLanguage() {
     currentLanguage = currentLanguage === 'ru' ? 'en' : 'ru';
     loadLocalization(currentLanguage);
-});
+}
 
-// Использование локализации в коде
-orderButton.addEventListener("click", () => {
+// Валидация и отправка данных формы
+function validateAndSubmitForm() {
     const name = botNameInput.value.trim();
     const api = botApiInput.value.trim();
 
-    errorElement.innerText = "";
+    // Сбрасываем ошибки
+    botNameInput.classList.remove("error");
+    botApiInput.classList.remove("error");
+
+    let hasError = false;
+
     if (name.length < 5) {
-        errorElement.innerText = data.errorBotName; // Локализованное сообщение об ошибке
-        return;
+        botNameInput.classList.add("error");
+        hasError = true;
     }
+
     if (api.length < 5) {
-        errorElement.innerText = data.errorBotApi; // Локализованное сообщение об ошибке
-        return;
+        botApiInput.classList.add("error");
+        hasError = true;
     }
+
+    if (hasError) return;
 
     fetch("http://127.0.0.1:8000/bot/submit_bot_name", {
         method: "POST",
@@ -76,9 +84,7 @@ orderButton.addEventListener("click", () => {
         body: JSON.stringify({ user_id: userId, name, api })
     })
     .then(response => response.json())
-    .then(data => console.log("Ответ сервера:", data))
-    .catch(error => console.error("Ошибка:", error));
-});
+}
 
 // Функция загрузки списка ботов
 function fetchBotList(userId) {
@@ -90,136 +96,45 @@ function fetchBotList(userId) {
         body: JSON.stringify({ user_id: userId })
     })
     .then(response => response.json())
-    .then(data => {
-        botListItems.innerHTML = "";
-
-        if (data.bots && data.bots.length > 0) {
-            data.bots.forEach(bot => {
-                const listItem = document.createElement("button");
-                listItem.textContent = bot.name;
-                listItem.classList.add("bot-button");
-                botListItems.appendChild(listItem);
-            });
-            botListItems.style.display = "block";
-        } else {
-            botListItems.innerHTML = `<p>${data.noBots}</p>`;
-            botListItems.style.display = "none";
-        }
-    })
-    .catch(error => console.error("Ошибка при получении списка ботов:", error));
+    .then(data => updateBotList(data))
 }
 
+function updateBotList(data) {
+    botListItems.innerHTML = "";
+    if (data.bots && data.bots.length > 0) {
+        data.bots.forEach(bot => {
+            const listItem = document.createElement("button");
+            listItem.textContent = bot.name;
+            listItem.classList.add("bot-button");
+            // listItem.style.marginTop = "0"; // Remove any margin
+            // listItem.style.marginBottom = "20"; // Remove any margin
+            botListItems.appendChild(listItem);
+        });
+        botListItems.style.display = "block";
+    } else {
+        botListItems.innerHTML = `<p>${data.noBots}</p>`;
+        botListItems.style.display = "none";
+    }
+}
 
 
 // Восстановление состояния из sessionStorage
-if (sessionStorage.getItem("formShown") === "true") {
-    mainSection.style.display = "none";
-    botList.style.display = "none";
-    form.style.display = "block";
-    botNameInput.value = sessionStorage.getItem("botName") || "";  // Восстановление введенного имени бота
-    botApiInput.value = sessionStorage.getItem("botApi") || "";    // Восстановление введенного API
-} else if (sessionStorage.getItem("botListShown") === "true") {
-    mainSection.style.display = "none";
-    form.style.display = "none";
-    botList.style.display = "block";
-    fetchBotList(userId); // Загрузить список ботов после отображения списка
+function restorePageState() {
+    if (sessionStorage.getItem("formShown") === "true") {
+        mainSection.style.display = "none";
+        botList.style.display = "none";
+        botForm.style.display = "block";
+        botNameInput.value = sessionStorage.getItem("botName") || "";
+        botApiInput.value = sessionStorage.getItem("botApi") || "";
+    } else if (sessionStorage.getItem("botListShown") === "true") {
+        mainSection.style.display = "none";
+        botForm.style.display = "none";
+        botList.style.display = "block";
+        fetchBotList(userId);
+    }
 }
 
-createButton.addEventListener("click", () => {
-    mainSection.style.display = "none";
-    form.style.display = "block";
-    botList.style.display = "none";
-    sessionStorage.setItem("formShown", "true");
-    sessionStorage.removeItem("botListShown");
-    errorElement.innerText = "";
-});
-
-myBotsButton.addEventListener("click", () => {
-    mainSection.style.display = "none";
-    form.style.display = "none";
-    botList.style.display = "block";
-    sessionStorage.setItem("botListShown", "true");
-    sessionStorage.removeItem("formShown");
-    errorElement.innerText = "";
-    fetchBotList(userId);
-});
-
-backButton.addEventListener("click", () => {
-    form.style.display = "none";
-    mainSection.style.display = "block";
-    botList.style.display = "none";
-    sessionStorage.removeItem("formShown");
-    sessionStorage.removeItem("botListShown");
-    errorElement.innerText = "";
-});
-
-backToMainButton.addEventListener("click", () => {
-    botList.style.display = "none";
-    mainSection.style.display = "block";
-    form.style.display = "none";
-    sessionStorage.removeItem("formShown");
-    sessionStorage.removeItem("botListShown");
-    errorElement.innerText = "";
-});
-
-orderButton.addEventListener("click", () => {
-    const name = botNameInput.value.trim();
-    const api = botApiInput.value.trim();
-
-    errorElement.innerText = "";
-    if (name.length < 5) {
-        errorElement.innerText = "Ошибка в названии";
-        return;
-    }
-    if (api.length < 5) {
-        errorElement.innerText = "Ошибка в API";
-        return;
-    }
-
-    fetch("http://127.0.0.1:8000/bot/submit_bot_name", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ user_id: userId, name, api })
-    })
-    .then(response => response.json())
-    .then(data => console.log("Ответ сервера:", data))
-    .catch(error => console.error("Ошибка:", error));
-
-    // Сохраняем введенные данные
-    sessionStorage.setItem("botName", botNameInput.value);
-    sessionStorage.setItem("botApi", botApiInput.value);
-});
-
-// Функция загрузки списка ботов
-function fetchBotList(userId) {
-    if (!userId) return;
-
-    fetch("http://127.0.0.1:8000/bot/get_bot_list", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ user_id: userId })
-    })
-    .then(response => response.json())
-    .then(data => {
-        botListItems.innerHTML = "";
-
-        if (data.bots && data.bots.length > 0) {
-            data.bots.forEach(bot => {
-                const listItem = document.createElement("button");
-                listItem.textContent = bot.name;
-                listItem.classList.add("bot-button");
-                botListItems.appendChild(listItem);
-            });
-            botListItems.style.display = "block";
-        } else {
-            botListItems.innerHTML = "<p>У вас пока нет ботов.</p>";
-            botListItems.style.display = "none";
-        }
-    })
-    .catch(error => console.error("Ошибка при получении списка ботов:", error));
-}
-
-// Функция для контроля отображения состояния на странице при обновлении
+// Обновление состояния страницы
 function updatePageState() {
     const formShown = sessionStorage.getItem("formShown") === "true";
     const botListShown = sessionStorage.getItem("botListShown") === "true";
@@ -227,34 +142,74 @@ function updatePageState() {
     if (formShown) {
         mainSection.style.display = "none";
         botList.style.display = "none";
-        form.style.display = "block";
-        errorElement.innerText = "";
+        botForm.style.display = "block";
     } else if (botListShown) {
         mainSection.style.display = "none";
-        form.style.display = "none";
+        botForm.style.display = "none";
         botList.style.display = "block";
-        errorElement.innerText = "";
     } else {
         mainSection.style.display = "block";
-        form.style.display = "none";
+        botForm.style.display = "none";
         botList.style.display = "none";
-        errorElement.innerText = "";
     }
 }
 
-// Добавьте обработчик клика для bot_name_display
-userNameDisplay.addEventListener("click", () => {
-    const userId = tg.initDataUnsafe?.user?.id || "unknown";  // Получаем userId
-    navigator.clipboard.writeText(userId)
-        // .then(() => {
-        //     // Сообщение об успешном копировании
-        //     alert("User ID скопирован в буфер обмена!");
-        // })
-        // .catch(err => {
-        //     // В случае ошибки
-        //     console.error("Ошибка при копировании:", err);
-        // });
+// Очистка ошибок
+function clearError(event) {
+    event.target.classList.remove("error");
+}
+
+// Обработчик клика для userNameDisplay
+function copyUserIdToClipboard() {
+    navigator.clipboard.writeText(userId);
+}
+
+// Обработчики событий
+createButton.addEventListener("click", () => {
+    mainSection.style.display = "none";
+    botForm.style.display = "block";
+    botList.style.display = "none";
+    sessionStorage.setItem("formShown", "true");
+    sessionStorage.removeItem("botListShown");
 });
 
-// Вызов функции для правильной инициализации страницы при обновлении
+myBotsButton.addEventListener("click", () => {
+    mainSection.style.display = "none";
+    botForm.style.display = "none";
+    botList.style.display = "block";
+    sessionStorage.setItem("botListShown", "true");
+    sessionStorage.removeItem("formShown");
+    fetchBotList(userId);
+});
+
+backButton.addEventListener("click", () => {
+    botForm.style.display = "none";
+    mainSection.style.display = "block";
+    botList.style.display = "none";
+    sessionStorage.removeItem("formShown");
+    sessionStorage.removeItem("botListShown");
+});
+
+backToMainButton.addEventListener("click", () => {
+    botList.style.display = "none";
+    mainSection.style.display = "block";
+    botForm.style.display = "none";
+    sessionStorage.removeItem("formShown");
+    sessionStorage.removeItem("botListShown");
+});
+
+nextButton.addEventListener("click", validateAndSubmitForm);
+
+// Очистка ошибок при взаимодействии с полями
+["focus"].forEach(event => {
+    botNameInput.addEventListener(event, clearError);
+    botApiInput.addEventListener(event, clearError);
+});
+
+// Обработчик клика для отображения ID пользователя
+userNameDisplay.addEventListener("click", copyUserIdToClipboard);
+
+// Вызов функций для начальной загрузки страницы
+loadLocalization(currentLanguage);
+restorePageState();
 updatePageState();

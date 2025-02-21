@@ -4,7 +4,7 @@
     "myBots": "Мои боты",
     "back": "Назад",
     "next": "Далее",
-    "botNamePlaceholder": "Название",
+    "botNamePlaceholder": "Имя бота",
     "botApiPlaceholder": "Bot API",
     "errorBotName": "Ошибка в названии",
     "errorBotApi": "Ошибка в API",

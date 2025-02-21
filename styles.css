@@ -26,7 +26,7 @@ body {
     color: var(--tg-theme-text-color);
 }
 
-#language-toggle {
+#languageToggleButton {
     position: absolute;
     top: 20px;
     left: 20px; /* Убедитесь, что кнопка будет расположена слева */
@@ -38,7 +38,7 @@ body {
     background-color: transparent;
 }
 
-#bot_name_display {
+#botNameDisplayButton {
     position: absolute;
     top: 20px;
     right: 20px;
@@ -56,31 +56,17 @@ body {
     padding: 20px;
 }
 
-#bot_list {
+#botListForm {
+    overflow-y: auto;
     display: none;
     flex-direction: column;
     width: 100%;
     max-width: 320px;
-    margin-top: 20px;
+    /* margin-top: 20px; */
     padding: 15px;
     border-radius: 8px;
-    background: var(--tg-theme-secondary-bg-color);
+    /* background: red; */
 }
-
-#bot_list_items {
-    display: flex;
-    flex-direction: column;
-    align-items: center;  /* Центрируем кнопки по горизонтали */
-    justify-content: center;  /* Центрируем по вертикали */
-    width: 100%;
-    /* max-width: 400px; */
-    margin: 0 auto;  /* Центрируем контейнер по горизонтали */
-}
-.bot-button {
-    margin: 10px 0;  /* Отступы между кнопками */
-    padding: 10px 20px;  /* Размер кнопки */
-}
-
 
 #toggle_bot_list {
     border: none;
@@ -108,9 +94,7 @@ body {
 .bot-button {
     width: 100%;
     padding: 12px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+    margin-bottom: 20px;
     font-size: 16px;
     font-weight: 500;
     background: var(--tg-theme-button-color);
@@ -118,7 +102,6 @@ body {
     cursor: pointer;
     transition: background 0.3s ease;
 }
-
 
 .bot-button:hover {
     filter: brightness(0.9);
@@ -128,11 +111,30 @@ body {
     transform: scale(0.95);
 }
 
-#bot_list_container {
+#botListContainer {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%; /* Контейнер должен занимать всю высоту */
+    margin: 20px 0px;
+    /* background-color:aqua; */
+    max-height: 350px; /* Максимальная высота контейнера */
+    overflow-y: auto;
+    position: relative;
+    padding-left: 20px;
+    padding-right: 10px;
+    box-sizing: border-box;
+}
+
+#botListItems {
+    display: flex;
+    flex-direction: column;
+    align-items: center;  /* Центрируем кнопки по горизонтали */
+    justify-content: center;  /* Центрируем по вертикали */
+    width: 100%;
+    padding: 0;
+    list-style-type: none;
+    /* max-width: 400px; */
+    margin: 0;
 }
 
 .back-button {
@@ -141,6 +143,7 @@ body {
     padding: 12px;
     margin-top: 20px;
     margin: 0 auto; /* Центрирование */
+    margin-top: 20px;
     display: block; /* Убедиться, что элемент блоковый */
     border: none;
     border-radius: 8px;
@@ -149,9 +152,8 @@ body {
     background: var(--tg-theme-button-color);
     color: var(--tg-theme-button-text-color);
     cursor: pointer;
-    transition: background 0.3s ease;
+    /* transition: background 0.3s ease; */
 }
-
 
 .back-button:hover {
     filter: brightness(0.9);
@@ -172,7 +174,7 @@ body {
     transition: background 0.3s ease;
     color: var(--tg-theme-button-text-color);
     background: var(--tg-theme-button-color);
-    margin: 20px auto;
+    margin-top: 20px; /* Отступы сверху и снизу */
 }
 
 .start-button:hover {
@@ -214,22 +216,55 @@ input {
     outline: none;
 }
 
-
 input:focus {
     outline: 2px solid #0088cc;
 }
 
-#error {
-    color: red;
-    margin-bottom: 10px;
+/* Стиль для поля с ошибкой */
+input.error {
+    border-color: rgba(255, 0, 0, 0.559); /* Изменяем цвет рамки при ошибке */
+    outline: 2px solid #cc0000;
+    outline-width: 2px;
 }
 
-#button-container {
+#buttonContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0px; /* Фиксированное расстояние между кнопками */
+    justify-content: space-between;
+    margin: 0px;
     background: transparent; /* Прозрачный фон */
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: space-between; /* Расположить кнопки по краям */
+    align-items: center; /* Вертикальное выравнивание по центру */
+    width: 100%;
+}
+
+.buttonContainer button {
+    width: 130px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#botForm {
+    display: flex;
+    flex-direction: column; /* Вертикальное выравнивание */
+    align-items: center; /* Центрировать все элементы по горизонтали */
+    width: 320px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+}
+
+#botForm input {
+    width: 100%; /* Максимальная ширина полей */
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 10px;
 }
 
 button {
