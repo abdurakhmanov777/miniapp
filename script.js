@@ -58,7 +58,7 @@ function updateLocalization(data) {
     botApiInput.placeholder = data.botApiPlaceholder;
     backButton.textContent = data.back;
     noBotsMessage.textContent = data.noBots;
-    document.getElementById('languageToggleButton').textContent = currentLanguage === 'en' ? 'EN' : 'RU';
+    document.getElementById('languageToggleButton').textContent = currentLanguage === 'en' ? 'RU' : 'EN';
 }
 
 // Переключение языка
