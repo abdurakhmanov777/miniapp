@@ -62,10 +62,6 @@ body {
     flex-direction: column;
     width: 100%;
     max-width: 320px;
-    /* margin-top: 20px; */
-    /* padding: 20px;
-    padding-top: auto; */
-    /* border-radius: 8px; */
     /* background: green; */
 }
 
@@ -78,7 +74,6 @@ body {
     font-size: 18px;
     font-weight: 500;
     cursor: pointer;
-    transition: background 0.3s ease;
     color: var(--tg-theme-button-text-color);
     background: var(--tg-theme-button-color);
     margin: 20px auto;
@@ -101,7 +96,6 @@ body {
     background: var(--tg-theme-button-color);
     color: var(--tg-theme-button-text-color);
     cursor: pointer;
-    transition: background 0.3s ease;
 }
 
 .bot-button:hover {
@@ -124,8 +118,6 @@ body {
     position: relative;
     padding-left: 20px;
     padding-right: 10px;
-    /* padding-top: 20px; */
-    /* margin-top: 100px; */
     box-sizing: border-box;
     /* background-color: red; */
 }
@@ -156,9 +148,9 @@ body {
     max-width: 220px;
     padding: 12px;
     margin-top: 20px;
-    margin: 0 auto; /* Центрирование */
+    margin: 0 auto;
     margin-top: 20px;
-    display: block; /* Убедиться, что элемент блоковый */
+    display: block;
     border: none;
     border-radius: 8px;
     font-size: 18px;
@@ -166,7 +158,6 @@ body {
     background: var(--tg-theme-button-color);
     color: var(--tg-theme-button-text-color);
     cursor: pointer;
-    /* transition: background 0.3s ease; */
 }
 
 .back-button:hover {
@@ -185,7 +176,6 @@ body {
     font-size: 18px;
     font-weight: 500;
     cursor: pointer;
-    transition: background 0.3s ease;
     color: var(--tg-theme-button-text-color);
     background: var(--tg-theme-button-color);
     margin-top: 20px; /* Отступы сверху и снизу */
@@ -289,7 +279,6 @@ button {
     font-size: 18px;
     font-weight: 500;
     cursor: pointer;
-    transition: background 0.3s ease;
     color: var(--tg-theme-button-text-color);
     background: var(--tg-theme-button-color);
 }
