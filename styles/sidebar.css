@@ -34,6 +34,7 @@
     padding: 15px;
     margin-left: 15px;
     border: none;
+    color: var(--tg-theme-text-color);
     background: none;
     text-align: left;
     cursor: pointer;

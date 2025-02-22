@@ -14,7 +14,6 @@
     font-weight: 500;
     width: 40px;
     height: 30px;
-    color: var(--tg-theme-text-color);
     background-color: transparent;
     display: flex;
     flex-direction: column;
@@ -30,16 +29,9 @@
     display: block;
     width: 25px;
     height: 4px;
-    background-color: white;
+    background-color: var(--tg-theme-text-color);
     border-radius: 10px;
 }
-
-/* .menu-button span {
-    display: block;
-    height: 4px;
-    background-color: white;
-    border-radius: 10px;
-} */
 
 #line1 {
     width: 20px;
@@ -68,8 +60,9 @@
     right: 20px;
     font-size: 16px;
     font-weight: 500;
-    width: 125px;
+    width: 130px;
     height: 30px;
+    padding: 10;
     color: var(--tg-theme-text-color);
     background-color: transparent;
     text-align: center;
