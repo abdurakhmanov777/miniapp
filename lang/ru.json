@@ -9,6 +9,6 @@
     "errorBotName": "Ошибка в названии",
     "errorBotApi": "Ошибка в API",
     "noBots": "У вас пока нет ботов",
-    "menu_1": "Подписки",
-    "menu_2": "Настройки"
+    "subscriptions": "Подписки",
+    "settings": "Настройки"
 }

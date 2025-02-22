@@ -14,8 +14,8 @@ const createButton = document.getElementById("createBotButton");
 const myBotsButton = document.getElementById("myBotsButton");
 const nextButton = document.getElementById("nextButton");
 const backButton = document.getElementById("backButton");
-const menu_1 = document.getElementById("menu_1");
-const menu_2 = document.getElementById("menu_2");
+const subscriptions = document.getElementById("subscriptions");
+const settings = document.getElementById("settings");
 const backToMainButton = document.getElementById("backToMainButton");
 const userIdDisplay = document.getElementById("userIdDisplay");
 const botForm = document.getElementById("botForm");
@@ -80,8 +80,8 @@ function updateLocalization(data) {
     botApiInput.placeholder = data.botApiPlaceholder;
     backButton.textContent = data.back;
     noBotsMessage.textContent = data.noBots;
-    menu_1.textContent = data.menu_1;
-    menu_2.textContent = data.menu_2;
+    subscriptions.textContent = data.subscriptions;
+    settings.textContent = data.settings;
     document.getElementById('languageToggleButton').textContent = currentLanguage === 'en' ? 'RU' : 'EN';
 }
 
