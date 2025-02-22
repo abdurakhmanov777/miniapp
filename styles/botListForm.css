@@ -1,0 +1,94 @@
+#botListForm {
+    overflow-y: auto;
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    max-width: 320px;
+    /* background: green; */
+}
+
+#botListContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin: 20px 0px; */
+    /* background-color:aqua; */
+    margin: 5%;
+    max-height: 380px;
+    overflow-y: auto;
+    position: relative;
+    padding-left: 20px;
+    padding-right: 10px;
+    box-sizing: border-box;
+    /* background-color: red; */
+}
+
+#botListItems {
+    display: flex;
+    flex-direction: column;
+    align-items: center;  /* Центрируем кнопки по горизонтали */
+    justify-content: center;  /* Центрируем по вертикали */
+    width: 100%;
+    padding: 0;
+    list-style-type: none;
+    /* max-width: 400px; */
+    margin: 0;
+    margin-top: 250px;
+    /* background-color: wheat; */
+}
+
+.bot-button {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-weight: 500;
+    background: var(--tg-theme-button-color);
+    color: var(--tg-theme-button-text-color);
+    cursor: pointer;
+}
+
+.bot-button:hover {
+    filter: brightness(0.9);
+}
+
+.center-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-size: 24px;
+    font-weight: 500;
+    color: red;
+    text-align: center;
+}
+
+.no-bots-message {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500; /* Сделать шрифт толще */
+    color: #777;
+    padding: 20px;
+    margin: 0;
+}
+
+.back-button {
+    width: 100%;
+    max-width: 220px;
+    padding: 12px;
+    margin-top: 20px;
+    margin: 0 auto;
+    margin-top: 20px;
+    display: block;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 500;
+    background: var(--tg-theme-button-color);
+    color: var(--tg-theme-button-text-color);
+    cursor: pointer;
+}
+
+.back-button:hover {
+    filter: brightness(0.9);
+}

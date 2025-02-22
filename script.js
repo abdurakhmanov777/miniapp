@@ -7,14 +7,17 @@ if (!tg.initDataUnsafe?.user?.id) {
 }
 
 tg.expand();
+tg.disableVerticalSwipes()
 
 // Элементы DOM
 const createButton = document.getElementById("createBotButton");
 const myBotsButton = document.getElementById("myBotsButton");
 const nextButton = document.getElementById("nextButton");
 const backButton = document.getElementById("backButton");
+const menu_1 = document.getElementById("menu_1");
+const menu_2 = document.getElementById("menu_2");
 const backToMainButton = document.getElementById("backToMainButton");
-const userNameDisplay = document.getElementById("botNameDisplayButton");
+const userIdDisplay = document.getElementById("userIdDisplay");
 const botForm = document.getElementById("botForm");
 const botList = document.getElementById("botListForm");
 const mainSection = document.getElementById("main");
@@ -24,9 +27,28 @@ const botApiInput = document.getElementById("botApiInput");
 
 // Получение ID пользователя
 const userId = tg.initDataUnsafe?.user?.id || "unknown";
-userNameDisplay.innerText = `ID: ${userId}`;
+userIdDisplay.textContent = `ID: ${userId}`;
 
 // Функция для загрузки локализации
+document.addEventListener("DOMContentLoaded", function() {
+    let menuBtn = document.getElementById("menuBtn");
+    let sidebar = document.getElementById("sidebar");
+
+    menuBtn.addEventListener("click", function() {
+        sidebar.classList.toggle("active");
+    });
+
+    // Закрытие слайд-бара при клике вне его области
+    document.addEventListener("click", function(event) {
+        // Проверяем, был ли клик вне слайд-бара и кнопки меню
+        if (!sidebar.contains(event.target) && !menuBtn.contains(event.target)) {
+            sidebar.classList.remove("active");
+        }
+    });
+});
+
+
+
 async function loadLocalization(language) {
     const content = document.getElementById('content');
     const cachedData = sessionStorage.getItem(`lang_${language}`);
@@ -58,6 +80,8 @@ function updateLocalization(data) {
     botApiInput.placeholder = data.botApiPlaceholder;
     backButton.textContent = data.back;
     noBotsMessage.textContent = data.noBots;
+    menu_1.textContent = data.menu_1;
+    menu_2.textContent = data.menu_2;
     document.getElementById('languageToggleButton').textContent = currentLanguage === 'en' ? 'RU' : 'EN';
 }
 
@@ -189,7 +213,7 @@ function clearError(event) {
     event.target.classList.remove("error");
 }
 
-// Обработчик клика для userNameDisplay
+// Обработчик клика для userIdDisplay
 function copyUserIdToClipboard() {
     navigator.clipboard.writeText(userId);
 }
@@ -237,7 +261,7 @@ nextButton.addEventListener("click", validateAndSubmitForm);
 });
 
 // Обработчик клика для отображения ID пользователя
-userNameDisplay.addEventListener("click", copyUserIdToClipboard);
+userIdDisplay.addEventListener("click", copyUserIdToClipboard);
 
 // Вызов функций для начальной загрузки страницы
 restorePageState();

@@ -8,5 +8,7 @@
     "botApiPlaceholder": "Bot API",
     "errorBotName": "Error in bot name",
     "errorBotApi": "Error in bot API",
-    "noBots": "You have no bots yet"
+    "noBots": "You have no bots yet",
+    "menu_1": "Subscriptions",
+    "menu_2": "Settings"
 }

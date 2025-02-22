@@ -1,0 +1,68 @@
+/* Меню (изначально скрыто) */
+#sidebar {
+    position: absolute;
+    top: 0;
+    left: -330px; /* Меню скрыто за экраном */
+    width: 320px;
+    height: 100%;
+    background-color: var(--tg-theme-bg-color);
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+    transition: left 0.2s ease;
+    padding-top: 60px;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+}
+
+#sidebar.active {
+    left: 0; /* Слайдбар появляется */
+}
+
+/* Убираем отступы и делаем кнопки блочными */
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+/* Стилизация кнопок */
+#sidebar ul button {
+    width: 90%;  /* Растягиваем кнопку на всю ширину */
+    padding: 15px;
+    margin-left: 15px;
+    border: none;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+}
+
+#sidebar ul button a {
+    text-decoration: none;
+    font-size: 18px;
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    transition: background 0.3s;
+}
+
+/* Эффект при наведении */
+#sidebar ul button a:hover {
+    background-color: #555;
+}
+
+/* Активное состояние меню */
+#sidebar.active {
+    left: 0;
+}
+
+#sidebarFooter {
+    text-align: center;
+    padding: 10px;
+    color: #888; /* Серый цвет текста */
+    font-size: 15px;
+    /* margin-bottom: 100px; */
+    margin-top: auto;
+}
