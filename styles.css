@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;500&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;500&display=swap'); */
 
 * {
     margin: 0;
@@ -63,9 +63,10 @@ body {
     width: 100%;
     max-width: 320px;
     /* margin-top: 20px; */
-    padding: 15px;
-    border-radius: 8px;
-    /* background: red; */
+    /* padding: 20px;
+    padding-top: auto; */
+    /* border-radius: 8px; */
+    /* background: green; */
 }
 
 #toggle_bot_list {
@@ -115,14 +116,18 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 20px 0px;
+    /* margin: 20px 0px; */
     /* background-color:aqua; */
-    max-height: 350px; /* Максимальная высота контейнера */
+    margin: 5%;
+    max-height: 380px;
     overflow-y: auto;
     position: relative;
     padding-left: 20px;
     padding-right: 10px;
+    /* padding-top: 20px; */
+    /* margin-top: 100px; */
     box-sizing: border-box;
+    /* background-color: red; */
 }
 .no-bots-message {
     text-align: center;
@@ -142,6 +147,8 @@ body {
     list-style-type: none;
     /* max-width: 400px; */
     margin: 0;
+    margin-top: 250px;
+    /* background-color: wheat; */
 }
 
 .back-button {
