@@ -1,41 +1,41 @@
-#botListForm {
+#botList {
+    margin-top: auto;
     overflow-y: auto;
     display: none;
     flex-direction: column;
-    width: 100%;
-    max-width: 320px;
+    width: 90%;
+    /* max-width: 320px; */
     /* background: green; */
+    height: 80%;
+    max-width: 400px;
 }
 
 #botListContainer {
     display: flex;
     justify-content: center;
-    align-items: center;
-    /* margin: 20px 0px; */
-    /* background-color:aqua; */
+    align-items: flex-start;  /* Центрирование по вертикали, но с возможностью прокрутки */
     margin: 5%;
-    max-height: 380px;
-    overflow-y: auto;
+    max-height: 80%;  /* Устанавливаем ограничение на высоту контейнера относительно высоты экрана */
+    overflow-y: auto;  /* Включаем вертикальную прокрутку */
     position: relative;
-    padding-left: 20px;
-    padding-right: 10px;
+    padding: 20px;
     box-sizing: border-box;
     /* background-color: red; */
+    scrollbar-width: none;  /* Скрываем скроллбар в Firefox */
 }
 
 #botListItems {
     display: flex;
     flex-direction: column;
-    align-items: center;  /* Центрируем кнопки по горизонтали */
-    justify-content: center;  /* Центрируем по вертикали */
+    align-items: center;  /* Центрируем элементы по горизонтали */
+    justify-content: flex-start;  /* Начало для вертикального выравнивания */
     width: 100%;
     padding: 0;
     list-style-type: none;
-    /* max-width: 400px; */
     margin: 0;
-    margin-top: 250px;
-    /* background-color: wheat; */
+    margin-top: 0;  /* Убираем лишний верхний отступ */
 }
+
 
 .bot-button {
     width: 100%;

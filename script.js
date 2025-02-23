@@ -2,14 +2,16 @@ let tg = window.Telegram.WebApp;
 let currentLanguage = 'ru';  // Начальный язык
 
 // Проверка запуска в Telegram
-if (!tg.initDataUnsafe?.user?.id) {
-    document.body.innerHTML = '<div class="center-message">The site is unavailable outside of Telegram</div>';
-}
+// if (!tg.initDataUnsafe?.user?.id) {
+//     document.body.innerHTML = '<div class="center-message">The site is unavailable outside of Telegram</div>';
+// }
 
 tg.expand();
 tg.disableVerticalSwipes()
 
 // Элементы DOM
+const BASE_URL = "https://4g7zqplm-8000.euw.devtunnels.ms";
+// const BASE_URL = "http://127.0.0.1:8000";
 const createButton = document.getElementById("createBotButton");
 const myBotsButton = document.getElementById("myBotsButton");
 const nextButton = document.getElementById("nextButton");
@@ -19,7 +21,7 @@ const settings = document.getElementById("settings");
 const backToMainButton = document.getElementById("backToMainButton");
 const userIdDisplay = document.getElementById("userIdDisplay");
 const botForm = document.getElementById("botForm");
-const botList = document.getElementById("botListForm");
+const botList = document.getElementById("botList");
 const mainSection = document.getElementById("main");
 const botListItems = document.getElementById("botListItems");
 const botNameInput = document.getElementById("botNameInput");
@@ -28,6 +30,31 @@ const botApiInput = document.getElementById("botApiInput");
 // Получение ID пользователя
 const userId = tg.initDataUnsafe?.user?.id || "unknown";
 userIdDisplay.textContent = `ID: ${userId}`;
+
+settings.addEventListener("click", function() {
+    // Показываем кнопку возврата
+    Telegram.WebApp.BackButton.show();
+
+    // Скрываем основной контент и показываем настройки
+    mainSection.style.display = "none";
+    botList.style.display = "none";
+    botForm.style.display = "none";
+    sidebar.classList.remove("active");
+    // sidebar.style.left= "-330px";
+    document.getElementById("settingsPage").style.display = "block";
+});
+
+Telegram.WebApp.BackButton.onClick(() => {
+    Telegram.WebApp.BackButton.hide();
+    // Скрываем страницу настроек и возвращаемся на главную страницу
+    document.getElementById("settingsPage").style.display = "none";
+    mainSection.style.display = "block";
+    // sidebar.style.display = "flex";
+    // sidebar.style.left= "-330px";
+    sidebar.classList.remove("active");
+    botList.style.display = "none";
+    botForm.style.display = "none";
+});
 
 // Функция для загрузки локализации
 document.addEventListener("DOMContentLoaded", function() {
@@ -137,7 +164,7 @@ async function validateAndSubmitForm() {
     if (hasError) return;
 
     try {
-        await fetch("http://127.0.0.1:8000/bot/submit_bot_name", {
+        await fetch(`${BASE_URL}/bot/submit_bot_name`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ user_id: userId, name, api })
@@ -152,7 +179,7 @@ async function fetchBotList(userId) {
     if (!userId) return;
 
     try {
-        const response = await fetch("http://127.0.0.1:8000/bot/get_bot_list", {
+        const response = await fetch(`${BASE_URL}/bot/get_bot_list`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ user_id: userId })
