@@ -34,6 +34,10 @@ document.addEventListener("DOMContentLoaded", function() {
     let menuBtn = document.getElementById("menuBtn");
     let sidebar = document.getElementById("sidebar");
 
+    // Переменные для отслеживания свайпа
+    let touchStartX = 0;
+    let touchEndX = 0;
+
     menuBtn.addEventListener("click", function() {
         sidebar.classList.toggle("active");
     });
@@ -45,7 +49,22 @@ document.addEventListener("DOMContentLoaded", function() {
             sidebar.classList.remove("active");
         }
     });
+
+    // Обработка свайпа влево для закрытия слайд-бара
+    sidebar.addEventListener("touchstart", function(event) {
+        touchStartX = event.touches[0].clientX;
+    });
+
+    sidebar.addEventListener("touchend", function(event) {
+        touchEndX = event.changedTouches[0].clientX;
+
+        // Если свайп был вправо (отрицательное значение)
+        if (touchStartX - touchEndX > 150) {
+            sidebar.classList.remove("active");
+        }
+    });
 });
+
 
 
 
