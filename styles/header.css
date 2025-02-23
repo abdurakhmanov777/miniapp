@@ -41,19 +41,6 @@
     width: 15px;
 }
 
-#languageToggleButton {
-    /* position: absolute;
-    top: 20px;
-    left: 20px;
-    font-size: 16px;
-    font-weight: 500;
-    width: 30px;
-    height: 30px;
-    color: var(--tg-theme-text-color);
-    background-color: transparent; */
-    display: none;
-}
-
 #userIdDisplay {
     position: absolute;
     top: 20px;

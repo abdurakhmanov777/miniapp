@@ -49,6 +49,12 @@
     transition: background 0.3s;
 }
 
+#sidebar button.active {
+    background: var(--tg-theme-button-color);
+    color: var(--tg-theme-button-text-color);
+    font-weight: bold;
+}
+
 /* Эффект при наведении */
 #sidebar ul button a:hover {
     background-color: #555;

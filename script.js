@@ -2,20 +2,22 @@ let tg = window.Telegram.WebApp;
 let currentLanguage = 'ru';  // Начальный язык
 
 // Проверка запуска в Telegram
-// if (!tg.initDataUnsafe?.user?.id) {
-//     document.body.innerHTML = '<div class="center-message">The site is unavailable outside of Telegram</div>';
-// }
+if (!tg.initDataUnsafe?.user?.id) {
+    document.body.innerHTML = '<div class="center-message">The site is unavailable outside of Telegram</div>';
+}
 
 tg.expand();
 tg.disableVerticalSwipes()
 
 // Элементы DOM
 const BASE_URL = "https://4g7zqplm-8000.euw.devtunnels.ms";
+// const BASE_URL = "http://80.87.201.50:40817";
 // const BASE_URL = "http://127.0.0.1:8000";
 const createButton = document.getElementById("createBotButton");
 const myBotsButton = document.getElementById("myBotsButton");
 const nextButton = document.getElementById("nextButton");
 const backButton = document.getElementById("backButton");
+const main_page = document.getElementById("main-page")
 const subscriptions = document.getElementById("subscriptions");
 const settings = document.getElementById("settings");
 const backToMainButton = document.getElementById("backToMainButton");
@@ -23,6 +25,7 @@ const userIdDisplay = document.getElementById("userIdDisplay");
 const botForm = document.getElementById("botForm");
 const botList = document.getElementById("botList");
 const mainSection = document.getElementById("main");
+const systemLanguageText = document.getElementById("systemLanguageText");
 const botListItems = document.getElementById("botListItems");
 const botNameInput = document.getElementById("botNameInput");
 const botApiInput = document.getElementById("botApiInput");
@@ -30,6 +33,20 @@ const botApiInput = document.getElementById("botApiInput");
 // Получение ID пользователя
 const userId = tg.initDataUnsafe?.user?.id || "unknown";
 userIdDisplay.textContent = `ID: ${userId}`;
+
+function handleBackOrMainClick() {
+    Telegram.WebApp.BackButton.hide();
+    document.getElementById("settingsPage").style.display = "none";
+    mainSection.style.display = "block";
+    sidebar.classList.remove("active");
+    botList.style.display = "none";
+    botForm.style.display = "none";
+    settings.classList.remove("active");
+    main_page.classList.toggle("active");
+}
+
+Telegram.WebApp.BackButton.onClick(handleBackOrMainClick);
+main_page.addEventListener("click", handleBackOrMainClick);
 
 settings.addEventListener("click", function() {
     // Показываем кнопку возврата
@@ -42,55 +59,103 @@ settings.addEventListener("click", function() {
     sidebar.classList.remove("active");
     // sidebar.style.left= "-330px";
     document.getElementById("settingsPage").style.display = "block";
+    main_page.classList.toggle("active");
 });
 
-Telegram.WebApp.BackButton.onClick(() => {
-    Telegram.WebApp.BackButton.hide();
-    // Скрываем страницу настроек и возвращаемся на главную страницу
-    document.getElementById("settingsPage").style.display = "none";
-    mainSection.style.display = "block";
-    // sidebar.style.display = "flex";
-    // sidebar.style.left= "-330px";
-    sidebar.classList.remove("active");
-    botList.style.display = "none";
-    botForm.style.display = "none";
+document.addEventListener("DOMContentLoaded", () => {
+    initializeSidebar();
+    initializeMenuButton();
+    initializeSwipeGesture();
+    highlightActivePage();
 });
 
-// Функция для загрузки локализации
-document.addEventListener("DOMContentLoaded", function() {
-    let menuBtn = document.getElementById("menuBtn");
-    let sidebar = document.getElementById("sidebar");
+/**
+ * Инициализация бокового меню и обработка кликов по кнопкам
+ */
+function initializeSidebar() {
+    const buttons = document.querySelectorAll("#sidebar button");
 
-    // Переменные для отслеживания свайпа
-    let touchStartX = 0;
-    let touchEndX = 0;
+    function setActive(button) {
+        buttons.forEach(btn => btn.classList.remove("active"));
+        button.classList.add("active");
+    }
 
-    menuBtn.addEventListener("click", function() {
+    buttons.forEach(button => {
+        button.addEventListener("click", () => {
+            setActive(button);
+        });
+    });
+
+    // Подсветка активной кнопки при загрузке страницы
+    const currentPath = window.location.hash;
+    if (currentPath) {
+        const activeButton = Array.from(buttons).find(button =>
+            button.querySelector("a")?.getAttribute("href") === currentPath
+        );
+        if (activeButton) setActive(activeButton);
+    }
+
+    // Подсвечиваем главную кнопку по умолчанию
+    const mainPageButton = document.getElementById("main-page");
+    if (mainPageButton) {
+        mainPageButton.classList.add("active");
+    }
+}
+
+/**
+ * Инициализация кнопки меню (открытие/закрытие бокового меню)
+ */
+function initializeMenuButton() {
+    const menuBtn = document.getElementById("menuBtn");
+    const sidebar = document.getElementById("sidebar");
+
+    if (!menuBtn || !sidebar) return;
+
+    menuBtn.addEventListener("click", () => {
         sidebar.classList.toggle("active");
     });
 
-    // Закрытие слайд-бара при клике вне его области
-    document.addEventListener("click", function(event) {
-        // Проверяем, был ли клик вне слайд-бара и кнопки меню
+    // Закрытие бокового меню при клике вне его области
+    document.addEventListener("click", (event) => {
         if (!sidebar.contains(event.target) && !menuBtn.contains(event.target)) {
             sidebar.classList.remove("active");
         }
     });
+}
 
-    // Обработка свайпа влево для закрытия слайд-бара
-    sidebar.addEventListener("touchstart", function(event) {
+/**
+ * Добавляет обработку свайпа для закрытия бокового меню
+ */
+function initializeSwipeGesture() {
+    const sidebar = document.getElementById("sidebar");
+    if (!sidebar) return;
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    sidebar.addEventListener("touchstart", (event) => {
         touchStartX = event.touches[0].clientX;
     });
 
-    sidebar.addEventListener("touchend", function(event) {
+    sidebar.addEventListener("touchend", (event) => {
         touchEndX = event.changedTouches[0].clientX;
 
-        // Если свайп был вправо (отрицательное значение)
-        if (touchStartX - touchEndX > 150) {
+        // Закрытие меню при свайпе влево
+        if (touchStartX - touchEndX > 100) {
             sidebar.classList.remove("active");
         }
     });
-});
+}
+
+/**
+ * Подсвечивает активную страницу в боковом меню
+ */
+function highlightActivePage() {
+    const mainPageButton = document.getElementById("main-page");
+    if (mainPageButton) {
+        mainPageButton.classList.add("active");
+    }
+}
 
 
 
@@ -115,17 +180,20 @@ async function loadLocalization(language) {
     }
 }
 
+
 // Обновление текста с локализацией
 function updateLocalization(data) {
     document.querySelector("h1").textContent = data.constructor;
     createButton.textContent = data.createBot;
     myBotsButton.textContent = data.myBots;
     backToMainButton.textContent = data.back;
+    systemLanguageText.textContent = data.systemLanguageText
     nextButton.textContent = data.next;
     botNameInput.placeholder = data.botNamePlaceholder;
     botApiInput.placeholder = data.botApiPlaceholder;
     backButton.textContent = data.back;
     noBotsMessage.textContent = data.noBots;
+    main_page.textContent = data.main_page
     subscriptions.textContent = data.subscriptions;
     settings.textContent = data.settings;
     document.getElementById('languageToggleButton').textContent = currentLanguage === 'en' ? 'RU' : 'EN';

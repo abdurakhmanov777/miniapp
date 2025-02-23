@@ -3,6 +3,7 @@
 @import url("styles/main.css");
 @import url("styles/botList.css");
 @import url("styles/botForm.css");
+@import url("styles/settings.css");
 
 body {
     font-family: 'Montserrat', sans-serif;

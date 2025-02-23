@@ -9,6 +9,7 @@
     <body>
         <div id="sidebar">
             <ul>
+                <button id="main-page"><a href="#"></a></>
                 <button id="subscriptions"><a href="#"></a></>
                 <button id="settings"><a href="#"></a></>
             </ul>
@@ -21,7 +22,6 @@
                 <span id="line1"></span>
                 <span id="line2"></span>
             </button>
-            <button id="languageToggleButton"></button>
             <button id="userIdDisplay"></button>
         </div>
         <div id="main">
@@ -53,8 +53,10 @@
             </div>
         </form>
         <div id="settingsPage" style="display: none;">
-            <h2>Настройки</h2>
-            <p>Здесь будет страница с настройками.</p>
+            <div id="settingsContainer">
+                <span id="systemLanguageText"></span>
+                <button id="languageToggleButton"></button>
+            </div>
         </div>
         <script src="https://telegram.org/js/telegram-web-app.js"></script>
         <script src="script.js"></script>

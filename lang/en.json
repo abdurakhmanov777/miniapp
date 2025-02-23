@@ -9,6 +9,8 @@
     "errorBotName": "Error in bot name",
     "errorBotApi": "Error in bot API",
     "noBots": "You have no bots yet",
+    "main_page" : "Main",
     "subscriptions": "Subscriptions",
-    "settings": "Settings"
+    "settings": "Settings",
+    "systemLanguageText": "System language"
 }

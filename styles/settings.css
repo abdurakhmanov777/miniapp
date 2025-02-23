@@ -1,0 +1,25 @@
+#settingsContainer {
+    display: flex;
+    flex-direction: row; /* Размещаем элементы в строку */
+    align-items: center;
+    justify-content: space-between; /* Размещаем элементы по краям */
+    margin-top: 60px;
+    width: 90vw;
+    max-width: 400px;
+    padding: 10px;
+    gap: 10px;
+}
+
+.settingsLabel {
+    font-size: 16px;
+}
+
+#languageToggleButton {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    align-items: center;
+    /* background-color: ; */
+}
