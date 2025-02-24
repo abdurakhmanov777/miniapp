@@ -1,28 +1,29 @@
-// events.js
-
 import { toggleLanguage } from "./localization.js";
 import { validateAndSubmitForm } from "./api.js";
 import * as pages from "./pages.js";
 import * as variables from "./variables.js";
 
-// Отображение ID пользователя
 userIdDisplay.textContent = `ID: ${variables.userId}`;
 
 const copyUserIdToClipboard = () => {
-    navigator.clipboard.writeText(variables.userId);
-    Telegram.WebApp.showAlert("Ваш ID скопирован!");
+    navigator.clipboard.writeText(variables.userId)
+        .then(() => {
+            Telegram.WebApp.showAlert("Ваш ID скопирован!");
+        })
+        .catch(err => {
+            console.error("Ошибка копирования:", err);
+            Telegram.WebApp.showAlert("Не удалось скопировать ID.");
+        });
 };
 
-function clearError(event) {
-    event.target.classList.remove("error");
-}
+const clearError = (event) => event.target.classList.remove("error");
 
 export const handlers = () => {
     document.addEventListener("DOMContentLoaded", () => {
-        // Навигация
+        // Обработчики кнопок навигации
         Telegram.WebApp.BackButton.onClick(() => {
-            pages.main_page_active();  // Первая функция
-            updateActiveBtn(variables.mainBtn);  // Вторая функция
+            pages.main_page_active();
+            updateActiveBtn(variables.mainBtn);
         });
         variables.mainBtn.addEventListener("click", pages.main_page_active);
         variables.subscriptionsBtn.addEventListener("click", pages.subscriptions_page_active);
@@ -33,13 +34,14 @@ export const handlers = () => {
         variables.backButton.addEventListener("click", pages.main_page_active);
         variables.backToMainButton.addEventListener("click", pages.main_page_active);
 
-        // Локализация
+        // Обработчик смены языка
         variables.languageToggleButton.addEventListener('click', toggleLanguage);
 
-        // Копирование ID
+        // Копирование ID пользователя
         variables.userIdDisplay.addEventListener("click", copyUserIdToClipboard);
 
-        botNameInput.addEventListener("focus", clearError);
-        botApiInput.addEventListener("focus", clearError);
+        // Очистка ошибок ввода
+        variables.botNameInput.addEventListener("focus", clearError);
+        variables.botApiInput.addEventListener("focus", clearError);
     });
 };
