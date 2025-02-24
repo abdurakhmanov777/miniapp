@@ -10,6 +10,7 @@ userIdDisplay.textContent = `ID: ${variables.userId}`;
 
 const copyUserIdToClipboard = () => {
     navigator.clipboard.writeText(variables.userId);
+    Telegram.WebApp.showAlert("Ваш ID скопирован!");
 };
 
 function clearError(event) {

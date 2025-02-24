@@ -9,6 +9,8 @@ if (!tg?.initDataUnsafe?.user?.id) {
 } else {
     tg.expand();
     tg.disableVerticalSwipes();
+    // tg.requestFullscreen();
+    tg.lockOrientation();
 
     // Инициализация модулей
     initializeMenu();
