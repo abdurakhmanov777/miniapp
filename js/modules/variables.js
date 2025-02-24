@@ -1,0 +1,25 @@
+export const BASE_URL = "https://4g7zqplm-8000.euw.devtunnels.ms";
+export const sidebar = document.getElementById("sidebar");
+export const menuBtn = document.getElementById("menuBtn");
+export const createButton = document.getElementById("createBotButton");
+export const myBotsButton = document.getElementById("myBotsButton");
+export const nextButton = document.getElementById("nextButton");
+export const backButton = document.getElementById("backButton");
+export const main_page = document.getElementById("main-page")
+export const subscriptions = document.getElementById("subscriptions");
+export const settings = document.getElementById("settings");
+export const noBotsMessage = document.getElementById("noBotsMessage");
+export const backToMainButton = document.getElementById("backToMainButton");
+export const userIdDisplay = document.getElementById("userIdDisplay");
+export const botForm = document.getElementById("botForm");
+export const botList = document.getElementById("botList");
+export const systemLanguageText = document.getElementById("systemLanguageText");
+export const botListItems = document.getElementById("botListItems");
+export const botNameInput = document.getElementById("botNameInput");
+export const botApiInput = document.getElementById("botApiInput");
+export const userId = window.Telegram.WebApp.initDataUnsafe?.user?.id || "unknown";
+export const languageToggleButton = document.getElementById('languageToggleButton');
+
+export const mainSection = document.getElementById("main");
+export const settingsSection = document.getElementById("settingsSection");
+export const subscriptionsSection = document.getElementById("subscriptionsSection");
