@@ -1,4 +1,4 @@
-import { initializeSidebar, initializeMenuButton, initializeSwipeGesture, highlightActivePage} from "./modules/sidebar.js";
+import { initializeSidebar, initializeMenuButton, initializeSwipeGesture } from "./modules/sidebar.js";
 import { loadLocalization } from "./modules/localization.js";
 import { handlers } from './modules/handlers.js';
 // import { restorePageState, updatePageState } from "./modules/storage.js";
@@ -22,7 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
     initializeSidebar();
     initializeMenuButton();
     initializeSwipeGesture();
-    highlightActivePage();
 });
 
 // restorePageState();

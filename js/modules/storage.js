@@ -38,3 +38,20 @@ export function updatePageState() {
 
     // sessionStorage.setItem("formShown", "true");
     // sessionStorage.removeItem("botListShown");
+
+
+// Восстановление страницы при загрузке
+document.addEventListener("DOMContentLoaded", () => {
+    const savedPage = sessionStorage.getItem("activePage") || "main";
+    setActivePage(savedPage);
+    const pages = {
+        main: variables.mainBtn,
+        botList: variables.mainBtn,
+        botForm: variables.mainBtn,
+        settings: variables.settingsBtn,
+        subscriptions: variables.subscriptionsBtn,
+    };
+
+    Object.values(pages).forEach(page => page?.classList.remove("active"));
+    pages[savedPage]?.classList.add("active");
+});

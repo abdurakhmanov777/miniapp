@@ -24,13 +24,23 @@ function setActivePage(activePage) {
 }
 
 export const main_page_active = () => setActivePage("main");
-export const settings_page_active = () => setActivePage("settings");
-export const subscriptions_page_active = () => setActivePage("subscriptions");
 export const botList_page_active = () => setActivePage("botList");
 export const botForm_page_active = () => setActivePage("botForm");
+export const settings_page_active = () => setActivePage("settings");
+export const subscriptions_page_active = () => setActivePage("subscriptions");
 
 // Восстановление страницы при загрузке
 document.addEventListener("DOMContentLoaded", () => {
     const savedPage = sessionStorage.getItem("activePage") || "main";
     setActivePage(savedPage);
+    const pages = {
+        main: variables.mainBtn,
+        botList: variables.mainBtn,
+        botForm: variables.mainBtn,
+        settings: variables.settingsBtn,
+        subscriptions: variables.subscriptionsBtn,
+    };
+
+    Object.values(pages).forEach(page => page?.classList.remove("active"));
+    pages[savedPage]?.classList.add("active");
 });

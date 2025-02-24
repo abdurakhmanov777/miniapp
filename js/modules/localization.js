@@ -13,9 +13,9 @@ export function updateLocalization(data) {
     variables.botApiInput.placeholder = data.botApiPlaceholder;
     variables.backButton.textContent = data.back;
     variables.noBotsMessage.textContent = data.noBots;
-    variables.main_page.textContent = data.main_page;
-    variables.subscriptions.textContent = data.subscriptions;
-    variables.settings.textContent = data.settings;
+    variables.mainBtn.textContent = data.mainBtn;
+    variables.subscriptionsBtn.textContent = data.subscriptionsBtn;
+    variables.settingsBtn.textContent = data.settingsBtn;
     document.getElementById('languageToggleButton').textContent = currentLanguage === 'ru' ? 'RU' : 'EN';
 }
 

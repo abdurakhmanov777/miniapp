@@ -1,4 +1,4 @@
-import { sidebar, menuBtn, main_page } from "./variables.js";
+import { sidebar, menuBtn, mainBtn } from "./variables.js";
 
 export function sidebar_passive() {
     sidebar?.classList.remove("active") || console.warn("Sidebar not found");
@@ -36,11 +36,6 @@ export function initializeSwipeGesture() {
     });
 }
 
-export function highlightActivePage() {
-    main_page?.classList.add("active");
-}
-
-
 export function initializeSidebar() {
     const buttons = document.querySelectorAll("#sidebar button");
 
@@ -62,11 +57,5 @@ export function initializeSidebar() {
             button.querySelector("a")?.getAttribute("href") === currentPath
         );
         if (activeButton) setActive(activeButton);
-    }
-
-    // Подсвечиваем главную кнопку по умолчанию
-    const mainPageButton = document.getElementById("main-page");
-    if (mainPageButton) {
-        mainPageButton.classList.add("active");
     }
 }

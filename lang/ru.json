@@ -9,8 +9,8 @@
     "errorBotName": "Ошибка в названии",
     "errorBotApi": "Ошибка в API",
     "noBots": "У вас пока нет ботов",
-    "main_page" : "Главная",
-    "subscriptions": "Подписки",
-    "settings": "Настройки",
+    "mainBtn" : "Главная",
+    "subscriptionsBtn": "Подписки",
+    "settingsBtn": "Настройки",
     "systemLanguageText": "Язык системы"
 }

@@ -20,9 +20,9 @@ export const handlers = () => {
     document.addEventListener("DOMContentLoaded", () => {
         // Навигация
         Telegram.WebApp.BackButton.onClick(pages.main_page_active);
-        variables.main_page.addEventListener("click", pages.main_page_active);
-        variables.settings.addEventListener("click", pages.settings_page_active);
-        variables.subscriptions.addEventListener("click", pages.subscriptions_page_active);
+        variables.mainBtn.addEventListener("click", pages.main_page_active);
+        variables.subscriptionsBtn.addEventListener("click", pages.subscriptions_page_active);
+        variables.settingsBtn.addEventListener("click", pages.settings_page_active);
         variables.nextButton.addEventListener("click", validateAndSubmitForm);
         variables.createButton.addEventListener("click", pages.botForm_page_active);
         variables.myBotsButton.addEventListener("click", pages.botList_page_active);
