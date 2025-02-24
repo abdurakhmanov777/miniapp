@@ -5,16 +5,9 @@ import * as variables from "./variables.js";
 
 userIdDisplay.textContent = `ID: ${variables.userId}`;
 
-const copyUserIdToClipboard = () => {
+const copyUserIdToClipboard = () =>
     navigator.clipboard.writeText(variables.userId)
-        .then(() => {
-            Telegram.WebApp.showAlert("Ваш ID скопирован!");
-        })
-        .catch(err => {
-            console.error("Ошибка копирования:", err);
-            Telegram.WebApp.showAlert("Не удалось скопировать ID.");
-        });
-};
+        .then(() => Telegram.WebApp.showAlert("Ваш ID скопирован!"));
 
 const clearError = (event) => event.target.classList.remove("error");
 
