@@ -9,7 +9,7 @@ body {
     font-family: 'Montserrat', sans-serif;
     font-weight: 200;
     color: var(--tg-theme-text-color);
-    background: var(--tg-theme-bg-color);
+    background: var(--tg-theme-section-bg-color);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -33,8 +33,8 @@ input:focus {
 
 /* Стиль для поля с ошибкой */
 input.error {
-    border-color: rgba(255, 0, 0, 0.559); /* Изменяем цвет рамки при ошибке */
-    outline: 2px solid #cc0000;
+    /* border-color: rgba(255, 0, 0, 0.559); */
+    outline: 2px solid var(--tg-theme-destructive-text-color);
     outline-width: 2px;
 }
 
