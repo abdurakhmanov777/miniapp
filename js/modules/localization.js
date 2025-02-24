@@ -1,6 +1,6 @@
 import * as variables from "./variables.js";
 
-let currentLanguage = 'ru';  // Начальный язык
+let currentLanguage = sessionStorage.getItem('language') || 'ru';  // Загружаем язык из sessionStorage или по умолчанию 'ru'
 
 export function updateLocalization(data) {
     document.querySelector("h1").textContent = data.constructor;
@@ -39,8 +39,11 @@ export async function loadLocalization(language) {
     }
 }
 
+// Загрузка языка при инициализации страницы
+loadLocalization(currentLanguage);
 
 export async function toggleLanguage() {
     currentLanguage = currentLanguage === 'ru' ? 'en' : 'ru';
+    sessionStorage.setItem('language', currentLanguage);  // Сохраняем выбранный язык
     await loadLocalization(currentLanguage);
 }

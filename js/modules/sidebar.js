@@ -1,4 +1,15 @@
-import { sidebar, menuBtn, mainBtn } from "./variables.js";
+import { sidebar, menuBtn } from "./variables.js";
+// import { initializeActivePage } from './modules/storage.js';
+
+
+export const initializeMenu = () => {
+    document.addEventListener("DOMContentLoaded", () => {
+        initializeSidebar();
+        initializeMenuButton();
+        initializeSwipeGesture();
+    });
+}
+
 
 export function sidebar_passive() {
     sidebar?.classList.remove("active") || console.warn("Sidebar not found");

@@ -1,28 +1,16 @@
-import { initializeSidebar, initializeMenuButton, initializeSwipeGesture } from "./modules/sidebar.js";
-import { loadLocalization } from "./modules/localization.js";
-import { handlers } from './modules/handlers.js';
-// import { restorePageState, updatePageState } from "./modules/storage.js";
+import { initializeMenu } from "./modules/sidebar.js";
+import { handlers } from "./modules/handlers.js";
 
-let tg = window.Telegram.WebApp;
-let currentLanguage = 'ru';
-loadLocalization(currentLanguage);
+const tg = window.Telegram?.WebApp;
 
 // Проверка запуска в Telegram
-if (!tg.initDataUnsafe?.user?.id) {
+if (!tg?.initDataUnsafe?.user?.id) {
     document.body.innerHTML = '<div class="center-message">The site is unavailable outside of Telegram</div>';
+} else {
+    tg.expand();
+    tg.disableVerticalSwipes();
+
+    // Инициализация модулей
+    initializeMenu();
+    handlers();
 }
-
-tg.expand();
-tg.disableVerticalSwipes()
-// Обработчики
-handlers();
-
-
-document.addEventListener("DOMContentLoaded", () => {
-    initializeSidebar();
-    initializeMenuButton();
-    initializeSwipeGesture();
-});
-
-// restorePageState();
-// updatePageState();
