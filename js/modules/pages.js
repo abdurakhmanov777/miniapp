@@ -1,5 +1,5 @@
 import * as variables from "./variables.js";
-import { sidebar_passive } from "./sidebar.js";
+import { sidebar_passive, updateActiveBtn } from "./sidebar.js";
 
 const pages = {
     main: variables.mainSection,
@@ -21,6 +21,7 @@ function setActivePage(activePage) {
             sessionStorage.setItem("activePage", key);
         }
     });
+    updateActiveButton(activePage)
 }
 
 export const main_page_active = () => setActivePage("main");
@@ -33,6 +34,10 @@ export const subscriptions_page_active = () => setActivePage("subscriptions");
 document.addEventListener("DOMContentLoaded", () => {
     const savedPage = sessionStorage.getItem("activePage") || "main";
     setActivePage(savedPage);
+    updateActiveButton(savedPage);
+});
+
+function updateActiveButton(page) {
     const pages = {
         main: variables.mainBtn,
         botList: variables.mainBtn,
@@ -40,7 +45,5 @@ document.addEventListener("DOMContentLoaded", () => {
         settings: variables.settingsBtn,
         subscriptions: variables.subscriptionsBtn,
     };
-
-    Object.values(pages).forEach(page => page?.classList.remove("active"));
-    pages[savedPage]?.classList.add("active");
-});
+    updateActiveBtn(pages[page]);
+}

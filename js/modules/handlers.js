@@ -19,7 +19,10 @@ function clearError(event) {
 export const handlers = () => {
     document.addEventListener("DOMContentLoaded", () => {
         // Навигация
-        Telegram.WebApp.BackButton.onClick(pages.main_page_active);
+        Telegram.WebApp.BackButton.onClick(() => {
+            pages.main_page_active();  // Первая функция
+            updateActiveBtn(variables.mainBtn);  // Вторая функция
+        });
         variables.mainBtn.addEventListener("click", pages.main_page_active);
         variables.subscriptionsBtn.addEventListener("click", pages.subscriptions_page_active);
         variables.settingsBtn.addEventListener("click", pages.settings_page_active);
