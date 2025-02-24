@@ -1,9 +1,9 @@
-@import url("styles/sidebar.css");
-@import url("styles/header.css");
-@import url("styles/main.css");
-@import url("styles/botList.css");
-@import url("styles/botForm.css");
-@import url("styles/settings.css");
+@import url("components/sidebar.css");
+@import url("components/header.css");
+@import url("components/main.css");
+@import url("components/botList.css");
+@import url("components/botForm.css");
+@import url("components/settings.css");
 
 body {
     font-family: 'Montserrat', sans-serif;

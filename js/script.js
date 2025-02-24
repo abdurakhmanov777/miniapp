@@ -169,7 +169,7 @@ async function loadLocalization(language) {
         content.style.display = 'block';
     } else {
         try {
-            const response = await fetch(`lang/${language}.json`);
+            const response = await fetch(`./lang/${language}.json`);
             const data = await response.json();
             sessionStorage.setItem(`lang_${language}`, JSON.stringify(data)); // Кэшируем
             updateLocalization(data);
