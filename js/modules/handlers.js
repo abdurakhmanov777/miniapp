@@ -14,10 +14,7 @@ const clearError = (event) => event.target.classList.remove("error");
 export const handlers = () => {
     document.addEventListener("DOMContentLoaded", () => {
         // Обработчики кнопок навигации
-        Telegram.WebApp.BackButton.onClick(() => {
-            pages.main_page_active();
-            updateActiveBtn(variables.mainBtn);
-        });
+        Telegram.WebApp.BackButton.onClick(pages.main_page_active);
         variables.mainBtn.addEventListener("click", pages.main_page_active);
         variables.subscriptionsBtn.addEventListener("click", pages.subscriptions_page_active);
         variables.settingsBtn.addEventListener("click", pages.settings_page_active);

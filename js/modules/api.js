@@ -4,18 +4,26 @@ export async function validateAndSubmitForm() {
     const name = variables.botNameInput.value.trim();
     const api = variables.botApiInput.value.trim();
 
+    const errors = [];
+    if (name.length < 5) errors.push("имя");
+    if (api.length < 5) errors.push("API");
+
     variables.botNameInput.classList.toggle("error", name.length < 5);
     variables.botApiInput.classList.toggle("error", api.length < 5);
 
-    if (name.length < 5 || api.length < 5) return;
+    if (errors.length) {
+        return Telegram.WebApp.showAlert(`Неверно: ${errors.join(", ")}`);
+    }
 
     try {
-        await fetch(`${variables.BASE_URL}/bot/submit_bot_name`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ user_id: userId, name, api })
-        });
+        // await fetch(`${variables.BASE_URL}/bot/submit_bot_name`, {
+        //     method: "POST",
+        //     headers: { "Content-Type": "application/json" },
+        //     body: JSON.stringify({ user_id: variables.userId, name, api })
+        // });
+        Telegram.WebApp.showAlert("Данные отправлены");
     } catch (error) {
+        Telegram.WebApp.showAlert("Ошибка при отправке данных");
         console.error('Ошибка при отправке данных:', error);
     }
 }
