@@ -1,15 +1,20 @@
 import * as variables from "./variables.js";
-import { currentLanguage } from "./localization.js";
+import { currentLanguage, getLocalizedVariable } from "./localization.js";
+
 
 
 export async function validateAndSubmitForm() {
-    const localizationData = JSON.parse(sessionStorage.getItem(`lang_${currentLanguage}`));
-
     const name = variables.botNameInput.value.trim();
     const api = variables.botApiInput.value.trim();
-    const errorTextApi = localizationData?.errorTextApi;
-    const errorTextName = localizationData?.errorTextName;
-    const errorIncorrect = localizationData?.errorIncorrect;
+
+    const [errorTextApi, errorTextName, errorIncorrect, successfull, unsuccessfull] =
+        await Promise.all([
+            getLocalizedVariable("errorTextApi"),
+            getLocalizedVariable("errorTextName"),
+            getLocalizedVariable("errorIncorrect"),
+            getLocalizedVariable("successfulSending"),
+            getLocalizedVariable("unsuccessfulSending")
+        ]);
 
     const errors = [];
     if (name.length < 5) errors.push(errorTextName);
@@ -28,11 +33,8 @@ export async function validateAndSubmitForm() {
         //     headers: { "Content-Type": "application/json" },
         //     body: JSON.stringify({ user_id: variables.userId, name, api })
         // });
-
-        const successfull = localizationData?.successfulSending;
         Telegram.WebApp.showAlert(successfull);
     } catch (error) {
-        const unsuccessfull = localizationData?.unsuccessfulSending;
         Telegram.WebApp.showAlert(unsuccessfull);
         console.error('Ошибка при отправке данных:', error);
     }

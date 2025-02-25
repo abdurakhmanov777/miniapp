@@ -1,6 +1,6 @@
 import * as variables from "./variables.js";
 
-export let currentLanguage = getLanguageFromStorage() || 'ru';  // Загружаем язык из sessionStorage или по умолчанию 'ru'
+export let currentLanguage = getLanguageFromStorage() || 'ru';
 
 export function getLanguageFromStorage() {
     return sessionStorage.getItem('language');
@@ -24,36 +24,39 @@ export function updateLocalization(data) {
     variables.mainBtn.textContent = data.mainBtn;
     variables.subscriptionsBtn.textContent = data.subscriptionsBtn;
     variables.settingsBtn.textContent = data.settingsBtn;
-    document.getElementById('languageToggleButton').textContent = currentLanguage === 'ru' ? 'RU' : 'EN';
+    variables.languageToggleButton.textContent = currentLanguage === 'ru' ? 'RU' : 'EN';
 }
 
 export async function loadLocalization(language) {
     const content = document.getElementById('content');
-    const cachedData = sessionStorage.getItem(`lang_${language}`);
+    const cacheKey = `lang_${language}`;
+    const cachedData = sessionStorage.getItem(cacheKey);
 
-    if (cachedData) {
-        updateLocalization(JSON.parse(cachedData));
+    try {
+        const data = cachedData ? JSON.parse(cachedData) : await fetchLocalization(language);
+        sessionStorage.setItem(cacheKey, JSON.stringify(data)); // Кэшируем
+        updateLocalization(data);
         content.style.display = 'block';
-    } else {
-        try {
-            const response = await fetch(`./lang/${language}.json`);
-            const data = await response.json();
-            sessionStorage.setItem(`lang_${language}`, JSON.stringify(data)); // Кэшируем
-            updateLocalization(data);
-            content.style.display = 'block';
-        } catch (error) {
-            console.error('Ошибка при загрузке локализации:', error);
-        }
+    } catch (error) {
+        console.error('Ошибка загрузки локализации:', error);
     }
 }
 
-// Загрузка языка при инициализации страницы
-loadLocalization(currentLanguage);
-
-// document.addEventListener("DOMContentLoaded", () => { loadLocalization(currentLanguage); });
+async function fetchLocalization(language) {
+    const response = await fetch(`./lang/${language}.json`);
+    if (!response.ok) throw new Error(`Ошибка HTTP: ${response.status}`);
+    return response.json();
+}
 
 export async function toggleLanguage() {
     currentLanguage = currentLanguage === 'ru' ? 'en' : 'ru';
     setLanguageToStorage(currentLanguage);  // Сохраняем выбранный язык
     await loadLocalization(currentLanguage);
 }
+
+export async function getLocalizedVariable(key) {
+    const localizationData = JSON.parse(sessionStorage.getItem(`lang_${currentLanguage}`));
+    return localizationData[key] || key;
+}
+
+loadLocalization(currentLanguage);
