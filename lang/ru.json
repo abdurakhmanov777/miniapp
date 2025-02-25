@@ -6,11 +6,15 @@
     "next": "Далее",
     "botNamePlaceholder": "Имя бота",
     "botApiPlaceholder": "Bot API",
-    "errorBotName": "Ошибка в названии",
-    "errorBotApi": "Ошибка в API",
+    "errorIncorrect": "Неверно",
+    "errorTextName": "имя бота",
+    "errorTextApi": "API",
+    "successfully": "Данные успешно отправлены",
+    "unsuccessfulSending": "Ошибка при отправке данных",
     "noBots": "У вас пока нет ботов",
     "mainBtn" : "Главная",
     "subscriptionsBtn": "Подписки",
     "settingsBtn": "Настройки",
-    "systemLanguageText": "Язык системы"
+    "systemLanguageText": "Язык системы",
+    "copyUserIdSuccess": "Ваш ID скопирован"
 }

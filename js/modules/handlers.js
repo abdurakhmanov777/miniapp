@@ -2,12 +2,17 @@ import { toggleLanguage } from "./localization.js";
 import { validateAndSubmitForm } from "./api.js";
 import * as pages from "./pages.js";
 import * as variables from "./variables.js";
+import { currentLanguage } from "./localization.js";
 
 userIdDisplay.textContent = `ID: ${variables.userId}`;
 
-const copyUserIdToClipboard = () =>
+function copyUserIdToClipboard() {
+    const localizationData = JSON.parse(sessionStorage.getItem(`lang_${currentLanguage}`));
+    const message = localizationData?.copyUserIdSuccess;
+
     navigator.clipboard.writeText(variables.userId)
-        .then(() => Telegram.WebApp.showAlert("Ваш ID скопирован"));
+        .then(() => Telegram.WebApp.showAlert(message));
+}
 
 const clearError = (event) => event.target.classList.remove("error");
 

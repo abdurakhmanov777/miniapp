@@ -6,11 +6,15 @@
     "next": "Next",
     "botNamePlaceholder": "Bot Name",
     "botApiPlaceholder": "Bot API",
-    "errorBotName": "Error in bot name",
-    "errorBotApi": "Error in bot API",
+    "errorIncorrect": "Incorrect",
+    "errorTextName": "bot name",
+    "errorTextApi": "bot API",
+    "successfulSending": "The data has been sent successfully",
+    "unsuccessfulSending": "Error when sending data",
     "noBots": "You have no bots yet",
     "mainBtn" : "Main",
     "subscriptionsBtn": "Subscriptions",
     "settingsBtn": "Settings",
-    "systemLanguageText": "System language"
+    "systemLanguageText": "System language",
+    "copyUserIdSuccess": "Your ID has been copied"
 }

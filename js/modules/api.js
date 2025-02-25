@@ -1,18 +1,25 @@
 import * as variables from "./variables.js";
+import { currentLanguage } from "./localization.js";
+
 
 export async function validateAndSubmitForm() {
+    const localizationData = JSON.parse(sessionStorage.getItem(`lang_${currentLanguage}`));
+
     const name = variables.botNameInput.value.trim();
     const api = variables.botApiInput.value.trim();
+    const errorTextApi = localizationData?.errorTextApi;
+    const errorTextName = localizationData?.errorTextName;
+    const errorIncorrect = localizationData?.errorIncorrect;
 
     const errors = [];
-    if (name.length < 5) errors.push("имя");
-    if (api.length < 5) errors.push("API");
+    if (name.length < 5) errors.push(errorTextName);
+    if (api.length < 5) errors.push(errorTextApi);
 
     variables.botNameInput.classList.toggle("error", name.length < 5);
     variables.botApiInput.classList.toggle("error", api.length < 5);
 
     if (errors.length) {
-        return Telegram.WebApp.showAlert(`Неверно: ${errors.join(", ")}`);
+        return Telegram.WebApp.showAlert(`${errorIncorrect}: ${errors.join(", ")}`);
     }
 
     try {
@@ -21,8 +28,11 @@ export async function validateAndSubmitForm() {
         //     headers: { "Content-Type": "application/json" },
         //     body: JSON.stringify({ user_id: variables.userId, name, api })
         // });
-        Telegram.WebApp.showAlert("Данные отправлены");
+
+        const successfull = localizationData?.successfulSending;
+        Telegram.WebApp.showAlert(successfully);
     } catch (error) {
+        const unsuccessfull = localizationData?.unsuccessfulSending;
         Telegram.WebApp.showAlert("Ошибка при отправке данных");
         console.error('Ошибка при отправке данных:', error);
     }
