@@ -30,10 +30,10 @@ export async function validateAndSubmitForm() {
         // });
 
         const successfull = localizationData?.successfulSending;
-        Telegram.WebApp.showAlert(successfully);
+        Telegram.WebApp.showAlert(successfull);
     } catch (error) {
         const unsuccessfull = localizationData?.unsuccessfulSending;
-        Telegram.WebApp.showAlert("Ошибка при отправке данных");
+        Telegram.WebApp.showAlert(unsuccessfull);
         console.error('Ошибка при отправке данных:', error);
     }
 }
