@@ -1,18 +1,18 @@
-#settingsSection {
+/* #settingsSection {
     display: flex;
-    /* flex-direction: column;
+    flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     max-width: 400px;
     height: 87vh;
-    margin: 60px auto 20px; */
-}
+    margin: 60px auto 20px;
+} */
 
-.settingsSection {
+/* .settingsSection {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
+} */
 
 .settingsLabel {
     font-size: 16px;
