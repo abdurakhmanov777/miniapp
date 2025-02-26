@@ -69,7 +69,7 @@ button:active {
 .page {
     display: flex;
     flex-direction: row;
-    align-items: flex;
+    align-items: flex-start;
     justify-self: center;
     height: 87vh;
     max-width: 400px;
