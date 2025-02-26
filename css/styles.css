@@ -63,6 +63,7 @@ button:active {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    /* font-family: */
 }
 
 .page {
@@ -70,12 +71,11 @@ button:active {
     flex-direction: row;
     align-items: flex;
     justify-self: center;
-    width: 50vw;
     height: 87vh;
-    max-width: 400px;
+    max-width: 380px;
     margin: 20px;
     margin-top: 60px;
     align-self: flex-start;
-    /* background-color: red; */
+    background-color: red;
     width: 90vw;
 }
