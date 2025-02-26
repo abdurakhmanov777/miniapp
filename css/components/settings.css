@@ -4,9 +4,8 @@
 
 .settingsSection {
     display: flex;
-    justify-content: center; /* Горизонтальное выравнивание */
-    align-items: flex-start; /* Размещение сверху */
-    height: 100vh; /* Высота контейнера для вертикального выравнивания */
+    flex-direction: column;
+    align-items: center;
 }
 
 .settingsLabel {
