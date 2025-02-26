@@ -31,6 +31,10 @@ export const handlers = () => {
             }
         });
 
+        variables.languageOptions.forEach(option =>
+            option.addEventListener("change", e => toggleLanguage(e.target.value))
+        );
+
         // Telegram.WebApp.BackButton.onClick(pages.main_page_active);
         variables.mainBtn.addEventListener("click", pages.main_page_active);
         variables.subscriptionsBtn.addEventListener("click", pages.subscriptions_page_active);

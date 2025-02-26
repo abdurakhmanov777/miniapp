@@ -1,5 +1,5 @@
 import * as variables from "./variables.js";
-import { currentLanguage, getLocalizedVariable } from "./localization.js";
+import { getLocalizedVariable } from "./localization.js";
 
 
 

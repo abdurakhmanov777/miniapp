@@ -62,6 +62,7 @@ export async function toggleLanguage(lang) {
     currentLanguage = lang;
     setLanguageToStorage(currentLanguage);  // Сохраняем выбранный язык
     await loadLocalization(currentLanguage);
+    updateSelectionLang();
 }
 
 export async function getLocalizedVariable(key) {
@@ -69,8 +70,9 @@ export async function getLocalizedVariable(key) {
     return localizationData[key] || key;
 }
 
-await loadLocalization(currentLanguage);
+loadLocalization(currentLanguage);
 updateLanguageCheckmark();
+
 export function updateLanguageCheckmark() {
     document.addEventListener("DOMContentLoaded", () => {
         const savedLanguage = localStorage.getItem("language") || "en"; // Заданный язык

@@ -1,7 +1,5 @@
 import { initializeMenu } from "./modules/sidebar.js";
 import { handlers } from "./modules/handlers.js";
-// import { initLocalization } from "./modules/localization.js";
-init_pages
 
 const tg = window.Telegram?.WebApp;
 
@@ -12,9 +10,8 @@ if (!tg.initDataUnsafe?.user?.id) {
     tg.expand();
     tg.disableVerticalSwipes();
     // tg.lockOrientation();
+
     // Инициализация модулей
-    // initLocalization();
-    handlers();
     initializeMenu();
-    // handlers();
+    handlers();
 }
