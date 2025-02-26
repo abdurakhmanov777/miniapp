@@ -1,5 +1,5 @@
 .language-selector {
-    background: #222;
+    background: var(--tg-theme-secondary-bg-color);
     border-radius: 12px;
     padding: 10px;
     width: 100%;
@@ -30,7 +30,7 @@
 .text span {
     font-size: 16px;
     font-weight: bold;
-    color: white;
+    color: var(--tg-theme-text-color);
 }
 
 .text small {
