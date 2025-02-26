@@ -76,6 +76,6 @@ button:active {
     margin: 20px;
     margin-top: 60px;
     align-self: flex-start;
-    background-color: red;
+    /* background-color: red; */
     width: 90vw;
 }
