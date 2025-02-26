@@ -10,18 +10,25 @@
 
 
 #botForm {
-    display: flex;
-    flex-direction: column; /* Вертикальное выравнивание */
-    align-items: center; /* Центрировать все элементы по горизонтали */
-    width: 320px;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 20px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
 }
 
 #botForm input {
-    width: 100%; /* Максимальная ширина полей */
+    width: 80%;
     padding: 10px;
-    margin-bottom: 20px;
-    border-radius: 10px;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    gap: 10px;
+}
+
+
+#botForm button {
+    width: 80%;
 }

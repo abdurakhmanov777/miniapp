@@ -3,10 +3,11 @@ import { sidebar_passive, updateActiveBtn } from "./sidebar.js";
 
 const pages = {
     main: variables.mainSection,
-    settings: variables.settingsSection,
-    subscriptions: variables.subscriptionsSection,
     botList: variables.botList,
-    botForm: variables.botForm
+    botForm: variables.botForm,
+    settings: variables.settingsSection,
+    language: variables.languageSection,
+    subscriptions: variables.subscriptionsSection
 };
 
 function setActivePage(activePage) {
@@ -19,7 +20,7 @@ function setActivePage(activePage) {
 
     Object.entries(pages).forEach(([key, section]) => {
         const isActive = key === activePage;
-        section.style.display = isActive ? "block" : "none";
+        section.style.display = isActive ? "flex" : "none";
         variables[key]?.classList.toggle("active", isActive);
         if (isActive) sessionStorage.setItem("activePage", key);
     });
@@ -32,6 +33,7 @@ export const main_page_active = () => setActivePage("main");
 export const botList_page_active = () => setActivePage("botList");
 export const botForm_page_active = () => setActivePage("botForm");
 export const settings_page_active = () => setActivePage("settings");
+export const language_page_active = () => setActivePage("language");
 export const subscriptions_page_active = () => setActivePage("subscriptions");
 
 // Восстановление страницы при загрузке
@@ -47,7 +49,13 @@ function updateActiveButton(page) {
         botList: variables.mainBtn,
         botForm: variables.mainBtn,
         settings: variables.settingsBtn,
+        language: variables.settingsBtn,
         subscriptions: variables.subscriptionsBtn,
     };
     updateActiveBtn(pages[page]);
+}
+
+export function isPageActive() {
+    const activePage = sessionStorage.getItem("activePage");
+    return activePage || "default";
 }

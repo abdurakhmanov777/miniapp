@@ -1,29 +1,19 @@
 #main {
-    text-align: center;
-    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90vw;
+    max-width: 400px;
+    height: 87vh;
+    margin: 60px auto 20px;
 }
 
 #buttonContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    margin: 0px;
-    background: transparent;
-}
-
-.buttonContainer {
-    display: flex;
-    justify-content: space-between; /* Расположить кнопки по краям */
-    align-items: center; /* Вертикальное выравнивание по центру */
-    width: 100%;
-}
-
-.buttonContainer button {
-    width: 130px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
+    gap: 10px; /* Расстояние между кнопками */
 }
 
 .start-button {
@@ -36,7 +26,7 @@
     cursor: pointer;
     color: var(--tg-theme-button-text-color);
     background: var(--tg-theme-button-color);
-    margin-top: 20px; /* Отступы сверху и снизу */
+    margin-top: 20px;
 }
 
 .start-button:hover {

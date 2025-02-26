@@ -16,8 +16,8 @@ export const backButton = document.getElementById("backButton");
 
 // UI элементы
 export const noBotsMessage = document.getElementById("noBotsMessage");
-export const systemLanguageText = document.getElementById("systemLanguageText");
 export const languageToggleButton = document.getElementById("languageToggleButton");
+export const languageButton = document.getElementById("languageButton");
 
 // Формы и списки
 export const botForm = document.getElementById("botForm");
@@ -30,6 +30,7 @@ export const botApiInput = document.getElementById("botApiInput");
 export const mainSection = document.getElementById("main");
 export const settingsSection = document.getElementById("settingsSection");
 export const subscriptionsSection = document.getElementById("subscriptionsSection");
+export const languageSection = document.getElementById("languageSection");
 
 // ID пользователя Telegram
 export const userId = window.Telegram?.WebApp?.initDataUnsafe?.user?.id || "unknown";

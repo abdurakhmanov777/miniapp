@@ -15,7 +15,6 @@ export function updateLocalization(data) {
     variables.createButton.textContent = data.createBot;
     variables.myBotsButton.textContent = data.myBots;
     variables.backToMainButton.textContent = data.back;
-    variables.systemLanguageText.textContent = data.systemLanguageText;
     variables.nextButton.textContent = data.next;
     variables.botNameInput.placeholder = data.botNamePlaceholder;
     variables.botApiInput.placeholder = data.botApiPlaceholder;
@@ -24,7 +23,7 @@ export function updateLocalization(data) {
     variables.mainBtn.textContent = data.mainBtn;
     variables.subscriptionsBtn.textContent = data.subscriptionsBtn;
     variables.settingsBtn.textContent = data.settingsBtn;
-    variables.languageToggleButton.textContent = currentLanguage === 'ru' ? 'RU' : 'EN';
+    variables.languageToggleButton.textContent = data.language;
 }
 
 export async function loadLocalization(language) {
