@@ -1,6 +1,12 @@
-/* #settingsSection {
-    width: 100%;
-} */
+#settingsSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    max-width: 400px;
+    height: 87vh;
+    margin: 60px auto 20px;
+}
 
 .settingsSection {
     display: flex;
@@ -13,7 +19,7 @@
 }
 
 #languageToggleButton {
-    width: 400px;
+    width: 100%;
     /* height: 40px; */
     border: none;
     /* border-radius: 5px; */
