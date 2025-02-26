@@ -1,5 +1,8 @@
 {
-    "language": "English",
+    "textSystemLanguage": "System language",
+    "textValueLanguage": "English",
+    "textTheme": "Theme",
+    "textValueTheme": "System",
     "constructor": "Constructor",
     "createBot": "Create Bot",
     "myBots": "My Bots",

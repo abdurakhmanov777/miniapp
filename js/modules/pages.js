@@ -1,5 +1,6 @@
 import * as variables from "./variables.js";
 import { sidebar_passive, updateActiveBtn } from "./sidebar.js";
+import { updateSelectionLang } from "./localization.js";
 
 const pages = {
     main: variables.mainSection,
@@ -10,7 +11,7 @@ const pages = {
     subscriptions: variables.subscriptionsSection
 };
 
-function setActivePage(activePage) {
+export function setActivePage(activePage) {
     Telegram.WebApp.BackButton[activePage === 'main' ? 'hide' : 'show']();
 
     if (activePage !== 'botForm') {
@@ -25,6 +26,12 @@ function setActivePage(activePage) {
         if (isActive) sessionStorage.setItem("activePage", key);
     });
 
+    if (['settings', 'language'].includes(activePage)) {
+        variables.topPanel.style.display = "none";
+    } else {
+        variables.topPanel.style.display = "flex";
+    }
+
     sidebar_passive();
     updateActiveButton(activePage)
 }
@@ -37,10 +44,12 @@ export const language_page_active = () => setActivePage("language");
 export const subscriptions_page_active = () => setActivePage("subscriptions");
 
 // Восстановление страницы при загрузке
+
 document.addEventListener("DOMContentLoaded", () => {
     const savedPage = sessionStorage.getItem("activePage") || "main";
     setActivePage(savedPage);
     updateActiveButton(savedPage);
+    updateSelectionLang();
 });
 
 function updateActiveButton(page) {
@@ -57,5 +66,5 @@ function updateActiveButton(page) {
 
 export function isPageActive() {
     const activePage = sessionStorage.getItem("activePage");
-    return activePage || "default";
+    return activePage || "main";
 }

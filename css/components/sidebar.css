@@ -31,7 +31,7 @@
 /* Стилизация кнопок */
 #sidebar ul button {
     width: 90%;  /* Растягиваем кнопку на всю ширину */
-    padding: 15px;
+    padding-left: 20px;
     margin-left: 15px;
     border: none;
     color: var(--tg-theme-text-color);
@@ -40,14 +40,14 @@
     cursor: pointer;
 }
 
-#sidebar ul button a {
+/* #sidebar ul button a {
     text-decoration: none;
     font-size: 18px;
     display: block;
     width: 100%;
     padding: 10px 15px;
     transition: background 0.3s;
-}
+} */
 
 #sidebar button.active {
     background: var(--tg-theme-button-color);
@@ -58,11 +58,6 @@
 /* Эффект при наведении */
 #sidebar ul button a:hover {
     background-color: #555;
-}
-
-/* Активное состояние меню */
-#sidebar.active {
-    left: 0;
 }
 
 #sidebarFooter {

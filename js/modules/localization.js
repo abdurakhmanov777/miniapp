@@ -1,9 +1,16 @@
 import * as variables from "./variables.js";
 
-export let currentLanguage = getLanguageFromStorage() || 'ru';
+export let currentLanguage = sessionStorage.getItem('language') || 'ru';
 
-export function getLanguageFromStorage() {
-    return sessionStorage.getItem('language');
+export function updateSelectionLang() {
+    document.querySelectorAll(".checkmark").forEach(el => el.style.display = "none");
+    const selectedInput = document.querySelector(`input[name="language"][value="${currentLanguage}"]`);
+
+    if (selectedInput) {
+        const checkmark = selectedInput.closest(".language-option")?.querySelector(".checkmark");
+        // Telegram.WebApp.showAlert(selectedLanguage);
+        if (checkmark) checkmark.style.display = "block";
+    }
 }
 
 function setLanguageToStorage(language) {
@@ -23,7 +30,11 @@ export function updateLocalization(data) {
     variables.mainBtn.textContent = data.mainBtn;
     variables.subscriptionsBtn.textContent = data.subscriptionsBtn;
     variables.settingsBtn.textContent = data.settingsBtn;
-    variables.languageToggleButton.textContent = data.language;
+
+    variables.textSystemLanguage.textContent = data.textSystemLanguage;
+    variables.textValueLanguage.textContent = data.textValueLanguage;
+    variables.textTheme.textContent = data.textTheme;
+    variables.textValueTheme.textContent = data.textValueTheme;
 }
 
 export async function loadLocalization(language) {
@@ -47,8 +58,8 @@ async function fetchLocalization(language) {
     return response.json();
 }
 
-export async function toggleLanguage() {
-    currentLanguage = currentLanguage === 'ru' ? 'en' : 'ru';
+export async function toggleLanguage(lang) {
+    currentLanguage = lang;
     setLanguageToStorage(currentLanguage);  // Сохраняем выбранный язык
     await loadLocalization(currentLanguage);
 }
@@ -58,4 +69,36 @@ export async function getLocalizedVariable(key) {
     return localizationData[key] || key;
 }
 
-loadLocalization(currentLanguage);
+await loadLocalization(currentLanguage);
+updateLanguageCheckmark();
+export function updateLanguageCheckmark() {
+    document.addEventListener("DOMContentLoaded", () => {
+        const savedLanguage = localStorage.getItem("language") || "en"; // Заданный язык
+        const radioButtons = document.querySelectorAll("input[name='language']");
+
+        radioButtons.forEach(radio => {
+            const parentLabel = radio.closest(".language-option");
+            const checkmark = parentLabel.querySelector(".checkmark");
+
+            if (radio.value === savedLanguage) {
+                radio.checked = true;
+                checkmark.style.visibility = "visible";
+            } else {
+                checkmark.style.visibility = "hidden";
+            }
+
+            radio.addEventListener("change", () => {
+                localStorage.setItem("language", radio.value);
+                updateCheckmarks();
+            });
+        });
+
+        function updateCheckmarks() {
+            radioButtons.forEach(radio => {
+                const parentLabel = radio.closest(".language-option");
+                const checkmark = parentLabel.querySelector(".checkmark");
+                checkmark.style.visibility = radio.checked ? "visible" : "hidden";
+            });
+        }
+    });
+}

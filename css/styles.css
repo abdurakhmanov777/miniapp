@@ -1,5 +1,5 @@
 @import url("components/sidebar.css");
-@import url("components/header.css");
+@import url("components/topPanel.css");
 @import url("components/main.css");
 @import url("components/botList.css");
 @import url("components/botForm.css");
@@ -48,33 +48,32 @@ button:active {
     transform: scale(0.95);
 }
 
-/* * {
+* {
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-} */
+}
 
 body {
+    display: flex;
     justify-self: center;
-    /* font-weight: 200; */
+    flex-direction: column;
     color: var(--tg-theme-text-color);
     background: var(--tg-theme-section-bg-color);
-    /* background-color: aquamarine; */
-    /* flex-direction: column; */
     align-items: center;
     justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    /* gap: 3%; */
 }
 
 .page {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 740px;
-    width: 370px;
-    max-width: 90vw;
-    max-height: 90vh;
-
-
-    background-color: red;
-    margin: 60px 20px 20px;
+    height: 93%;
+    /* margin-top: 5px; */
+    width: 90%;
+    /* background-color: red; */
 }

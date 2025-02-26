@@ -43,7 +43,9 @@ export const handlers = () => {
         variables.languageToggleButton.addEventListener('click', pages.language_page_active);
 
         // Обработчик смены языка
-        variables.languageButton.addEventListener('click', toggleLanguage);
+        variables.languageOptions.forEach(option =>
+            option.addEventListener("change", e => toggleLanguage(e.target.value))
+        );
 
         // Копирование ID пользователя
         variables.userIdDisplay.addEventListener("click", copyUserIdToClipboard);

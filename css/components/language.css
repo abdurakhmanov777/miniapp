@@ -1,27 +1,57 @@
-#languageContainer {
-    width: 100%; /* Занимает всю ширину родительского блока */
-}
-
-
-#languageButton {
+.language-selector {
+    background: #222;
+    border-radius: 12px;
+    padding: 10px;
     width: 100%;
-    background-color: blue;
-    color: white;
-    border: none;
-    cursor: pointer;
+    display: flex;
+    flex-direction: column;
 }
 
+.language-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    position: relative;
+    transition: background 0.3s;
+}
 
-/* #languageContainer {
-    display: flex
-;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: center;
-    width: 90vw;
-    height: 87vh;
-    max-width: 400px;
-    align-self: flex-start;
-    background-color: red;
-    margin: 60px 20px 20px;
-} */
+.language-option input {
+    display: none;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+}
+
+.text span {
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+}
+
+.text small {
+    font-size: 12px;
+    color: gray;
+}
+
+.checkmark {
+    display: none;
+    color: blue;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.language-option input:checked ~ .checkmark {
+    display: block;
+}
+
+/* Черточка между элементами */
+.separator {
+    height: 1px;
+    background-color: #444;
+    margin: 5px 10px;
+}

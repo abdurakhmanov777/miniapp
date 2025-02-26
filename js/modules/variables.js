@@ -1,5 +1,4 @@
 export const BASE_URL = "https://4g7zqplm-8000.euw.devtunnels.ms";
-
 // Навигация
 export const sidebar = document.getElementById("sidebar");
 export const menuBtn = document.getElementById("menuBtn");
@@ -17,7 +16,13 @@ export const backButton = document.getElementById("backButton");
 // UI элементы
 export const noBotsMessage = document.getElementById("noBotsMessage");
 export const languageToggleButton = document.getElementById("languageToggleButton");
-export const languageButton = document.getElementById("languageButton");
+export const languageOptions = document.querySelectorAll(".language-option");
+
+export const textSystemLanguage = document.getElementById("textSystemLanguage");
+export const textValueLanguage = document.getElementById("textValueLanguage");
+export const textTheme = document.getElementById("textTheme");
+export const textValueTheme = document.getElementById("textValueTheme");
+
 
 // Формы и списки
 export const botForm = document.getElementById("botForm");
@@ -27,6 +32,7 @@ export const botNameInput = document.getElementById("botNameInput");
 export const botApiInput = document.getElementById("botApiInput");
 
 // Разделы приложения
+export const topPanel = document.getElementById("topPanel");
 export const mainSection = document.getElementById("main");
 export const settingsSection = document.getElementById("settingsSection");
 export const subscriptionsSection = document.getElementById("subscriptionsSection");

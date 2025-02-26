@@ -17,7 +17,7 @@
                 <p>ProjectByDalgat</p>
             </div>
         </div>
-        <div id="header">
+        <div id="topPanel">
             <button class="menu-button" id="menuBtn">
                 <span id="line1"></span>
                 <span id="line2"></span>
@@ -31,7 +31,7 @@
                 <button id="myBotsButton" class="start-button"></button>
             </div>
         </div>
-        <div id="botList">
+        <div id="botList" style="display: none;">
             <div id="botListContainer">
                 <ul id="botListItems" style="display: none;"></ul>
                 <!-- Добавляем скрытое сообщение для отсутствующих ботов -->
@@ -40,7 +40,7 @@
             <button id="backToMainButton" class="back-button"></button>
         </div>
 
-        <form id="botForm" class="page">
+        <form id="botForm" class="page" style="display: none;">
             <input type="text" placeholder="" id="botNameInput">
             <div id="botNameError" class="error-message"></div>
 
@@ -55,13 +55,51 @@
         <div id="subscriptionsSection" class="page" style="display: none;">
         </div>
         <div id="settingsSection" class="page" style="display: none;">
-            <button id="languageToggleButton">
-            </button>
+            <div class="settings-list">
+                <button id="languageToggleButton" class="settings-item">
+                    <div class="icon" style="background-color: #a054e8;">
+                        🌐
+                    </div>
+                    <div class="content">
+                        <span id="textSystemLanguage" class="title"></span>
+                        <span id="textValueLanguage" class="value"></span>
+                    </div>
+                    <div class="arrow">›</div>
+                </button>
+                <div class="separator"></div>
+                <button id="themeToggleButton" class="settings-item">
+                    <div class="icon" style="background-color: #007aff;">
+                        📌
+                    </div>
+                    <div class="content">
+                        <span id="textTheme"  class="title"></span>
+                        <span id="textValueTheme"  class="value"></span>
+                    </div>
+                    <div class="arrow">›</div>
+                </button>
+            </div>
+
         </div>
         <div id="languageSection" class="page" style="display: none;">
-            <div id="languageContainer">
-                <button id="languageButton">
-                </button>
+            <!-- <button id="languageButton"></button> -->
+            <div class="language-selector">
+                <label class="language-option">
+                    <input type="radio" name="language" value="en" checked>
+                    <div class="text">
+                        <span>English</span>
+                        <small>English</small>
+                    </div>
+                    <i class="checkmark">✔</i>
+                </label>
+                <div class="separator"></div>
+                <label class="language-option">
+                    <input type="radio" name="language" value="ru">
+                    <div class="text">
+                        <span>Russian</span>
+                        <small>Русский</small>
+                    </div>
+                    <i class="checkmark">✔</i>
+                </label>
             </div>
         </div>
         <script src="https://telegram.org/js/telegram-web-app.js"></script>
