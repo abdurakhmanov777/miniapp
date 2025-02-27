@@ -40,14 +40,6 @@ button {
     background: var(--tg-theme-button-color);
 }
 
-button:hover {
-    filter: brightness(0.9);
-}
-
-button:active {
-    transform: scale(0.95);
-}
-
 * {
     font-family: Arial, sans-serif;
     margin: 0;
