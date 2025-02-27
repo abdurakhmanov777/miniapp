@@ -12,7 +12,6 @@ export const createButton = document.getElementById("createBotButton");
 export const myBotsButton = document.getElementById("myBotsButton");
 export const nextButton = document.getElementById("nextButton");
 export const backButton = document.getElementById("backButton");
-export const closeApp = document.getElementById("closeApp");
 
 // UI элементы
 export const noBotsMessage = document.getElementById("noBotsMessage");

@@ -43,9 +43,6 @@ export const handlers = () => {
         variables.backButton.addEventListener("click", pages.main_page_active);
         variables.backToMainButton.addEventListener("click", pages.main_page_active);
         variables.languageToggleButton.addEventListener('click', pages.language_page_active);
-        variables.closeApp.addEventListener('click', function() {
-            window.Telegram.WebApp.close();
-        });
         // Обработчик смены языка
         variables.languageOptions.forEach(option =>
             option.addEventListener("change", e => toggleLanguage(e.target.value))
