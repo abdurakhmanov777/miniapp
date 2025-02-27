@@ -1,4 +1,5 @@
-export const BASE_URL = "https://4g7zqplm-8000.euw.devtunnels.ms";
+// export const BASE_URL = "https://4g7zqplm-8000.euw.devtunnels.ms";
+export const BASE_URL = "http://127.0.0.1:8000";
 // Навигация
 export const sidebar = document.getElementById("sidebar");
 export const menuBtn = document.getElementById("menuBtn");
