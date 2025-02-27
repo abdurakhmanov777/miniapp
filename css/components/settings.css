@@ -21,7 +21,6 @@
     padding: 10px;
     border-radius: 10px;
     cursor: pointer;
-    transition: background 0.3s;
     justify-content: space-between;
     border: none;
     background: transparent;
@@ -37,7 +36,6 @@
     align-items: center;
     justify-content: center;
     font-size: 18px;
-    color: white;
     margin-right: 12px;
     flex-shrink: 0;
 }
