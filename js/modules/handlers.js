@@ -4,6 +4,8 @@ import * as pages from "./pages.js";
 import * as variables from "./variables.js";
 import { currentLanguage } from "./localization.js";
 
+variables.userIdValue.textContent = `${userId}`;
+
 function copyUserIdToClipboard() {
     const localizationData = JSON.parse(sessionStorage.getItem(`lang_${currentLanguage}`));
     const message = localizationData?.copyUserIdSuccess;
