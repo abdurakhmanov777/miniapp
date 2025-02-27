@@ -5,12 +5,8 @@ export let currentLanguage = sessionStorage.getItem('language') || 'ru';
 export function updateSelectionLang() {
     document.querySelectorAll(".checkmark").forEach(el => el.style.display = "none");
     const selectedInput = document.querySelector(`input[name="language"][value="${currentLanguage}"]`);
-
-    // if (selectedInput) {
     const checkmark = selectedInput.closest(".language-option")?.querySelector(".checkmark");
-    // Telegram.WebApp.showAlert(selectedLanguage);
     if (checkmark) checkmark.style.display = "block";
-    // }
 }
 
 function setLanguageToStorage(language) {
@@ -71,7 +67,6 @@ export async function getLocalizedVariable(key) {
 }
 
 loadLocalization(currentLanguage);
-updateLanguageCheckmark();
 
 export function updateLanguageCheckmark() {
     document.addEventListener("DOMContentLoaded", () => {

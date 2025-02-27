@@ -1,11 +1,10 @@
 import { sidebar, menuBtn, mainBtn, settingsBtn, subscriptionsBtn } from "./variables.js";
 
 export const initializeMenu = () => {
-    document.addEventListener("DOMContentLoaded", () => {
-        initializeSidebar();
-        initializeMenuButton();
-        initializeSwipeGesture();
-    });
+    // document.addEventListener("DOMContentLoaded", () => {
+    initializeSidebar();
+    initializeMenuButton();
+    initializeSwipeGesture();
 };
 
 export const sidebar_passive = () => sidebar?.classList.remove("active");

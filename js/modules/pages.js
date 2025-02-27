@@ -1,6 +1,6 @@
 import * as variables from "./variables.js";
 import { sidebar_passive, updateActiveBtn } from "./sidebar.js";
-import { updateSelectionLang } from "./localization.js";
+import { updateSelectionLang, updateLanguageCheckmark } from "./localization.js";
 
 const pages = {
     main: variables.mainSection,
@@ -44,13 +44,13 @@ export const language_page_active = () => setActivePage("language");
 export const subscriptions_page_active = () => setActivePage("subscriptions");
 
 // Восстановление страницы при загрузке
-
-document.addEventListener("DOMContentLoaded", () => {
+export function pageLoading() {
     const savedPage = sessionStorage.getItem("activePage") || "main";
     setActivePage(savedPage);
     updateActiveButton(savedPage);
     updateSelectionLang();
-});
+    updateLanguageCheckmark();
+}
 
 function updateActiveButton(page) {
     const pages = {
