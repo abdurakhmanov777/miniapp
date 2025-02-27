@@ -9,9 +9,10 @@ if (!tg.initDataUnsafe?.user?.id) {
 } else {
     tg.expand();
     tg.disableVerticalSwipes();
+    document.addEventListener("DOMContentLoaded", handlers);
     // tg.lockOrientation();
 
     // Инициализация модулей
     initializeMenu();
-    handlers();
+    // handlers();
 }

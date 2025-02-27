@@ -17,7 +17,6 @@ function copyUserIdToClipboard() {
 const clearError = (event) => event.target.classList.remove("error");
 
 export const handlers = () => {
-    document.addEventListener("DOMContentLoaded", () => {
         // Обработчики кнопок навигации
         Telegram.WebApp.BackButton.onClick(() => {
             const currentPage = pages.isPageActive();
@@ -51,10 +50,9 @@ export const handlers = () => {
         );
 
         // Копирование ID пользователя
-        variables.userIdValue.addEventListener("click", copyUserIdToClipboard);
+        variables.userIdBtn.addEventListener("click", copyUserIdToClipboard);
 
         // Очистка ошибок ввода
         variables.botNameInput.addEventListener("focus", clearError);
         variables.botApiInput.addEventListener("focus", clearError);
-    });
 };

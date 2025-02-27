@@ -42,3 +42,4 @@ export const languageSection = document.getElementById("languageSection");
 // ID пользователя Telegram
 export const userId = window.Telegram?.WebApp?.initDataUnsafe?.user?.id || "unknown";
 export const userIdValue = document.getElementById("userIdValue");
+export const userIdBtn = document.getElementById("userIdBtn");
