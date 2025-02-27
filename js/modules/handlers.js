@@ -4,8 +4,6 @@ import * as pages from "./pages.js";
 import * as variables from "./variables.js";
 import { currentLanguage } from "./localization.js";
 
-userIdDisplay.textContent = `ID: ${variables.userId}`;
-
 function copyUserIdToClipboard() {
     const localizationData = JSON.parse(sessionStorage.getItem(`lang_${currentLanguage}`));
     const message = localizationData?.copyUserIdSuccess;
@@ -45,14 +43,16 @@ export const handlers = () => {
         variables.backButton.addEventListener("click", pages.main_page_active);
         variables.backToMainButton.addEventListener("click", pages.main_page_active);
         variables.languageToggleButton.addEventListener('click', pages.language_page_active);
-
+        variables.closeApp.addEventListener('click', function() {
+            window.Telegram.WebApp.close();
+        });
         // Обработчик смены языка
         variables.languageOptions.forEach(option =>
             option.addEventListener("change", e => toggleLanguage(e.target.value))
         );
 
         // Копирование ID пользователя
-        variables.userIdDisplay.addEventListener("click", copyUserIdToClipboard);
+        variables.userIdValue.addEventListener("click", copyUserIdToClipboard);
 
         // Очистка ошибок ввода
         variables.botNameInput.addEventListener("focus", clearError);

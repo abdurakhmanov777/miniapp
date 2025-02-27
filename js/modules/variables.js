@@ -12,6 +12,7 @@ export const createButton = document.getElementById("createBotButton");
 export const myBotsButton = document.getElementById("myBotsButton");
 export const nextButton = document.getElementById("nextButton");
 export const backButton = document.getElementById("backButton");
+export const closeApp = document.getElementById("closeApp");
 
 // UI элементы
 export const noBotsMessage = document.getElementById("noBotsMessage");
@@ -40,4 +41,6 @@ export const languageSection = document.getElementById("languageSection");
 
 // ID пользователя Telegram
 export const userId = window.Telegram?.WebApp?.initDataUnsafe?.user?.id || "unknown";
-export const userIdDisplay = document.getElementById("userIdDisplay");
+export const userIdValue = document.getElementById("userIdValue");
+userIdValue.textContent = `${userId}`;
+// export const userIdBtn = document.getElementById("userIdBtn");

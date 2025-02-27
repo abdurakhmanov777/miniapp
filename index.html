@@ -22,16 +22,16 @@
                 <span id="line1"></span>
                 <span id="line2"></span>
             </button>
-            <button id="userIdDisplay"></button>
         </div>
         <div id="main" class="page">
             <h1></h1>
             <div id="buttonContainer">
                 <button id="createBotButton" class="start-button"></button>
                 <button id="myBotsButton" class="start-button"></button>
+                <button id="closeApp" class="start-button"></button>
             </div>
         </div>
-        <div id="botList" style="display: none;">
+        <div id="botList" class="page" style="display: none;">
             <div id="botListContainer">
                 <ul id="botListItems" style="display: none;"></ul>
                 <!-- Добавляем скрытое сообщение для отсутствующих ботов -->
@@ -56,6 +56,16 @@
         </div>
         <div id="settingsSection" class="page" style="display: none;">
             <div class="settings-list">
+                <button id="userIdBtn" class="settings-item">
+                    <div class="icon">
+                        <img src="/miniapp/css/icon/user_id.svg">
+                    </div>
+                    <div class="content">
+                        <span class="title">User ID</span>
+                        <span id="userIdValue" class="value"></span>
+                    </div>
+                </button>
+                <div class="separator"></div>
                 <button id="languageToggleButton" class="settings-item">
                     <div class="icon">
                         <img src="/miniapp/css/icon/language.svg">

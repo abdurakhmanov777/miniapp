@@ -1,13 +1,7 @@
 #botList {
-    margin-top: auto;
-    overflow-y: auto;
-    display: none;
     flex-direction: column;
-    width: 90%;
-    /* max-width: 320px; */
-    /* background: green; */
-    height: 80%;
-    max-width: 400px;
+    align-items: center;
+    justify-content: center;
 }
 
 #botListContainer {

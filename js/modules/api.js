@@ -28,11 +28,11 @@ export async function validateAndSubmitForm() {
     }
 
     try {
-        // await fetch(`${variables.BASE_URL}/bot/submit_bot_name`, {
-        //     method: "POST",
-        //     headers: { "Content-Type": "application/json" },
-        //     body: JSON.stringify({ user_id: variables.userId, name, api })
-        // });
+        await fetch(`${variables.BASE_URL}/bot/submit_bot_name`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ user_id: variables.userId, name, api })
+        });
         Telegram.WebApp.showAlert(successfull);
     } catch (error) {
         Telegram.WebApp.showAlert(unsuccessfull);
