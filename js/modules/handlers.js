@@ -1,12 +1,12 @@
-import { toggleLanguage } from "./localization.js";
+import { loadLocalization } from "./localization.js";
 import { validateAndSubmitForm } from "./api.js";
 import * as pages from "./pages.js";
 import * as variables from "./variables.js";
-import { currentLanguage } from "./localization.js";
 
 variables.userIdValue.textContent = `${variables.userId}`;
 
 function copyUserIdToClipboard() {
+    const currentLanguage = sessionStorage.getItem('language')
     const localizationData = JSON.parse(sessionStorage.getItem(`lang_${currentLanguage}`));
     const message = localizationData?.copyUserIdSuccess;
 
@@ -30,10 +30,6 @@ export const handlers = () => {
             }
         });
 
-        variables.languageOptions.forEach(option =>
-            option.addEventListener("change", e => toggleLanguage(e.target.value))
-        );
-
         // Telegram.WebApp.BackButton.onClick(pages.main_page_active);
         variables.mainBtn.addEventListener("click", pages.main_page_active);
         variables.subscriptionsBtn.addEventListener("click", pages.subscriptions_page_active);
@@ -46,7 +42,7 @@ export const handlers = () => {
         variables.languageToggleButton.addEventListener('click', pages.language_page_active);
         // Обработчик смены языка
         variables.languageOptions.forEach(option =>
-            option.addEventListener("change", e => toggleLanguage(e.target.value))
+            option.addEventListener("change", e => loadLocalization(e.target.value))
         );
 
         // Копирование ID пользователя

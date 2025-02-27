@@ -18,6 +18,7 @@ export const backButton = document.getElementById("backButton");
 export const noBotsMessage = document.getElementById("noBotsMessage");
 export const languageToggleButton = document.getElementById("languageToggleButton");
 export const languageOptions = document.querySelectorAll(".language-option");
+export const selectedButton = document.querySelector('input[name="language"]:checked');
 
 export const textSystemLanguage = document.getElementById("textSystemLanguage");
 export const textValueLanguage = document.getElementById("textValueLanguage");

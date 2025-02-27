@@ -1,6 +1,7 @@
-import { initializeMenu } from "./modules/sidebar.js";
+import { initMenu } from "./modules/sidebar.js";
 import { handlers } from "./modules/handlers.js";
 import { pageLoading } from "./modules/pages.js";
+import { initLocalization } from "./modules/localization.js";
 
 const tg = window.Telegram?.WebApp;
 
@@ -10,14 +11,11 @@ if (!tg.initDataUnsafe?.user?.id) {
 } else {
     tg.expand();
     tg.disableVerticalSwipes();
+    // tg.lockOrientation();
     document.addEventListener("DOMContentLoaded", function () {
+        initLocalization();
         pageLoading();
         handlers();
-        initializeMenu();
+        initMenu();
     });
-    // tg.lockOrientation();
-
-    // Инициализация модулей
-    // initializeMenu();
-    // handlers();
 }

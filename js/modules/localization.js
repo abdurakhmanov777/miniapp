@@ -2,15 +2,24 @@ import * as variables from "./variables.js";
 
 export let currentLanguage = sessionStorage.getItem('language') || 'ru';
 
-export function updateSelectionLang() {
-    document.querySelectorAll(".checkmark").forEach(el => el.style.display = "none");
-    const selectedInput = document.querySelector(`input[name="language"][value="${currentLanguage}"]`);
-    const checkmark = selectedInput.closest(".language-option")?.querySelector(".checkmark");
-    if (checkmark) checkmark.style.display = "block";
+export async function initLocalization() {
+    await loadLocalization(currentLanguage);
 }
 
-function setLanguageToStorage(language) {
+export async function loadLocalization(language) {
+    const content = document.getElementById('content');
+    const cacheKey = `lang_${language}`;
+    const cachedData = sessionStorage.getItem(cacheKey);
     sessionStorage.setItem('language', language);
+    updateLanguageSelection(language);
+    try {
+        const data = cachedData ? JSON.parse(cachedData) : await fetchLocalization(language);
+        sessionStorage.setItem(cacheKey, JSON.stringify(data)); // Кэшируем
+        updateLocalization(data);
+        content.style.display = 'block';
+    } catch (error) {
+        console.error('Ошибка загрузки локализации:', error);
+    }
 }
 
 export function updateLocalization(data) {
@@ -33,32 +42,10 @@ export function updateLocalization(data) {
     variables.textValueTheme.textContent = data.textValueTheme;
 }
 
-export async function loadLocalization(language) {
-    const content = document.getElementById('content');
-    const cacheKey = `lang_${language}`;
-    const cachedData = sessionStorage.getItem(cacheKey);
-
-    try {
-        const data = cachedData ? JSON.parse(cachedData) : await fetchLocalization(language);
-        sessionStorage.setItem(cacheKey, JSON.stringify(data)); // Кэшируем
-        updateLocalization(data);
-        content.style.display = 'block';
-    } catch (error) {
-        console.error('Ошибка загрузки локализации:', error);
-    }
-}
-
 async function fetchLocalization(language) {
     const response = await fetch(`./lang/${language}.json`);
     if (!response.ok) throw new Error(`Ошибка HTTP: ${response.status}`);
     return response.json();
-}
-
-export async function toggleLanguage(lang) {
-    currentLanguage = lang;
-    setLanguageToStorage(currentLanguage);  // Сохраняем выбранный язык
-    await loadLocalization(currentLanguage);
-    updateSelectionLang();
 }
 
 export async function getLocalizedVariable(key) {
@@ -66,36 +53,18 @@ export async function getLocalizedVariable(key) {
     return localizationData[key] || key;
 }
 
-loadLocalization(currentLanguage);
-
-export function updateLanguageCheckmark() {
-    document.addEventListener("DOMContentLoaded", () => {
-        const savedLanguage = localStorage.getItem("language") || "en"; // Заданный язык
-        const radioButtons = document.querySelectorAll("input[name='language']");
-
-        radioButtons.forEach(radio => {
-            const parentLabel = radio.closest(".language-option");
-            const checkmark = parentLabel.querySelector(".checkmark");
-
-            if (radio.value === savedLanguage) {
-                radio.checked = true;
-                checkmark.style.visibility = "visible";
-            } else {
-                checkmark.style.visibility = "hidden";
-            }
-
-            radio.addEventListener("change", () => {
-                localStorage.setItem("language", radio.value);
-                updateCheckmarks();
-            });
-        });
-
-        function updateCheckmarks() {
-            radioButtons.forEach(radio => {
-                const parentLabel = radio.closest(".language-option");
-                const checkmark = parentLabel.querySelector(".checkmark");
-                checkmark.style.visibility = radio.checked ? "visible" : "hidden";
-            });
-        }
+async function updateLanguageSelection(language) {
+    const radioButtons = document.querySelectorAll('input[name="language"]');
+    radioButtons.forEach(radio => {
+        const label = radio.closest('.language-option');
+        const checkmark = label.querySelector('.checkmark');
+        checkmark.style.display = 'none'; // скрыть checkmark
     });
+
+    const selectedRadio = document.querySelector(`input[name="language"][value="${language}"]`);
+    if (selectedRadio) {
+        const selectedLabel = selectedRadio.closest('.language-option');
+        const checkmark = selectedLabel.querySelector('.checkmark');
+        checkmark.style.display = 'inline';
+    }
 }

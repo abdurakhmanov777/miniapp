@@ -1,6 +1,5 @@
 import * as variables from "./variables.js";
 import { sidebar_passive, updateActiveBtn } from "./sidebar.js";
-import { updateSelectionLang, updateLanguageCheckmark } from "./localization.js";
 
 const pages = {
     main: variables.mainSection,
@@ -48,8 +47,6 @@ export function pageLoading() {
     const savedPage = sessionStorage.getItem("activePage") || "main";
     setActivePage(savedPage);
     updateActiveButton(savedPage);
-    updateSelectionLang();
-    updateLanguageCheckmark();
 }
 
 function updateActiveButton(page) {
@@ -65,6 +62,5 @@ function updateActiveButton(page) {
 }
 
 export function isPageActive() {
-    const activePage = sessionStorage.getItem("activePage");
-    return activePage || "main";
+    return sessionStorage.getItem("activePage") || "main";
 }

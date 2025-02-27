@@ -1,16 +1,15 @@
 import { sidebar, menuBtn, mainBtn, settingsBtn, subscriptionsBtn } from "./variables.js";
 
-export const initializeMenu = () => {
-    // document.addEventListener("DOMContentLoaded", () => {
-    initializeSidebar();
-    initializeMenuButton();
-    initializeSwipeGesture();
+export const initMenu = () => {
+    initSidebar();
+    initMenuButton();
+    initSwipeGesture();
 };
 
 export const sidebar_passive = () => sidebar?.classList.remove("active");
 export const sidebar_active = () => sidebar?.classList.toggle("active");
 
-export const initializeMenuButton = () => {
+export const initMenuButton = () => {
     if (!menuBtn || !sidebar) return;
 
     menuBtn.addEventListener("click", sidebar_active);
@@ -19,7 +18,7 @@ export const initializeMenuButton = () => {
     });
 };
 
-export const initializeSwipeGesture = () => {
+export const initSwipeGesture = () => {
     if (!sidebar) return;
     let touchStartX = 0;
 
@@ -29,7 +28,7 @@ export const initializeSwipeGesture = () => {
     });
 };
 
-export const initializeSidebar = () => {
+export const initSidebar = () => {
     const buttons = document.querySelectorAll("#sidebar button");
     const setActive = (button) => buttons.forEach(btn => btn.classList.toggle("active", btn === button));
 
