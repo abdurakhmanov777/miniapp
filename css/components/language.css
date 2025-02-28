@@ -48,7 +48,6 @@
     display: block;
 }
 
-/* Черточка между элементами */
 .separator {
     height: 1px;
     background-color: #444;
