@@ -1,36 +1,50 @@
-.settingsLabel {
-    font-size: 16px;
+#settingsSection {
+    /* background-color: #007aff; */
+    flex-direction: column;
+    gap: 18px;
 }
 
 .settings-list {
     /* margin-top: 20px; */
-    /* background: var(--tg-theme-secondary-bg-color); */
+    background-color: var(--tg-theme-secondary-bg-color);
     /* background-color: red; */
     border-radius: 12px;
-    padding: 0;
+    /* padding: 5px; */
     width: 100%;
     display: flex;
     flex-direction: column;
 }
 
 .settings-item {
-    /* background-color: aquamarine; */
     display: flex;
     align-items: center;
     width: 100%;
-    padding: 10px;
+    height: 70px;
+    padding: 18px;
     border-radius: 10px;
     cursor: pointer;
     justify-content: space-between;
     border: none;
-    background: transparent;
+    /* background: seagreen; */
+    background-color: transparent;
     outline: none;
+    position: relative;
+}
+
+.settings-item:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 20px; /* Отступ слева */
+    right: 20px; /* Отступ справа */
+    height: 1px; /* Толщина линии */
+    background-color: var(--tg-theme-text-color);
 }
 
 .icon {
     background-color: #007aff;
-    width: 32px;
-    height: 40px;
+    width: 34px;
+    height: 34px;
     border-radius: 8px;
     display: flex;
     align-items: center;
@@ -66,4 +80,10 @@
     font-size: 18px;
     color: var(--tg-theme-text-color);
     margin-left: 8px;
+}
+
+.separator {
+    height: 1px;
+    background-color: #444;
+    margin: 0 10px;
 }
