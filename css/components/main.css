@@ -18,7 +18,6 @@
     font-weight: 500;
     cursor: pointer;
     color: var(--tg-theme-button-text-color);
-    background: var(--tg-theme-button-color);
     margin-top: 20px;
 }
 

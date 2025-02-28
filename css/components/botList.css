@@ -37,7 +37,6 @@
     margin-bottom: 20px;
     font-size: 16px;
     font-weight: 500;
-    background: var(--tg-theme-button-color);
     color: var(--tg-theme-button-text-color);
     cursor: pointer;
 }
@@ -78,7 +77,6 @@
     border-radius: 8px;
     font-size: 18px;
     font-weight: 500;
-    background: var(--tg-theme-button-color);
     color: var(--tg-theme-button-text-color);
     cursor: pointer;
 }
