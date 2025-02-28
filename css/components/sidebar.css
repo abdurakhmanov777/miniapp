@@ -1,8 +1,7 @@
-/* Меню (изначально скрыто) */
 #sidebar {
     position: absolute;
     top: 0;
-    left: -350px; /* Меню скрыто за экраном */
+    left: -350px;
     width: 320px;
     height: 100%;
     background-color: var(--tg-theme-section-bg-color);
@@ -15,10 +14,9 @@
 }
 
 #sidebar.active {
-    left: 0; /* Слайдбар появляется */
+    left: 0;
 }
 
-/* Убираем отступы и делаем кнопки блочными */
 #sidebar ul {
     list-style: none;
     padding: 0;
@@ -28,11 +26,9 @@
     flex-grow: 1;
 }
 
-/* Стилизация кнопок */
 #sidebar ul button {
     width: 90%;
     padding-left: 35px;
-    /* margin-left: 15px; */
     border: none;
     color: var(--tg-theme-text-color);
     background: none;
@@ -52,7 +48,7 @@
 #sidebarFooter {
     text-align: center;
     padding: 10px;
-    color: var(--tg-theme-subtitle-text-color); /* Серый цвет текста */
+    color: var(--tg-theme-subtitle-text-color);
     font-size: 15px;
     margin-top: auto;
 }
