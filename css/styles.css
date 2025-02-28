@@ -38,7 +38,7 @@ button {
     cursor: pointer;
     color: var(--tg-theme-button-text-color);
     /* background: var(--tg-theme-button-color); */
-    background-color: #02633e;
+    background-color: #00693e;
 }
 
 * {
