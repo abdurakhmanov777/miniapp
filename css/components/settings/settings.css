@@ -35,9 +35,9 @@
     content: "";
     position: absolute;
     bottom: 0;
-    left: 20px; /* Отступ слева */
-    right: 20px; /* Отступ справа */
-    height: 1px; /* Толщина линии */
+    left: 20px;
+    right: 20px;
+    height: 1px;
     background-color: #888888;
 }
 
