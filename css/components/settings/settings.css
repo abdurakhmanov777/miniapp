@@ -42,7 +42,7 @@
 }
 
 .icon {
-    background-color: #00693e;
+    background-color: var(--accent-color);
     width: 34px;
     height: 34px;
     border-radius: 8px;

@@ -42,7 +42,7 @@
 
 #sidebar button.active {
     /* background: var(--tg-theme-button-color); */
-    background-color: #00693e;
+    background-color: var(--accent-color);
     color: var(--tg-theme-button-text-color);
     font-weight: bold;
 }

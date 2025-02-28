@@ -6,6 +6,9 @@
 @import url("components/settings/settings.css");
 @import url("components/settings/options.css");
 
+:root {
+    --accent-color: #00693e;
+}
 
 input {
     width: 100%;
@@ -38,7 +41,7 @@ button {
     cursor: pointer;
     color: var(--tg-theme-button-text-color);
     /* background: var(--tg-theme-button-color); */
-    background-color: #00693e;
+    background-color: var(--accent-color);
 }
 
 * {
