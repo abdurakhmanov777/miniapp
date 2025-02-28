@@ -31,13 +31,15 @@
 /* Стилизация кнопок */
 #sidebar ul button {
     width: 90%;
-    padding-left: 20px;
-    margin-left: 15px;
+    padding-left: 35px;
+    /* margin-left: 15px; */
     border: none;
     color: var(--tg-theme-text-color);
     background: none;
     text-align: left;
     cursor: pointer;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
 }
 
 #sidebar button.active {
