@@ -3,6 +3,8 @@
     "textValueLanguage": "English",
     "textTheme": "Theme",
     "textValueTheme": "System",
+    "textContactAdmin": "Comtacts",
+    "textContactAdminValue": "Telegram",
     "constructor": "Constructor",
     "createBot": "Create Bot",
     "myBots": "My Bots",

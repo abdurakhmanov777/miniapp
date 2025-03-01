@@ -3,6 +3,8 @@
     "textValueLanguage": "Русский",
     "textTheme": "Тема",
     "textValueTheme": "Системная",
+    "textContactAdmin": "Контакты",
+    "textContactAdminValue": "Телеграм",
     "constructor": "Конструктор",
     "createBot": "Создать бота",
     "myBots": "Мои боты",

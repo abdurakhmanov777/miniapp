@@ -23,7 +23,8 @@ export const textSystemLanguage = document.getElementById("textSystemLanguage");
 export const textValueLanguage = document.getElementById("textValueLanguage");
 export const textTheme = document.getElementById("textTheme");
 export const textValueTheme = document.getElementById("textValueTheme");
-
+export const textContactAdmin = document.getElementById("textContactAdmin");
+export const textContactAdminValue = document.getElementById("textContactAdminValue");
 
 // Формы и списки
 export const botForm = document.getElementById("botForm");

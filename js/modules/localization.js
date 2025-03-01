@@ -40,6 +40,8 @@ export function updateLocalization(data) {
     variables.textValueLanguage.textContent = data.textValueLanguage;
     variables.textTheme.textContent = data.textTheme;
     variables.textValueTheme.textContent = data.textValueTheme;
+    variables.textContactAdmin.textContent = data.textContactAdmin;
+    variables.textContactAdminValue.textContent = data.textContactAdminValue;
 }
 
 async function fetchLocalization(language) {
