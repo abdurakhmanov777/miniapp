@@ -27,7 +27,8 @@
 }
 
 .text small {
-    font-size: 12px;
+    margin-top: 2px;
+    font-size: 14px;
     color: gray;
 }
 
