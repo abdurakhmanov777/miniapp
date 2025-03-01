@@ -1,13 +1,25 @@
 {
+    "mainBtn" : "Main",
+    "subscriptionsBtn": "Subscriptions",
+    "settingsBtn": "Settings",
+    "copyUserIdSuccess": "Your ID has been copied",
+
     "textSystemLanguage": "System language",
     "textValueLanguage": "English",
+
     "textTheme": "Theme",
     "textValueTheme": "System",
+    "textThemeSystem": "System",
+    "textThemeDark": "Dark",
+    "textThemeLight": "Light",
+
     "textContactAdmin": "Contacts",
     "textContactAdminValue": "Telegram",
+
     "constructor": "Constructor",
     "createBot": "Create Bot",
     "myBots": "My Bots",
+
     "back": "Back",
     "next": "Next",
     "botNamePlaceholder": "Bot Name",
@@ -17,10 +29,5 @@
     "errorTextApi": "bot API",
     "successfulSending": "The data has been sent successfully",
     "unsuccessfulSending": "Error when sending data",
-    "noBots": "You have no bots yet",
-    "mainBtn" : "Main",
-    "subscriptionsBtn": "Subscriptions",
-    "settingsBtn": "Settings",
-    "systemLanguageText": "System language",
-    "copyUserIdSuccess": "Your ID has been copied"
+    "noBots": "You have no bots yet"
 }

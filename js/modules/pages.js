@@ -7,6 +7,7 @@ const pages = {
     botForm: variables.botForm,
     settings: variables.settingsSection,
     language: variables.languageSection,
+    theme: variables.themeSection,
     subscriptions: variables.subscriptionsSection
 };
 
@@ -25,7 +26,7 @@ export function setActivePage(activePage) {
         if (isActive) sessionStorage.setItem("activePage", key);
     });
 
-    if (['language'].includes(activePage)) {
+    if (['language', 'theme'].includes(activePage)) {
         variables.topPanel.style.display = "none";
     } else {
         variables.topPanel.style.display = "flex";
@@ -40,6 +41,7 @@ export const botList_page_active = () => setActivePage("botList");
 export const botForm_page_active = () => setActivePage("botForm");
 export const settings_page_active = () => setActivePage("settings");
 export const language_page_active = () => setActivePage("language");
+export const theme_page_active = () => setActivePage("theme");
 export const subscriptions_page_active = () => setActivePage("subscriptions");
 
 // Восстановление страницы при загрузке
@@ -56,6 +58,7 @@ function updateActiveButton(page) {
         botForm: variables.mainBtn,
         settings: variables.settingsBtn,
         language: variables.settingsBtn,
+        theme: variables.settingsBtn,
         subscriptions: variables.subscriptionsBtn,
     };
     updateActiveBtn(pages[page]);

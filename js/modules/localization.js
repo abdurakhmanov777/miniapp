@@ -39,8 +39,13 @@ export function updateLocalization(data) {
     variables.h2.textContent = data.textSystemLanguage;
     variables.textSystemLanguage.textContent = data.textSystemLanguage;
     variables.textValueLanguage.textContent = data.textValueLanguage;
+
+    variables.h3.textContent = data.textTheme;
     variables.textTheme.textContent = data.textTheme;
     variables.textValueTheme.textContent = data.textValueTheme;
+    variables.textThemeSystem.textContent = data.textThemeSystem;
+    variables.textThemeDark.textContent = data.textThemeDark;
+    variables.textThemeLight.textContent = data.textThemeLight;
     variables.textContactAdmin.textContent = data.textContactAdmin;
     variables.textContactAdminValue.textContent = data.textContactAdminValue;
 }

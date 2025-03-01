@@ -55,7 +55,7 @@
     background-color: gray;
 }
 
-h2 {
+h2, h3 {
     text-transform: uppercase;
     align-self: flex-start;
     font-size: 12px;

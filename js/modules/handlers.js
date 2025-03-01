@@ -24,6 +24,9 @@ export const handlers = () => {
                 case "language":
                     pages.settings_page_active();
                     break;
+                case "theme":
+                    pages.settings_page_active();
+                    break;
                 default:
                     pages.main_page_active();
                     break;
@@ -40,6 +43,7 @@ export const handlers = () => {
         variables.backButton.addEventListener("click", pages.main_page_active);
         variables.backToMainButton.addEventListener("click", pages.main_page_active);
         variables.languageToggleButton.addEventListener('click', pages.language_page_active);
+        variables.themeToggleButton.addEventListener('click', pages.theme_page_active);
 
         // Обработчик смены языка
         variables.languageOptions.forEach(option =>
