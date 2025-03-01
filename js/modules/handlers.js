@@ -40,6 +40,7 @@ export const handlers = () => {
         variables.backButton.addEventListener("click", pages.main_page_active);
         variables.backToMainButton.addEventListener("click", pages.main_page_active);
         variables.languageToggleButton.addEventListener('click', pages.language_page_active);
+
         // Обработчик смены языка
         variables.languageOptions.forEach(option =>
             option.addEventListener("change", e => loadLocalization(e.target.value))
@@ -47,6 +48,11 @@ export const handlers = () => {
 
         // Копирование ID пользователя
         variables.userIdBtn.addEventListener("click", copyUserIdToClipboard);
+
+        // Переход к контактам
+        variables.contact_admin.addEventListener('click', function() {
+            Telegram.WebApp.openTelegramLink("https://t.me/abdurakhmanov777");
+        });
 
         // Очистка ошибок ввода
         variables.botNameInput.addEventListener("focus", clearError);

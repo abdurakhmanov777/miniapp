@@ -18,6 +18,7 @@ export const backButton = document.getElementById("backButton");
 export const noBotsMessage = document.getElementById("noBotsMessage");
 export const languageToggleButton = document.getElementById("languageToggleButton");
 export const languageOptions = document.querySelectorAll(".settings-option");
+export const contact_admin = document.getElementById("contact_admin");
 
 export const textSystemLanguage = document.getElementById("textSystemLanguage");
 export const textValueLanguage = document.getElementById("textValueLanguage");
