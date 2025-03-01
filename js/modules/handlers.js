@@ -51,7 +51,7 @@ export const handlers = () => {
 
         // Переход к контактам
         variables.contact_admin.addEventListener('click', function() {
-            Telegram.WebApp.openTelegramLink("https://t.me/abdurakhmanov777");
+            Telegram.WebApp.openTelegramLink(variables.URL_ADMIN);
         });
 
         // Очистка ошибок ввода

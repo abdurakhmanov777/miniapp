@@ -1,5 +1,6 @@
 // export const BASE_URL = "https://4g7zqplm-8000.euw.devtunnels.ms";
 export const BASE_URL = "http://127.0.0.1:8000";
+export const URL_ADMIN = "https://t.me/abdurakhmanov777";
 // Навигация
 export const sidebar = document.getElementById("sidebar");
 export const menuBtn = document.getElementById("menuBtn");
@@ -15,6 +16,8 @@ export const nextButton = document.getElementById("nextButton");
 export const backButton = document.getElementById("backButton");
 
 // UI элементы
+export const h1 = document.querySelector("h1");
+export const h2 = document.querySelector("h2");
 export const noBotsMessage = document.getElementById("noBotsMessage");
 export const languageToggleButton = document.getElementById("languageToggleButton");
 export const languageOptions = document.querySelectorAll(".settings-option");

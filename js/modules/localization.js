@@ -23,7 +23,7 @@ export async function loadLocalization(language) {
 }
 
 export function updateLocalization(data) {
-    document.querySelector("h1").textContent = data.constructor;
+    variables.h1.textContent = data.constructor;
     variables.createButton.textContent = data.createBot;
     variables.myBotsButton.textContent = data.myBots;
     variables.backToMainButton.textContent = data.back;
@@ -36,6 +36,7 @@ export function updateLocalization(data) {
     variables.subscriptionsBtn.textContent = data.subscriptionsBtn;
     variables.settingsBtn.textContent = data.settingsBtn;
 
+    variables.h2.textContent = data.textSystemLanguage;
     variables.textSystemLanguage.textContent = data.textSystemLanguage;
     variables.textValueLanguage.textContent = data.textValueLanguage;
     variables.textTheme.textContent = data.textTheme;
