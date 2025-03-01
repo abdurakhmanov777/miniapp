@@ -50,6 +50,12 @@ export const handlers = () => {
             option.addEventListener("change", e => loadLocalization(e.target.value))
         );
 
+        // Обработчик смены темы
+        variables.themeOptions.forEach(option =>
+            option.addEventListener("change", e => pages.updateThemeSelection(e.target.value))
+        );
+
+
         // Копирование ID пользователя
         variables.userIdBtn.addEventListener("click", copyUserIdToClipboard);
 

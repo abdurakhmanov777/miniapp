@@ -22,7 +22,8 @@ export const h3 = document.querySelector("h3");
 export const noBotsMessage = document.getElementById("noBotsMessage");
 export const languageToggleButton = document.getElementById("languageToggleButton");
 export const themeToggleButton = document.getElementById("themeToggleButton");
-export const languageOptions = document.querySelectorAll(".settings-option");
+export const languageOptions = filterOptionsByName("language");
+export const themeOptions = filterOptionsByName("theme");
 export const contact_admin = document.getElementById("contact_admin");
 
 export const textSystemLanguage = document.getElementById("textSystemLanguage");
@@ -56,3 +57,12 @@ export const themeSection = document.getElementById("themeSection");
 export const userId = window.Telegram?.WebApp?.initDataUnsafe?.user?.id || "unknown";
 export const userIdValue = document.getElementById("userIdValue");
 export const userIdBtn = document.getElementById("userIdBtn");
+
+
+function filterOptionsByName(name) {
+    const options = document.querySelectorAll(".settings-option");
+    return Array.from(options).filter(option => {
+        const input = option.querySelector('input[type="radio"]');
+        return input && input.name === name;
+    });
+}
