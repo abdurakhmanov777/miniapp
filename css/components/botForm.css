@@ -1,24 +1,14 @@
-/* form {
-    display: none;
-    flex-direction: column;
-    width: 320px;
-    margin-top: 20px;
-    padding: 15px;
-    border-radius: 8px;
-    background: var(--tg-theme-secondary-bg-color);
-} */
-
-
 #botForm {
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
 }
 
 #botForm input {
     width: 80%;
     padding: 10px;
+    box-sizing: border-box;
 }
 
 .buttonContainer {
@@ -28,7 +18,6 @@
     gap: 10px;
 }
 
-
 #botForm button {
-    width: 80%;
+    width: 100%;
 }

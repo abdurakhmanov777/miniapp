@@ -1,21 +1,17 @@
 #settingsSection {
-    /* background-color: #007aff; */
     flex-direction: column;
     gap: 18px;
 }
 
 .settings-list {
-    /* margin-top: 20px; */
     background-color: var(--tg-theme-secondary-bg-color);
-    /* background-color: red; */
     border-radius: 12px;
-    /* padding: 5px; */
     width: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.settings-item {
+.settings-item, .settings-option {
     display: flex;
     align-items: center;
     width: 100%;
@@ -25,13 +21,13 @@
     cursor: pointer;
     justify-content: space-between;
     border: none;
-    /* background: seagreen; */
     background-color: transparent;
     outline: none;
     position: relative;
 }
 
-.settings-item:not(:last-child)::after {
+.settings-item:not(:last-child)::after,
+.settings-option:not(:last-child)::after {
     content: "";
     position: absolute;
     bottom: 0;
@@ -67,13 +63,48 @@
     color: var(--tg-theme-text-color);
 }
 
-.value {
+.value, .arrow, .text small {
     font-size: 14px;
     color: var(--tg-theme-subtitle-text-color);
 }
 
 .arrow {
+    margin-left: 8px;
+}
+
+.settings-option input {
+    display: none;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+}
+
+.text span {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.checkmark {
+    width: 23px;
+    height: 23px;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+.settings-option input:checked ~ .checkmark {
+    display: block;
+}
+
+h2, h3 {
+    text-transform: uppercase;
+    align-self: flex-start;
     font-size: 14px;
     color: var(--tg-theme-subtitle-text-color);
-    margin-left: 8px;
+    margin-left: 18px;
+    margin-bottom: 9px;
 }

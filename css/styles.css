@@ -3,8 +3,7 @@
 @import url("components/main.css");
 @import url("components/botList.css");
 @import url("components/botForm.css");
-@import url("components/settings/settings.css");
-@import url("components/settings/options.css");
+@import url("components/settings.css");
 
 :root {
     --accent-color: #00693e;
