@@ -26,7 +26,7 @@ export function setActivePage(activePage) {
         if (isActive) sessionStorage.setItem("activePage", key);
     });
 
-    if (['language', 'theme'].includes(activePage)) {
+    if (['botForm', 'botList', 'language', 'theme'].includes(activePage)) {
         variables.topPanel.style.display = "none";
     } else {
         variables.topPanel.style.display = "flex";
