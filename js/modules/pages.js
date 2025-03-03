@@ -14,9 +14,10 @@ const pages = {
 export function setActivePage(activePage) {
     Telegram.WebApp.BackButton[activePage === 'main' ? 'hide' : 'show']();
 
-    if (activePage !== 'botForm') {
-        variables.botNameInput.classList.remove("error");
-        variables.botApiInput.classList.remove("error");
+    if (['botForm', 'botList', 'language', 'theme'].includes(activePage)) {
+        variables.topPanel.style.display = "none";
+    } else {
+        variables.topPanel.style.display = "flex";
     }
 
     Object.entries(pages).forEach(([key, section]) => {
@@ -26,14 +27,12 @@ export function setActivePage(activePage) {
         if (isActive) sessionStorage.setItem("activePage", key);
     });
 
-    if (['botForm', 'botList', 'language', 'theme'].includes(activePage)) {
-        variables.topPanel.style.display = "none";
-    } else {
-        variables.topPanel.style.display = "flex";
-    }
-
     sidebar_passive();
-    updateActiveButton(activePage)
+    updateActiveButton(activePage);
+    if (activePage !== 'botForm') {
+        variables.botNameInput.classList.remove("error");
+        variables.botApiInput.classList.remove("error");
+    }
 }
 
 export const main_page_active = () => setActivePage("main");
