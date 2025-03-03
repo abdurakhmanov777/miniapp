@@ -26,7 +26,6 @@ export function updateLocalization(data) {
     variables.h1.textContent = data.constructor;
     variables.createButton.textContent = data.createBot;
     variables.myBotsButton.textContent = data.myBots;
-    variables.backToMainButton.textContent = data.back;
     variables.nextButton.textContent = data.next;
     variables.botNameInput.placeholder = data.botNamePlaceholder;
     variables.botApiInput.placeholder = data.botApiPlaceholder;

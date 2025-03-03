@@ -7,7 +7,6 @@ export const menuBtn = document.getElementById("menuBtn");
 export const mainBtn = document.getElementById("mainBtn");
 export const subscriptionsBtn = document.getElementById("subscriptionsBtn");
 export const settingsBtn = document.getElementById("settingsBtn");
-export const backToMainButton = document.getElementById("backToMainButton");
 
 // Кнопки управления ботами
 export const createButton = document.getElementById("createBotButton");

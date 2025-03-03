@@ -41,7 +41,6 @@ export const handlers = () => {
         variables.createButton.addEventListener("click", pages.botForm_page_active);
         variables.myBotsButton.addEventListener("click", pages.botList_page_active);
         variables.backButton.addEventListener("click", pages.main_page_active);
-        variables.backToMainButton.addEventListener("click", pages.main_page_active);
         variables.languageToggleButton.addEventListener('click', pages.language_page_active);
         variables.themeToggleButton.addEventListener('click', pages.theme_page_active);
 
