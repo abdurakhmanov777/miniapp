@@ -12,9 +12,9 @@ if (!tg.initDataUnsafe?.user?.id) {
     tg.expand();
     tg.disableVerticalSwipes();
     // tg.lockOrientation();
-    document.addEventListener("DOMContentLoaded", function () {
-        initLocalization();
+    document.addEventListener("DOMContentLoaded", () => {
         pageLoading();
+        initLocalization();
         handlers();
         initMenu();
     });
