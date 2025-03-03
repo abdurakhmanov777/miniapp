@@ -15,25 +15,41 @@ export function setActivePage(activePage) {
     Telegram.WebApp.BackButton[activePage === 'main' ? 'hide' : 'show']();
 
     const isHiddenPage = ['botForm', 'botList', 'language', 'theme'].includes(activePage);
-    variables.topPanel.style.display = isHiddenPage ? "none" : "flex";
+    const displayValue = isHiddenPage ? "none" : "flex";
+
+    if (variables.topPanel.style.display !== displayValue) {
+        variables.topPanel.style.display = displayValue;
+    }
+
+    let updated = false;
 
     Object.entries(pages).forEach(([key, section]) => {
         const isActive = key === activePage;
-        if (section.style.display !== (isActive ? "flex" : "none")) {
-            section.style.display = isActive ? "flex" : "none";
+        const sectionDisplay = isActive ? "flex" : "none";
+
+        if (section.style.display !== sectionDisplay) {
+            section.style.display = sectionDisplay;
+            updated = true;
         }
+
         variables[key]?.classList.toggle("active", isActive);
     });
 
-    sessionStorage.setItem("activePage", activePage);
+    if (updated) {
+        sessionStorage.setItem("activePage", activePage);
+    }
 
     sidebar_passive();
     updateActiveButton(activePage);
-    if (activePage !== 'botForm') {
+
+    if (activePage !== 'botForm' &&
+        (variables.botNameInput.classList.contains("error") ||
+         variables.botApiInput.classList.contains("error"))) {
         variables.botNameInput.classList.remove("error");
         variables.botApiInput.classList.remove("error");
     }
 }
+
 
 export const main_page_active = () => setActivePage("main");
 export const botList_page_active = () => setActivePage("botList");
